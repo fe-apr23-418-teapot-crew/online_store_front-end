@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+[DEMO](https://fe-apr23-418-teapot-crew.github.io/online_store_front-end)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
