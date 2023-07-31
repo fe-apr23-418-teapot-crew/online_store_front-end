@@ -1,0 +1,38 @@
+.phones {
+    display: flex;
+    flex-wrap: wrap;
+    // grid-template: 1fr 1fr 1fr 1fr;
+}
+.pagination {
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+    &__pages-list-container {
+        // display: flex;
+        width: 160px;
+        overflow-x: hidden;
+    }
+    &__pages-list {
+        white-space: nowrap;
+        transform: translateX(-40px);
+    }
+    &__button {
+        background-color: transparent;
+        color: black;
+        border: 1px solid black;
+        border-radius: 25px;
+        margin-right:  8px;
+        width: 32px;
+        height: 32px;
+        &--active {
+            background-color: black;
+            color: white;
+        }
+        &--arrow {
+            border-color: #E2E6E9;
+            &:hover {
+                border-color: black;
+            }
+        }
+    }
+}
