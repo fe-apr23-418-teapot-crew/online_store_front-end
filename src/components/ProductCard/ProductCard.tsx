@@ -1,13 +1,12 @@
 import React from 'react';
 import { Product } from '../../types/Product';
-import './ProductCard';
 
 type Props = {
   product: Product,
 };
 
 export const Card: React.FC<Props> = ({ product }) => {
-  return(
+  return (
     <article className='product-card'>
       <img
         src={product.image}
@@ -16,14 +15,14 @@ export const Card: React.FC<Props> = ({ product }) => {
       >
       </img>
       <h2 className="product-card__name">
-        {product.name}
+        {`${product.name} ${product.capacity} ${product.color}`}
       </h2>
       <div className="product-card__prices">
         <div className="product-card__price">
-          {product.price}
+          {`$${product.price}`}
         </div>
         <div className="product-card__fullprice">
-          {product.fullPrice}
+          {`$${product.fullPrice}`}
         </div>
       </div>
       <ul className="product-card__attributes">
@@ -37,21 +36,29 @@ export const Card: React.FC<Props> = ({ product }) => {
         </li>
         <li className='product-card__attribute'>
           <p className="product-card__attribute-title">
-            Screen
+            Capacity
           </p>
           <p className="product-card__attribute-value">
-            {product.screen}
+            {product.capacity}
           </p>
         </li>
         <li className='product-card__attribute'>
           <p className="product-card__attribute-title">
-            Screen
+            RAM
           </p>
           <p className="product-card__attribute-value">
-            {product.screen}
+            {product.ram}
           </p>
         </li>
       </ul>
+      <div className="product-card__buttons">
+        <button className='product-card__cart-button'>
+          Add to cart
+        </button>
+
+        <button className='product-card__favorite-button'>
+        </button>
+      </div>
     </article>
   );
 };
