@@ -9,7 +9,6 @@ export const App = () => (
   <Routes>
     <Route path="/" element={<NavLayout />}>
       <Route index element={<Home />} />
-
       <Route path="home" element={<Navigate to="/" replace />} />
 
       <Route path="phones" element={<Phones />}>
