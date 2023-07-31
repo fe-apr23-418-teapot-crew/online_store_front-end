@@ -9,14 +9,17 @@ import { Tablets } from './pages/Tablets';
 import { Accessories } from './pages/Accessories';
 
 export const App = () => (
-  <Routes>
-    <Route path="/" element={<NavLayout />}>
-      <Route index element={<Home />} />
-      <Route path="home" element={<Navigate to="/" replace />} />
+  <div className='app'>
+    <header><Header /></header>
+    <main className='streched'>
+      <Routes>
+        <Route path="/" element={<NavLayout />}>
+          <Route index element={<Home />} />
+          <Route path="home" element={<Navigate to="/" replace />} />
 
-      <Route path="phones" element={<Phones />}>
-        <Route path=":selectedSlug" element={<Phones />} />
-      </Route>
+          <Route path="phones" element={<Phones />}>
+            <Route path=":selectedSlug" element={<Phones />} />
+          </Route>
 
       <Route path="tablets" element={<Tablets />}>
         <Route path=":selectedSlug" element={<Tablets />} />
