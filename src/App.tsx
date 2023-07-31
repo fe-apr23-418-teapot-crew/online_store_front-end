@@ -1,6 +1,21 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Card } from './components/ProductCard/ProductCard';
+const product = {
+  'id': 1,
+  'category': 'phones',
+  'itemId': 'apple-iphone-7-32gb-black',
+  'name': 'Apple iPhone 7 32GB Black',
+  'fullPrice': 400,
+  'price': 375,
+  'screen': '4.7\' IPS',
+  'capacity': '32GB',
+  'color': 'black',
+  'ram': '2GB',
+  'year': 2016,
+  'image': 'img/phones/apple-iphone-7/black/00.webp'
+};
 
 function App() {
   return (
@@ -19,6 +34,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <Card product={product} />
     </div>
   );
 }
