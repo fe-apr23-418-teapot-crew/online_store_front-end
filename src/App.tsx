@@ -4,6 +4,9 @@ import { NavLayout } from './layout/NavLayout';
 import { Home } from './pages/Home';
 // import { NotFound } from './pages/NotFound';
 import { Phones } from './pages/Phones';
+import './App.scss';
+import { Tablets } from './pages/Tablets';
+import { Accessories } from './pages/Accessories';
 
 export const App = () => (
   <Routes>
@@ -13,6 +16,14 @@ export const App = () => (
 
       <Route path="phones" element={<Phones />}>
         <Route path=":selectedSlug" element={<Phones />} />
+      </Route>
+
+      <Route path="tablets" element={<Tablets />}>
+        <Route path=":selectedSlug" element={<Tablets />} />
+      </Route>
+
+      <Route path="accessories" element={<Accessories />}>
+        <Route path=":selectedSlug" element={<Accessories/>} />
       </Route>
 
       {/* <Route path="*" element={<NotFound />} /> */}
