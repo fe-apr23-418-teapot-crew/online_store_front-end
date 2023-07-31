@@ -1,4 +1,4 @@
-export interface Phone {
+export interface ProductMain {
   id: string;
   namespaceId: string;
   name: string;

@@ -1,0 +1,48 @@
+.products {
+
+  
+  &__location-history {
+    display: flex;
+    align-items: center;
+
+
+    &__home-icon {
+      margin-right: 10px;
+    }
+
+    &-list {
+      display: flex;
+    }
+
+    &-item {
+      margin-right: 10px;
+    }
+  }
+  
+  &__title {
+  }
+  
+  &__count {
+
+  }
+  
+  &__filter-fields {
+
+    
+    &__select {
+      &:focus {
+      }
+      
+      &:disabled {
+
+      }
+    }
+  }
+  
+  &__gadgets {
+
+    .product-card {
+
+    }
+  }
+}

@@ -1,28 +1,38 @@
 import React from 'react';
 import { Product } from '../../types/Product';
 
-type Props = {
+type ProductCardProps = {
   product: Product,
 };
 
-export const Card: React.FC<Props> = ({ product }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const {
+    image,
+    name,
+    capacity,
+    color,
+    fullPrice,
+    price,
+    screen,
+    ram
+  } = product;
   return (
     <article className='product-card'>
       <img
-        src={product.image}
+        src={image}
         className='product-card__image'
-        alt={product.name}
+        alt={name}
       >
       </img>
       <h2 className="product-card__name">
-        {`${product.name} ${product.capacity} ${product.color}`}
+        {`${name} ${capacity} ${color}`}
       </h2>
       <div className="product-card__prices">
         <div className="product-card__price">
-          {`$${product.price}`}
+          {`$${price}`}
         </div>
         <div className="product-card__fullprice">
-          {`$${product.fullPrice}`}
+          {`$${fullPrice}`} 
         </div>
       </div>
       <ul className="product-card__attributes">
@@ -31,7 +41,7 @@ export const Card: React.FC<Props> = ({ product }) => {
             Screen
           </p>
           <p className="product-card__attribute-value">
-            {product.screen}
+            {screen}
           </p>
         </li>
         <li className='product-card__attribute'>
@@ -39,7 +49,7 @@ export const Card: React.FC<Props> = ({ product }) => {
             Capacity
           </p>
           <p className="product-card__attribute-value">
-            {product.capacity}
+            {capacity}
           </p>
         </li>
         <li className='product-card__attribute'>
@@ -47,7 +57,7 @@ export const Card: React.FC<Props> = ({ product }) => {
             RAM
           </p>
           <p className="product-card__attribute-value">
-            {product.ram}
+            {ram}
           </p>
         </li>
       </ul>
