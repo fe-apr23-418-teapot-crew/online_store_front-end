@@ -5,7 +5,7 @@ type Props = {
   product: Product,
 };
 
-export const Card: React.FC<Props> = ({ product }) => {
+export const ProductCard: React.FC<Props> = ({ product }) => {
   return (
     <article className='product-card'>
       <img

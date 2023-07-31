@@ -2,6 +2,7 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.scss';
 import Header from './components/Header';
+import { ProductList } from './components/ProductList/ProductList';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         </head>
         <body>
           <Header />
+          <ProductList />
         </body>
       </html>
     </>
