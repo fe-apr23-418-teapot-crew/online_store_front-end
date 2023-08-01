@@ -17,9 +17,11 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   pathAPI,
   title,
 }) => {
-  
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
-  const { data, isLoading, error } = useQuery<Product[]>(pathAPI, fetchProducts);
+  const { data, isLoading, error } = useQuery<Product[]>(
+    pathAPI,
+    fetchProducts,
+  );
 
   if (isLoading) {
     return <CircularProgress />;
@@ -29,11 +31,10 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
     return <div>Error: {error.toString()}</div>;
   }
 
-
   return (
     <div className="products">
       <div className="products__location-history">
-        <HomeIcon className="products__home-icon"/>
+        <HomeIcon className="products__home-icon" />
 
         <ul className="products__location-history-list">
           {locationHistory.map((location) => (
@@ -52,17 +53,13 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
 
       <div className="products__filter-fields">
         <select name="sort-by" className="products__select">
-          <option value="by-date" selected>
-          By date
-          </option>
+          <option value="by-date">By date</option>
           <option value="by-name">By name</option>
           <option value="by-price">By price</option>
         </select>
 
         <select name="pagination" className="products__select">
-          <option value="16" selected>
-          16
-          </option>
+          <option value="16">16</option>
           <option value="32">32</option>
           <option value="64">64</option>
           <option value="all">All</option>
@@ -76,5 +73,4 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
       </ul>
     </div>
   );
-
 };
