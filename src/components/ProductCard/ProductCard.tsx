@@ -12,6 +12,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const imageURL = API_URL + image;
 
+  const handleAddToCart = () => {
+    const existingCartItems = localStorage.getItem('cartItems');
+    const cartProducts = existingCartItems ? JSON.parse(existingCartItems) : [];
+    cartProducts.push(product);
+
+    localStorage.setItem('cartItems', JSON.stringify(cartProducts));
+  };
+
   return (
     <article className="product-card">
       <img src={imageURL} className="product-card__image" alt={name}></img>
@@ -35,7 +43,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </li>
       </ul>
       <div className="product-card__buttons">
-        <button className="product-card__cart-button">Add to cart</button>
+        <button className="product-card__cart-button" onClick={handleAddToCart}>
+          Add to cart
+        </button>
 
         <button className="product-card__favorite-button"></button>
       </div>

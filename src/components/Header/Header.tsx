@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import s from './Header.module.scss';
+import styles from './Header.module.scss';
 import logo from '../../images/Logo.svg';
 import logoBurger from '../../images/LogoForBurger.svg';
 import likes from '../../images/Favourites (Heart Like).svg';
@@ -13,13 +13,13 @@ export const Header = () => {
 
   return (
     <>
-      <header className={s.header}>
-        <div className={s.container}>
-          <div className={s.header_logo}>
-            <img src={logo} alt="LOGO" className={s.header_logoImage} />
+      <header className={styles.header}>
+        <div className={styles.container}>
+          <div className={styles.header_logo}>
+            <img src={logo} alt="LOGO" className={styles.header_logoImage} />
           </div>
 
-          <div className={s.header_menuItems}>
+          <div className={styles.header_menuItems}>
             <MenuLink to="/" path="Home" />
             <MenuLink to="/phones" path="Phones" />
             <MenuLink to="/tablets" path="Tablets" />
@@ -27,62 +27,59 @@ export const Header = () => {
           </div>
         </div>
 
-        <div className={s.header_buttons}>
-          <a href="#" className={s.header_button}>
+        <div className={styles.header_buttons}>
+          <MenuLink isBurgerItem={true} to="/favourites" path="Favourites">
             <img src={likes} alt="LIKES" />
-          </a>
+          </MenuLink>
 
-          <a href="#" className={s.header_button}>
+          <MenuLink isBurgerItem={true} to="/cart" path="Cart">
             <img src={shopBag} alt="SHOPING BAG" />
-          </a>
+          </MenuLink>
         </div>
 
-        <div 
-          className={s.header_buttonBurgerMenu}
-          onClick={() => setIsBurgerMenuOpen(prevState => !prevState)}
+        <div
+          className={styles.header_buttonBurgerMenu}
+          onClick={() => setIsBurgerMenuOpen((prevState) => !prevState)}
         >
-          <a 
-            href="#" 
-            className={s.header_buttonMenu}
-          >
+          <a href="#" className={styles.header_buttonMenu}>
             <img src={menu} alt="MENU" />
           </a>
         </div>
 
         {isBurgerMenuOpen && (
-          <div className={s.burger}>
-            <div className={s.container}>
-              <div className={s.header_logo}>
-                <img 
-                  src={logoBurger} 
-                  alt="LOGO" 
-                  className={s.header_logoImage}
+          <div className={styles.burger}>
+            <div className={styles.container}>
+              <div className={styles.header_logo}>
+                <img
+                  src={logoBurger}
+                  alt="LOGO"
+                  className={styles.header_logoImage}
                 />
               </div>
 
-              <div 
-                className={s.header_buttonBurgerMenu}
-                onClick={() => setIsBurgerMenuOpen(prevState => !prevState)}
+              <div
+                className={styles.header_buttonBurgerMenu}
+                onClick={() => setIsBurgerMenuOpen((prevState) => !prevState)}
               >
-                <a href="#" className={s.header_buttonMenu}>
+                <a href="#" className={styles.header_buttonMenu}>
                   <img src={closeMenu} alt="CLOSE MENU" />
                 </a>
               </div>
             </div>
 
-            <div className={s.burgerMenuItems}>
-              <a href="#" className={s.burgerMenuLink}>Home</a>
-              <a href="#" className={s.burgerMenuLink}>Phones</a>
-              <a href="#" className={s.burgerMenuLink}>Tablets</a>
-              <a href="#" className={s.burgerMenuLink}>Accessories</a>
+            <div className={styles.burgerMenuItems}>
+              <MenuLink to="/" path="Home" />
+              <MenuLink to="/phones" path="Phones" />
+              <MenuLink to="/tablets" path="Tablets" />
+              <MenuLink to="/accessories" path="Accessories" />
             </div>
 
-            <div className={s.burgerButtons}>
-              <a href="#" className={s.burgerButton}>
+            <div className={styles.burgerButtons}>
+              <a href="#" className={styles.burgerButton}>
                 <img src={likes} alt="LIKES" />
               </a>
 
-              <a href="#" className={s.burgerButton}>
+              <a href="#" className={styles.burgerButton}>
                 <img src={shopBag} alt="SHOPPING BAG" />
               </a>
             </div>

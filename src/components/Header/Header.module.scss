@@ -66,7 +66,7 @@ $gray-primary: #0f0f11;
     gap: 15px;
 
     background-color: $gray-white;
-    box-shadow: 0px 1px 0px 0px #E2E6E9;
+    box-shadow: 0px 1px 0px 0px #e2e6e9;
   }
 
   .burgerMenuItems {
@@ -94,7 +94,7 @@ $gray-primary: #0f0f11;
 
     &:focus {
       color: $gray-primary;
-      border-bottom: 2px solid #0F0F11; 
+      border-bottom: 2px solid #0f0f11;
     }
   }
 
@@ -110,21 +110,6 @@ $gray-primary: #0f0f11;
     left: 0;
     background-color: $gray-white;
     box-shadow: -1px 0px 0px 0px $gray-secondary;
-  }
-
-  .burgerButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 50%;
-
-    border-right: 1px solid $gray-secondary;
-    border-bottom: 3px solid transparent;
-
-    &:focus {
-      border-bottom: 3px solid $gray-primary;
-    }
   }
 }
 
