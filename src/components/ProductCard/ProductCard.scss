@@ -1,8 +1,14 @@
-$card-width: 272px;
-$card-padding: 32px;
-$card-prices-width: $card-width - (2 * $card-padding);
-$button-size: $card-prices-width - 40px - 8px;
+$card-width-mobile: 288px;
+$card-width-tablet: 230px;
+$card-width-desktop: 272px;
 
+$card-height-mobile: 440px;
+$card-height-tablet: 506px;
+$card-height-desktop: 506px;
+
+$image-min-height: 130px;
+
+$card-padding: 32px;
 
 .product-card {
   display: flex;
@@ -11,15 +17,14 @@ $button-size: $card-prices-width - 40px - 8px;
   align-items: center;
   box-sizing: border-box;
   padding: $card-padding;
-  width: $card-width;
-  height: 506px;
+  width: $card-width-mobile;
+  height: $card-height-mobile;
   border-radius: 8px;
   border: 1px solid #E2E6E9;
 
   &__image {
-    width: 173px;
-    height: 181px;
-    margin-bottom: 8px;
+    min-height: $image-min-height;
+    margin-bottom: 24px;
   }
 
   &__name {
@@ -33,7 +38,7 @@ $button-size: $card-prices-width - 40px - 8px;
 
   &__prices {
     margin-bottom: 8px;
-    width: $card-prices-width;
+    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -59,16 +64,11 @@ $button-size: $card-prices-width - 40px - 8px;
   }
 
   &__fullprice {
-    color: #89939A;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    text-decoration-line: line-through;
+    visibility: hidden;
   }
 
   &__attributes {
-    width: $card-prices-width;
+    width: 100%;
     margin-bottom: 16px;
     list-style: none;
     padding: 0 8px;
@@ -99,13 +99,14 @@ $button-size: $card-prices-width - 40px - 8px;
 
   &__buttons {
     display: flex;
-    gap: 8px;
-    align-items: center;
+    justify-content: center;
     width: 100%;
   }
 
   &__cart-button {
-    width: $button-size;
+    display: inline-block;
+    margin-right: 8px;
+    flex-grow: 1;
     color: #FFF;
     font-size: 14px;
     font-style: normal;
@@ -135,7 +136,7 @@ $button-size: $card-prices-width - 40px - 8px;
   &__favorite-button {
     width: 40px;
     height: 40px;
-    border-radius: 100%;
+    border-radius: 100px;
     border: 1px solid #B4BDC3;
     background-color: #FFF;
     background-image: url("../../icons/FavouriteBtn.svg");
@@ -153,3 +154,29 @@ $button-size: $card-prices-width - 40px - 8px;
     }
   }
 }
+
+
+@media (min-width: 640px) {
+  .product-card {
+    width: $card-width-tablet;
+    height: $card-height-tablet;
+  }
+}
+
+@media (min-width: 768px) {
+  .product-card {
+    width: $card-width-desktop;
+    height: $card-height-desktop;
+
+    &__fullprice {
+      color: #89939A;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-decoration-line: line-through;
+      visibility: visible;
+    }
+  }
+}
+
