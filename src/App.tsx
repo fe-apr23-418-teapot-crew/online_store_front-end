@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { NavLayout } from './layout/NavLayout';
+import { MainLayout } from './layout/MainLayout';
 import { Home } from './pages/Home';
 // import { NotFound } from './pages/NotFound';
 import { Phones } from './pages/Phones';
@@ -10,7 +10,7 @@ import { Accessories } from './pages/Accessories';
 
 export const App = () => (
   <Routes>
-    <Route path="/" element={<NavLayout />}>
+    <Route path="/" element={<MainLayout />}>
       <Route index element={<Home />} />
       <Route path="home" element={<Navigate to="/" replace />} />
 
@@ -23,7 +23,7 @@ export const App = () => (
       </Route>
 
       <Route path="accessories" element={<Accessories />}>
-        <Route path=":selectedSlug" element={<Accessories/>} />
+        <Route path=":selectedSlug" element={<Accessories />} />
       </Route>
 
       {/* <Route path="*" element={<NotFound />} /> */}

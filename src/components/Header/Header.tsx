@@ -6,6 +6,7 @@ import likes from '../../images/Favourites (Heart Like).svg';
 import shopBag from '../../images/Shopping bag (Cart).svg';
 import closeMenu from '../../images/Close.svg';
 import menu from '../../images/Menu.svg';
+import { MenuLink } from '../MenuLink';
 
 export const Header = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -15,20 +16,16 @@ export const Header = () => {
       <header className={s.header}>
         <div className={s.container}>
           <div className={s.header_logo}>
-            <img 
-              src={logo} 
-              alt="LOGO" 
-              className={s.header_logoImage}
-            />
+            <img src={logo} alt="LOGO" className={s.header_logoImage} />
           </div>
 
           <div className={s.header_menuItems}>
-            <a href="#" className={s.header_menuLink}>Home</a>
-            <a href="#" className={s.header_menuLink}>Phones</a>
-            <a href="#" className={s.header_menuLink}>Tablets</a>
-            <a href="#" className={s.header_menuLink}>Accessories</a>
+            <MenuLink to="/" path="Home" />
+            <MenuLink to="/phones" path="Phones" />
+            <MenuLink to="/tablets" path="Tablets" />
+            <MenuLink to="/accessories" path="Accessories" />
           </div>
-        </div>  
+        </div>
 
         <div className={s.header_buttons}>
           <a href="#" className={s.header_button}>
