@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import phones from './phones.json';
 import cn from 'classnames';
 import './Pagination.scss';
+import { ProductCard } from '../ProductCard';
 
 // ! Used the phones file instead of server data
 
@@ -53,10 +54,7 @@ export const Pagination: React.FC<Props> = ({ currentPage, pages }) => {
     <>
       <section className='phones'>
         {displayedPhones.map((phone) => (
-          <React.Fragment key={phone.id}>
-            <p>{phone.name}</p>
-            <p className='text'>{phone.id}</p>
-          </React.Fragment>
+          <ProductCard key={phone.id} product={phone}/>
         ))}
       </section>
       <aside className='pagination'>
