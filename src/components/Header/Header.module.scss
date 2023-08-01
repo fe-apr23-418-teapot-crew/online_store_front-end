@@ -1,4 +1,6 @@
 $gray-white: #FFFFFF;
+$gray-secondary: #89939A;
+$gray-primary: #0F0F11;
 
 .header {
   display: flex;
@@ -33,13 +35,110 @@ $gray-white: #FFFFFF;
     display: none;
   }
 
-  &_button {
+  &_buttonMenu {
     display: flex;
     justify-content: center;
     align-items: center;
 
     padding: 16px;
-    
+
     box-shadow: -1px 0px 0px 0px #E2E6E9;
  }
+}
+
+@media (min-width: 640px) {
+  .header {
+    gap: 16px;
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+    }
+
+    &_menuItems {
+      display: block;
+    }
+
+    &_menuLink {
+      margin-right: 32px;
+
+      font-family: Mont;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 800;
+      line-height: 48px;
+      letter-spacing: 0.48px;
+      text-transform: uppercase;
+
+      color: $gray-secondary;
+      border-bottom: 1px solid transparent;
+
+      transition: color 700ms;
+
+      &:focus {
+        color: $gray-primary;
+        border-bottom: 3px solid #0F0F11; 
+      }
+    }
+
+    &_buttons {
+      display: flex;
+    }
+
+    &_button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 16px;
+
+      box-shadow: -1px 0px 0px 0px #E2E6E9;
+    }
+
+    &_buttonBurgerMenu {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .header {
+    height: 64px;
+    gap: 24px;
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+    }
+
+    &_logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 18px 24px;
+    }
+
+    &_logoImage {
+      height: 28px;
+      width: 80px;
+    }
+
+    &_menuLink {
+      margin-right: 64px;
+      line-height: 64px;
+
+      &:focus {
+        margin-top: 3px;
+      }
+    }
+
+    &_button {
+      padding: 24px;
+    }
+  }
 }
