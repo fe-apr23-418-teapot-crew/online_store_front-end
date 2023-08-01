@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
-import { ProductCard } from '../../components/ProductCard';
 import { Product } from '../../types/Product';
 import { useQuery } from 'react-query';
 import { fetchProducts } from '../../api/products';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Pagination } from '../../components/Pagination/Pagination';
+import { ProductCard } from '../../components/ProductCard';
 
 interface ContentLayoutProps {
   path: string;
@@ -20,6 +21,11 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
   const { data, isLoading, error } = useQuery<Product[]>(pathAPI, fetchProducts);
+  const [itemsOnPage, setItemsOnPage] = useState<string>('16');
+
+  const handleDisplayedQuantity = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setItemsOnPage(event.target.value);
+  };
 
   if (isLoading) {
     return <CircularProgress />;
@@ -28,7 +34,6 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   if (error) {
     return <div>Error: {error.toString()}</div>;
   }
-
 
   return (
     <div className="products">
@@ -59,7 +64,11 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
           <option value="by-price">By price</option>
         </select>
 
-        <select name="pagination" className="products__select">
+        <select
+          name="pagination"
+          className="products__select"
+          onChange={handleDisplayedQuantity}
+        >
           <option value="16" selected>
           16
           </option>
@@ -69,11 +78,14 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
         </select>
       </div>
 
-      <ul className="products__gadgets">
-        {data?.map((gadget) => (
-          <ProductCard key={gadget.id} product={gadget} />
-        ))}
-      </ul>
+      {itemsOnPage !== 'all'
+        ? data && <Pagination pages={+itemsOnPage} products={data} />
+        : <ul className="products__gadgets">
+          {data?.map((gadget) => (
+            <ProductCard key={gadget.id} product={gadget} />
+          ))}
+        </ul>
+      }
     </div>
   );
 
