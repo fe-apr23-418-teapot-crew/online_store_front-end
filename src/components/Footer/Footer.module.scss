@@ -1,13 +1,120 @@
-
 .footer {
-  display: flex;
+  margin-top: auto;
   width: 100%;
-  height: 48px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
+  height: 96px;
+  color: #89939a;
+  box-shadow: 0px -1px 0px 0px #e2e6e9;;
+  padding: 32px 16px;
 
-  background-color: purple;
-  box-shadow: 0px 1px 0px 0px #E2E6E9;
+  @media (min-width: 640px) {
+    padding: 32px 0;
+  }
+
+  &__logo {
+    width: 89px;
+    height: 32px;
+  }
+
+  &__logoImage {
+    display: block;
+    padding-bottom: 32px;
+
+  }
+
+  &__menuLinks {
+    padding-bottom: 32px;
+  }
+
+  @media (min-width: 640px) {
+    & {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &__logoImage {
+      padding: 32px;
+    }
+
+
+    &__logo,
+    &__menuLinks {
+    padding-bottom: 0;
+    }
+  }
+}
+
+.list {
+  font-family: Mont;
+  font-size: 12px;
+    letter-spacing: 0em;
+    text-transform: uppercase;
+    list-style-type: none;
+    padding: 0;
+
+  &__item:not(:last-child) {
+    padding-bottom: 16px;
+  }
+
+  &__link {
+    color: #89939a;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 11px;
+  }
+
+  @media (min-width: 640px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &__item:not(:last-child) {
+      padding-bottom: 0;
+      padding-right: 11px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    &__item:not(:last-child) {
+      padding-right: 70px;
+    }
+  }
+}
+
+.backToTop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 15px;
+  letter-spacing: 0em;
+
+
+  &__button {
+    width: 32px;
+    height: 32px;
+    margin-left: 16px;
+    flex-shrink: 0;
+    background-color: #ffffff;
+
+    border-radius: 48px;
+    border: 1px solid #b4bdc3;
+
+    @media (min-width: 640px) {
+      margin-right: 32px;
+    }
+  }
+
+  &__pic {
+    width: 10px;
+    height: 10px;
+    margin: 10px;
+  }
+
+  &__pic:hover {
+    transform: rotate(-90deg);
+  }
 }
