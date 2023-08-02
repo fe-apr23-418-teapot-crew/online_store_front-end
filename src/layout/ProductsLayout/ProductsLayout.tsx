@@ -4,6 +4,7 @@ import { ProductCard } from '../../components/ProductCard';
 import { useQuery } from 'react-query';
 import { fetchProducts } from '../../api/products';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Product } from '../../types/Product';
 import { ApiResponse } from '../../types/APIResponse';
 // import { Pagination } from '../../components/Pagination/Pagination';
 
@@ -35,6 +36,12 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
 
   const productFromServer = data?.rows;
   const productCount = productFromServer?.length;
+
+  const handleProductCardClick = (productId: number) => {
+    setSelectedProductId(productId);
+  };
+
+  console.log(selectedProductId);
 
   return (
     <div className="products">
@@ -78,8 +85,12 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
       </div>
 
       <ul className="products__gadgets">
-        {productFromServer?.map((product) => (
-          <ProductCard key={product.id} product={product} />
+        {productFromServer?.map((product: Product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            handleProductCardClick={handleProductCardClick}
+          />
         ))}
       </ul>
     </div>
