@@ -4,10 +4,11 @@ import { Product } from '../../types/Product';
 
 type ProductCardProps = {
   product: Product;
+  handleProductCardClick?: (productId: number) => void;
 };
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { image, name, capacity, color, fullPrice, price, screen, ram } =
+export const ProductCard: React.FC<ProductCardProps> = ({ product, handleProductCardClick }) => {
+  const { id, image, name, capacity, color, fullPrice, price, screen, ram } =
     product;
 
   const imageURL = API_URL + image;
@@ -22,7 +23,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <article className="product-card">
-      <img src={imageURL} className="product-card__image" alt={name}></img>
+      <img 
+        src={imageURL} 
+        className="product-card__image" 
+        alt={name}
+        onClick={handleProductCardClick 
+          ? () => handleProductCardClick(+id)
+          : () => {}
+        }
+      >  
+      </img>
       <h2 className="product-card__name">{`${name} ${capacity} ${color}`}</h2>
       <div className="product-card__prices">
         <div className="product-card__price">{`$${price}`}</div>

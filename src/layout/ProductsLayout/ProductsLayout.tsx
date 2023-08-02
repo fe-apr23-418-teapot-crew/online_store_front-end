@@ -22,6 +22,8 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
     pathAPI,
     fetchProducts,
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
 
   if (isLoading) {
     return <CircularProgress />;
@@ -30,6 +32,10 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   if (error) {
     return <div>Error: {error.toString()}</div>;
   }
+
+  const handleProductCardClick = (productId: number) => {
+    setSelectedProductId(productId);
+  };
 
   return (
     <div className="products">
@@ -67,8 +73,12 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
       </div>
 
       <ul className="products__gadgets">
-        {data?.map((gadget) => (
-          <ProductCard key={gadget.id} product={gadget} />
+        {data?.map((product) => (
+          <ProductCard 
+            key={product.id} 
+            product={product} 
+            handleProductCardClick={handleProductCardClick}
+          />
         ))}
       </ul>
     </div>
