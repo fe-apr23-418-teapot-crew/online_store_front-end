@@ -1,56 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { API_URL } from '../../consts/api';
-import { Product } from '../../types/Product';
+import { getCartItems } from '../../helpers/localStorage/getCartItems';
+import { LiteProduct } from '../../types/LiteProduct';
 import styles from './CartItem.module.scss';
 
 interface CartItemProps {
-  product: Product;
-  onChangeTotalAmount: (amount: number) => void;
-  onChangeCartProducts: (updatedCartItems: Product[]) => void;
+  product: LiteProduct;
+  onRemoveFromCart: (productId: number) => void;
 }
 
 export const CartItem: React.FC<CartItemProps> = ({
   product,
-  onChangeTotalAmount,
-  onChangeCartProducts,
+  onRemoveFromCart,
 }) => {
-  const { name, image, price } = product;
-  const existingCount = localStorage.getItem(`count_${product.id}`);
-  const [count, setCount] = useState<number>(
-    existingCount ? parseInt(existingCount) : 1,
-  );
+  const { id, name, image, price } = product;
+  const cartItems = localStorage.getItem('cartItems');
+  const existingCount: number = cartItems
+    ? JSON.parse(cartItems).find((item: LiteProduct) => item.id === id)
+      ?.count || 1
+    : 1;
+
+  const [count, setCount] = useState<number>(existingCount);
 
   const imageURL = API_URL + image;
 
-  useEffect(() => {
-    onChangeTotalAmount(price);
-  }, []);
-
   const handleCountChange = (action: string) => {
-    const newCount = action === '+' ? count + 1 : count - 1;
+    action === '+'
+      ? setCount((prevCount) => prevCount + 1)
+      : setCount((prevCount) => prevCount - 1);
 
-    if (newCount >= 1) {
-      setCount(newCount);
-      localStorage.setItem(`count_${product.id}`, newCount.toString());
+    const cartItems = getCartItems();
+    const updatedCartItems = cartItems.map((item: LiteProduct) =>
+      item.id === id ? { ...item, count } : item,
+    );
 
-      onChangeTotalAmount(action === '+' ? price : -price);
-    }
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
   };
 
   const handleRemoveItem = () => {
-    const existingCartItems = localStorage.getItem('cartItems');
-    const cartItems = existingCartItems ? JSON.parse(existingCartItems) : [];
-
-    const productIndex = cartItems.findIndex(
-      (item: Product) => item.id === product.id,
-    );
-
-    if (productIndex !== -1) {
-      cartItems.splice(productIndex, 1);
-      localStorage.setItem('cartItems', JSON.stringify(cartItems));
-
-      onChangeCartProducts(cartItems);
-    }
+    onRemoveFromCart(id);
   };
 
   return (

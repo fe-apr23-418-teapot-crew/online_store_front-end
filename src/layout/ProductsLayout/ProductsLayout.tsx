@@ -19,6 +19,9 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   pathAPI,
   title,
 }) => {
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(
+    null,
+  );
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
   const { data, isLoading, error } = useQuery<ApiResponse>(
     pathAPI,

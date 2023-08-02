@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
 import { CartItem } from '../../components/CartItem/CartItem';
 import { MenuLink } from '../../components/MenuLink';
-import { Product } from '../../types/Product';
 import styles from './Cart.module.scss';
+import { LiteProduct } from '../../types/LiteProduct';
 
 interface CartProps {}
 
 export const Cart: React.FC<CartProps> = () => {
-  const existingCartProducts = localStorage.getItem('cartItems');
-  const [cartProducts, setCartProducts] = useState<Product[]>(
-    existingCartProducts ? JSON.parse(existingCartProducts) : [],
+  const existingCartItems = localStorage.getItem('cartItems');
+  const [cartItems, setCartItems] = useState<LiteProduct[]>(
+    existingCartItems ? JSON.parse(existingCartItems) : [],
   );
 
-  const [totalAmount, setTotalAmount] = useState(0);
-  const totalCartItemsCount = cartProducts.length;
+  const totalAmount = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const totalCartItemsCount = cartItems.length;
   const isCartItemsEmpty = totalCartItemsCount < 1;
 
-  const changeTotalAmount = (amount: number) => {
-    setTotalAmount((prevTotalAmount) => prevTotalAmount + amount);
-  };
-
-  const changeCartProducts = (updatedCartItems: Product[]) => {
-    setCartProducts([...updatedCartItems]);
+  const handleRemoveFromCart = (productId: number) => {
+    const updatedCartItems = cartItems.filter(
+      (product) => product.id !== productId,
+    );
+    setCartItems(updatedCartItems);
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
   };
 
   return (
@@ -38,12 +38,11 @@ export const Cart: React.FC<CartProps> = () => {
         {!isCartItemsEmpty && (
           <div className={styles.cart__content}>
             <ul className={styles.cart__products}>
-              {cartProducts.map((product) => (
+              {cartItems.map((product) => (
                 <CartItem
                   key={product.id}
                   product={product}
-                  onChangeTotalAmount={changeTotalAmount}
-                  onChangeCartProducts={changeCartProducts}
+                  onRemoveFromCart={handleRemoveFromCart}
                 />
               ))}
             </ul>

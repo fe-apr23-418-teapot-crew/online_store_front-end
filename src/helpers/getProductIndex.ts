@@ -1,8 +1,8 @@
 import { Product } from '../types/Product';
-import { getCartItemsFromLocalStorage } from './getCartItemsFromLocalStorage';
+import { getCartItems } from './localStorage/getCartItems';
 
 export const getProductIndex = (productId: number) => {
-  const cartItems = getCartItemsFromLocalStorage();
+  const cartItems = getCartItems();
 
   const productIndex = cartItems.findIndex(
     (item: Product) => item.id === productId,
