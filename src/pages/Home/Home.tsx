@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { Masonry } from '@mui/lab';
 
-const heights = [150, 30, 90, 70, 90, 100, 150, 30, 50, 80];
+const heights = [150, 1];
 
 const StyledAccordion = styled(Accordion)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',

@@ -4,6 +4,19 @@ import { Outlet } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 // import { Navigation } from '../../components/Navigation';
+<<<<<<< HEAD
+
+export const MainLayout: React.FC = () => (
+  <div data-cy="app">
+    <Header />
+
+    <main className="section">
+      <div className="container">
+        <Outlet />
+      </div>
+    </main>
+
+=======
 import styles from './MainLayout.module.scss';
 
 export const MainLayout: React.FC = () => (
@@ -15,6 +28,7 @@ export const MainLayout: React.FC = () => (
         <Outlet />
       </div>
     </main>
+>>>>>>> a7d6747f4a0bdbeb15f5bf552aa4b98a364f2f51
     <Footer />
   </div>
 );

@@ -10,7 +10,7 @@ $image-min-height: 130px;
 
 $card-padding: 32px;
 
-.product-card {
+.productCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,22 +79,22 @@ $card-padding: 32px;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
+  }
 
-    &-title {
-      color: #89939a;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-    }
+  &__attributeTitle {
+    color: #89939a;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
 
-    &-value {
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      text-align: right;
-    }
+  &__attributeValue {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: right;
   }
 
   &__buttons {
@@ -103,7 +103,7 @@ $card-padding: 32px;
     width: 100%;
   }
 
-  &__cart-button {
+  &__cartButton {
     display: inline-block;
     margin-right: 8px;
     flex-grow: 1;
@@ -122,6 +122,10 @@ $card-padding: 32px;
     border-radius: 8px;
     transition: 0.3s;
 
+    &--disabled {
+      background: red;
+    }
+
     &:hover {
       box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
     }
@@ -133,7 +137,7 @@ $card-padding: 32px;
     }
   }
 
-  &__favorite-button {
+  &__favoriteButton {
     width: 40px;
     height: 40px;
     border-radius: 100px;
@@ -156,14 +160,14 @@ $card-padding: 32px;
 }
 
 @media (min-width: 640px) {
-  .product-card {
+  .productCard {
     width: $card-width-tablet;
     height: $card-height-tablet;
   }
 }
 
 @media (min-width: 768px) {
-  .product-card {
+  .productCard {
     width: $card-width-desktop;
     height: $card-height-desktop;
 

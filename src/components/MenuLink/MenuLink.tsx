@@ -20,8 +20,8 @@ export const MenuLink: React.FC<MenuLinkProps> = ({
     to={to}
     className={({ isActive }) =>
       cn(styles.menuLink, {
-        [styles.menuLinkActive]: isActive,
-        [styles.menuLinkBurger]: isBurgerItem,
+        [styles.Active]: isActive,
+        [styles.Burger]: isBurgerItem,
       })
     }
   >

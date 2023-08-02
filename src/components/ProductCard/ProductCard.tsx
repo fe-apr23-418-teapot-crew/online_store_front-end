@@ -1,53 +1,86 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { API_URL } from '../../consts/api';
 import { Product } from '../../types/Product';
+import cn from 'classnames';
+import styles from './ProductCard.module.scss';
+import { getProductIndex } from '../../helpers/getProductIndex';
+import { getCartItemsFromLocalStorage } from '../../helpers/getCartItemsFromLocalStorage';
 
 type ProductCardProps = {
   product: Product;
 };
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { image, name, capacity, color, fullPrice, price, screen, ram } =
+  const { id, image, name, capacity, color, fullPrice, price, screen, ram } =
     product;
 
   const imageURL = API_URL + image;
+  const [isAddToCartDisabled, setIsAddToCartDisabled] = useState(false);
+
+  useEffect(() => {
+    const productIndex = getProductIndex(id);
+
+    if (productIndex !== -1) {
+      setIsAddToCartDisabled(true);
+    }
+  }, [product.id]);
 
   const handleAddToCart = () => {
-    const existingCartItems = localStorage.getItem('cartItems');
-    const cartProducts = existingCartItems ? JSON.parse(existingCartItems) : [];
-    cartProducts.push(product);
+    const productIndex = getProductIndex(id);
 
-    localStorage.setItem('cartItems', JSON.stringify(cartProducts));
+    if (productIndex !== -1) {
+      return;
+    }
+
+    const cartItems = getCartItemsFromLocalStorage();
+
+    cartItems.push(product);
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   };
 
   return (
-    <article className="product-card">
-      <img src={imageURL} className="product-card__image" alt={name}></img>
-      <h2 className="product-card__name">{`${name} ${capacity} ${color}`}</h2>
-      <div className="product-card__prices">
-        <div className="product-card__price">{`$${price}`}</div>
-        <div className="product-card__fullprice">{`$${fullPrice}`}</div>
+    <article className={styles.productCard}>
+      <img src={imageURL} className={styles.productCard__image} alt={name} />
+
+      <h2 className={styles.productCard__name}>
+        {`${name} ${capacity} ${color}`}
+      </h2>
+
+      <div className={styles.productCard__prices}>
+        <div className={styles.productCard__price}>{`$${price}`}</div>
+
+        <div className={styles.productCard__fullprice}>{`$${fullPrice}`}</div>
       </div>
-      <ul className="product-card__attributes">
-        <li className="product-card__attribute">
-          <p className="product-card__attribute-title">Screen</p>
-          <p className="product-card__attribute-value">{screen}</p>
+
+      <ul className={styles.productCard__attributes}>
+        <li className={styles.productCard__attribute}>
+          <p className={styles.productCard__attributeTitle}>Screen</p>
+          <p className={styles.productCard__attributeValue}>{screen}</p>
         </li>
-        <li className="product-card__attribute">
-          <p className="product-card__attribute-title">Capacity</p>
-          <p className="product-card__attribute-value">{capacity}</p>
+
+        <li className={styles.productCard__attribute}>
+          <p className={styles.productCard__attributeTitle}>Capacity</p>
+          <p className={styles.productCard__attributeValue}>{capacity}</p>
         </li>
-        <li className="product-card__attribute">
-          <p className="product-card__attribute-title">RAM</p>
-          <p className="product-card__attribute-value">{ram}</p>
+
+        <li className={styles.productCard__attribute}>
+          <p className={styles.productCard__attributeTitle}>RAM</p>
+          <p className={styles.productCard__attributeValue}>{ram}</p>
         </li>
       </ul>
-      <div className="product-card__buttons">
-        <button className="product-card__cart-button" onClick={handleAddToCart}>
+
+      <div className={styles.productCard__buttons}>
+        <button
+          className={cn(styles.productCard__cartButton, {
+            [styles['productCard__cartButton--disabled']]: isAddToCartDisabled,
+          })}
+          onClick={handleAddToCart}
+          disabled={isAddToCartDisabled}
+        >
           Add to cart
         </button>
 
-        <button className="product-card__favorite-button"></button>
+        <button className={styles.productCard__favoriteButton} />
       </div>
     </article>
   );
