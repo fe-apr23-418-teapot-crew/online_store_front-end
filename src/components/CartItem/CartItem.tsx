@@ -27,17 +27,13 @@ export const CartItem: React.FC<CartItemProps> = ({
   }, []);
 
   const handleCountChange = (action: string) => {
-    const newCount = action === '+' 
-      ? count + 1 
-      : count - 1;
+    const newCount = action === '+' ? count + 1 : count - 1;
 
     if (newCount >= 1) {
       setCount(newCount);
       localStorage.setItem(`count_${product.id}`, newCount.toString());
 
-      onChangeTotalAmount(action === '+' 
-        ? price 
-        : -price);
+      onChangeTotalAmount(action === '+' ? price : -price);
     }
   };
 

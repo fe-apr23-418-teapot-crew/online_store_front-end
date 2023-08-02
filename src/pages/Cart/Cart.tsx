@@ -8,9 +8,9 @@ interface CartProps {}
 
 export const Cart: React.FC<CartProps> = () => {
   const existingCartProducts = localStorage.getItem('cartItems');
-  const [cartProducts, setCartProducts]= useState<Product[]>(existingCartProducts
-    ? JSON.parse(existingCartProducts)
-    : []);
+  const [cartProducts, setCartProducts] = useState<Product[]>(
+    existingCartProducts ? JSON.parse(existingCartProducts) : [],
+  );
 
   const [totalAmount, setTotalAmount] = useState(0);
   const totalCartItemsCount = cartProducts.length;

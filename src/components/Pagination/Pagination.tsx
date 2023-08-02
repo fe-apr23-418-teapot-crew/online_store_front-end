@@ -1,30 +1,30 @@
 import React, { useState, useMemo } from 'react';
-import phones from './phones.json';
 import cn from 'classnames';
-import './Pagination.scss';
+import styles from './Pagination.module.scss';
 import { ProductCard } from '../ProductCard';
+import { Product } from '../../types/Product';
 
 // ! Used the phones file instead of server data
 
 interface Props {
-  currentPage: number;
   pages: number;
+  products: Product[];
 }
 
-export const Pagination: React.FC<Props> = ({ currentPage, pages }) => {
-  const [activePage, setActivePage] = useState(currentPage);
+export const Pagination: React.FC<Props> = ({ pages, products }) => {
+  const [activePage, setActivePage] = useState<number>(1);
   const [translateX, setTranslateX] = useState(0);
-  const lastPage = Math.ceil(phones.length/pages); 
+  const lastPage = Math.ceil(products.length/pages); 
   const displayedPhones = useMemo(() => {
-    return phones.filter(
+    return products.filter(
       (phone) => +phone.id > pages * (activePage - 1) && +phone.id <= pages * activePage
     );
-  }, [phones, pages, activePage]);
+  }, [products, pages, activePage]);
   
   const pageNumbers = useMemo(() => {
-    const lastPage = Math.ceil(phones.length / pages);
+    const lastPage = Math.ceil(products.length / pages);
     return Array.from({ length: lastPage }, (_, index) => index + 1);
-  }, [phones, pages]);
+  }, [products, pages]);
   
   const handleMoveLeft = () => {
     if (activePage === 1) {
@@ -44,7 +44,7 @@ export const Pagination: React.FC<Props> = ({ currentPage, pages }) => {
       return;
     }
     setActivePage(activePage + 1);
-    if (activePage >= lastPage - 3) {
+    if (activePage >= lastPage - 3 && translateX === (lastPage - 4) * -40) {
       return;
     }
     setTranslateX(translateX - 40);
@@ -52,20 +52,20 @@ export const Pagination: React.FC<Props> = ({ currentPage, pages }) => {
   
   return (
     <>
-      <section className='phones'>
-        {displayedPhones.map((phone) => (
-          <ProductCard key={phone.id} product={phone}/>
+      <ul>
+        {displayedPhones.map((gadget) => (
+          <ProductCard key={gadget.id} product={gadget} />
         ))}
-      </section>
-      <aside className='pagination'>
-        <button className='pagination__button pagination__button--arrow' onClick={handleMoveLeft}>
+      </ul>
+      <aside className={styles.pagination}>
+        <button className={`${styles.pagination__button} ${styles['pagination__button--arrow']}`} onClick={handleMoveLeft}>
           {'<'}
         </button>
         <div
-          className='pagination__pages-list-container'
+          className={styles['pagination__pages-list-container']}
         >
           <div
-            className='pagination__pages-list'
+            className={styles['pagination__pages-list']}
             style={{
               transform: `translateX(${translateX}px)`,
               transition: 'transform 0.3s ease',
@@ -73,8 +73,8 @@ export const Pagination: React.FC<Props> = ({ currentPage, pages }) => {
           >
             {pageNumbers.map((num) => (
               <button
-                className={cn('pagination__button', {
-                  'pagination__button--active': activePage === num,
+                className={cn(styles.pagination__button, {
+                  [styles['pagination__button--active']]: activePage === num,
                 })}
                 key={num}
                 onClick={() => setActivePage(num)}
@@ -84,7 +84,7 @@ export const Pagination: React.FC<Props> = ({ currentPage, pages }) => {
             ))}
           </div>
         </div>
-        <button className='pagination__button pagination__button--arrow' onClick={handleMoveRight}>
+        <button className={`${styles.pagination__button} ${styles['pagination__button--arrow']}`} onClick={handleMoveRight}>
           {'>'}
         </button>
       </aside>
