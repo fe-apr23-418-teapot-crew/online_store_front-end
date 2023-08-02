@@ -1,0 +1,29 @@
+.about {
+    &__header {
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 140%;
+        margin: 0;
+        margin-bottom: 16px;
+        height: 31px;
+    }
+    &__description {
+        border-top: solid 1px #E2E6E9;
+    }
+    &__description-title {
+        margin: 32px 0 0 0;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+    &__description-text {
+        margin: 16px 0 0 0;
+        color: #89939A;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 21px
+    }
+}
