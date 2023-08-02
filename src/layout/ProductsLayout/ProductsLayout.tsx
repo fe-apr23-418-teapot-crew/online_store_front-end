@@ -1,19 +1,11 @@
 import React, { useState } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
-<<<<<<< HEAD
 import { ProductCard } from '../../components/ProductCard';
 import { useQuery } from 'react-query';
 import { fetchProducts } from '../../api/products';
 import CircularProgress from '@mui/material/CircularProgress';
 import { ApiResponse } from '../../types/APIResponse';
-=======
-import { Product } from '../../types/Product';
-import { useQuery } from 'react-query';
-import { fetchProducts } from '../../api/products';
-import CircularProgress from '@mui/material/CircularProgress';
-import { Pagination } from '../../components/Pagination/Pagination';
-import { ProductCard } from '../../components/ProductCard';
->>>>>>> a7d6747f4a0bdbeb15f5bf552aa4b98a364f2f51
+// import { Pagination } from '../../components/Pagination/Pagination';
 
 interface ContentLayoutProps {
   path: string;
@@ -27,19 +19,11 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   title,
 }) => {
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
-<<<<<<< HEAD
   const { data, isLoading, error } = useQuery<ApiResponse>(
     pathAPI,
     fetchProducts,
   );
-=======
-  const { data, isLoading, error } = useQuery<Product[]>(pathAPI, fetchProducts);
-  const [itemsOnPage, setItemsOnPage] = useState<string>('16');
-
-  const handleDisplayedQuantity = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setItemsOnPage(event.target.value);
-  };
->>>>>>> a7d6747f4a0bdbeb15f5bf552aa4b98a364f2f51
+  //const itemsOnPage = 16;
 
   if (isLoading) {
     return <CircularProgress />;
@@ -49,12 +33,9 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
     return <div>Error: {error.toString()}</div>;
   }
 
-<<<<<<< HEAD
   const productFromServer = data?.rows;
   const productCount = productFromServer?.length;
 
-=======
->>>>>>> a7d6747f4a0bdbeb15f5bf552aa4b98a364f2f51
   return (
     <div className="products">
       <div className="products__location-history">
@@ -82,41 +63,27 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
           <option value="by-price">By price</option>
         </select>
 
-<<<<<<< HEAD
-        <select name="pagination" className="products__select">
-          <option value="16">16</option>
-=======
         <select
           name="pagination"
           className="products__select"
-          onChange={handleDisplayedQuantity}
+          // onChange={handleDisplayedQuantity}
         >
           <option value="16" selected>
-          16
+            16
           </option>
->>>>>>> a7d6747f4a0bdbeb15f5bf552aa4b98a364f2f51
           <option value="32">32</option>
           <option value="64">64</option>
           <option value="all">All</option>
         </select>
       </div>
 
-<<<<<<< HEAD
       <ul className="products__gadgets">
         {productFromServer?.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </ul>
-=======
-      {itemsOnPage !== 'all'
-        ? data && <Pagination pages={+itemsOnPage} products={data} />
-        : <ul className="products__gadgets">
-          {data?.map((gadget) => (
-            <ProductCard key={gadget.id} product={gadget} />
-          ))}
-        </ul>
-      }
->>>>>>> a7d6747f4a0bdbeb15f5bf552aa4b98a364f2f51
     </div>
   );
 };
+
+// <Pagination pages={+itemsOnPage} products={productFromServer} />
