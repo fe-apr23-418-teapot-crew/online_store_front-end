@@ -8,9 +8,10 @@ import { getCartItemsFromLocalStorage } from '../../helpers/getCartItemsFromLoca
 
 type ProductCardProps = {
   product: Product;
+  handleProductCardClick?: (productId: number) => void;
 };
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product, handleProductCardClick }) => {
   const { id, image, name, capacity, color, fullPrice, price, screen, ram } =
     product;
 
@@ -40,7 +41,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <article className={styles.productCard}>
-      <img src={imageURL} className={styles.productCard__image} alt={name} />
+      <img 
+        src={imageURL} 
+        className={styles.productCard__image} 
+        alt={name} 
+        onClick={handleProductCardClick 
+          ? () => handleProductCardClick(+id)
+          : () => {}
+        }
+      />
 
       <h2 className={styles.productCard__name}>
         {`${name} ${capacity} ${color}`}

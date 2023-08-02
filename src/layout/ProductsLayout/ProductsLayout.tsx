@@ -29,6 +29,9 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
     setItemsOnPage(event.target.value);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+
   if (isLoading) {
     return <CircularProgress />;
   }
@@ -39,6 +42,12 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
 
   const productFromServer = data?.rows;
   const productCount = productFromServer?.length;
+
+  const handleProductCardClick = (productId: number) => {
+    setSelectedProductId(productId);
+  };
+
+  console.log(selectedProductId);
 
   return (
     <div className="products">
@@ -83,7 +92,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
 
       <ul className="products__gadgets">
         {productFromServer?.map((product: Product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} handleProductCardClick={handleProductCardClick} />
         ))}
       </ul>
       {/* {itemsOnPage !== 'all'
