@@ -1,6 +1,6 @@
-$gray-white: #FFFFFF;
-$gray-secondary: #89939A;
-$gray-primary: #0F0F11;
+$gray-white: #ffffff;
+$gray-secondary: #89939a;
+$gray-primary: #0f0f11;
 
 .header {
   display: flex;
@@ -12,7 +12,7 @@ $gray-primary: #0F0F11;
   gap: 15px;
 
   background-color: $gray-white;
-  box-shadow: 0px 1px 0px 0px #E2E6E9;
+  box-shadow: 0px 1px 0px 0px #e2e6e9;
 
   &_logo {
     display: flex;
@@ -42,11 +42,82 @@ $gray-primary: #0F0F11;
 
     padding: 16px;
 
-    box-shadow: -1px 0px 0px 0px #E2E6E9;
- }
+    box-shadow: -1px 0px 0px 0px #e2e6e9;
+  }
+}
+
+.burger {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: $gray-white;
+
+  .container {
+    display: flex;
+    width: 100%;
+    height: 48px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    background-color: $gray-white;
+    box-shadow: 0px 1px 0px 0px #e2e6e9;
+  }
+
+  .burgerMenuItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 24px;
+
+    gap: 16px;
+  }
+
+  .burgerMenuLink {
+    font-family: Mont;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 27px;
+    letter-spacing: 0.48px;
+    text-transform: uppercase;
+
+    color: $gray-secondary;
+
+    border-bottom: 2px solid transparent;
+
+    &:focus {
+      color: $gray-primary;
+      border-bottom: 2px solid #0f0f11;
+    }
+  }
+
+  .burgerButtons {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 64px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $gray-white;
+    box-shadow: -1px 0px 0px 0px $gray-secondary;
+  }
 }
 
 @media (min-width: 640px) {
+  .burgerMenu {
+    display: none;
+  }
+
   .header {
     gap: 16px;
 
@@ -61,28 +132,6 @@ $gray-primary: #0F0F11;
       display: block;
     }
 
-    &_menuLink {
-      margin-right: 32px;
-
-      font-family: Mont;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 800;
-      line-height: 48px;
-      letter-spacing: 0.48px;
-      text-transform: uppercase;
-
-      color: $gray-secondary;
-      border-bottom: 1px solid transparent;
-
-      transition: color 700ms;
-
-      &:focus {
-        color: $gray-primary;
-        border-bottom: 3px solid #0F0F11; 
-      }
-    }
-
     &_buttons {
       display: flex;
     }
@@ -94,7 +143,7 @@ $gray-primary: #0F0F11;
 
       padding: 16px;
 
-      box-shadow: -1px 0px 0px 0px #E2E6E9;
+      box-shadow: -1px 0px 0px 0px #e2e6e9;
     }
 
     &_buttonBurgerMenu {
@@ -126,15 +175,6 @@ $gray-primary: #0F0F11;
     &_logoImage {
       height: 28px;
       width: 80px;
-    }
-
-    &_menuLink {
-      margin-right: 64px;
-      line-height: 64px;
-
-      &:focus {
-        margin-top: 3px;
-      }
     }
 
     &_button {

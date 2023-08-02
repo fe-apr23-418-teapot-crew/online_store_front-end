@@ -18,7 +18,6 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   pathAPI,
   title,
 }) => {
-  
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
   const { data, isLoading, error } = useQuery<Product[]>(pathAPI, fetchProducts);
   const [itemsOnPage, setItemsOnPage] = useState<string>('16');
@@ -38,7 +37,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   return (
     <div className="products">
       <div className="products__location-history">
-        <HomeIcon className="products__home-icon"/>
+        <HomeIcon className="products__home-icon" />
 
         <ul className="products__location-history-list">
           {locationHistory.map((location) => (
@@ -57,9 +56,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
 
       <div className="products__filter-fields">
         <select name="sort-by" className="products__select">
-          <option value="by-date" selected>
-          By date
-          </option>
+          <option value="by-date">By date</option>
           <option value="by-name">By name</option>
           <option value="by-price">By price</option>
         </select>
@@ -88,5 +85,4 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
       }
     </div>
   );
-
 };

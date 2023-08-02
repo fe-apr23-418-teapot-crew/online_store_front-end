@@ -1,16 +1,18 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { NavLayout } from './layout/NavLayout';
+import { MainLayout } from './layout/MainLayout';
 import { Home } from './pages/Home';
 // import { NotFound } from './pages/NotFound';
 import { Phones } from './pages/Phones';
-import './App.scss';
+import './styles/App.scss';
 import { Tablets } from './pages/Tablets';
 import { Accessories } from './pages/Accessories';
+import { Cart } from './pages/Cart';
+import { Favourites } from './pages/Favourites';
 
 export const App = () => (
   <Routes>
-    <Route path="/" element={<NavLayout />}>
+    <Route path="/" element={<MainLayout />}>
       <Route index element={<Home />} />
       <Route path="home" element={<Navigate to="/" replace />} />
 
@@ -23,9 +25,16 @@ export const App = () => (
       </Route>
 
       <Route path="accessories" element={<Accessories />}>
-        <Route path=":selectedSlug" element={<Accessories/>} />
+        <Route path=":selectedSlug" element={<Accessories />} />
       </Route>
 
+      <Route path="favourites" element={<Favourites />}>
+        <Route path=":selectedSlug" element={<Favourites />} />
+      </Route>
+
+      <Route path="cart" element={<Cart />}>
+        <Route path=":selectedSlug" element={<Cart />} />
+      </Route>
       {/* <Route path="*" element={<NotFound />} /> */}
     </Route>
   </Routes>
