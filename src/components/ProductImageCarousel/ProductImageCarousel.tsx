@@ -8,15 +8,9 @@ import './ProductImageCarousel.scss';
 // };
 
 export const ProductImageCarousel: React.FC = () => {
-  const images: string[] = [
-    'https://content1.rozetka.com.ua/goods/images/big/221214139.jpg',
-    'https://content.rozetka.com.ua/goods/images/big/221214140.jpg',
-    'https://content1.rozetka.com.ua/goods/images/big/221214141.jpg',
-  ];
+  const images: string[] = [];
   
-  const [cardImage, setCardImage] = useState(
-    'https://content1.rozetka.com.ua/goods/images/big/221214139.jpg'
-  );
+  const [cardImage, setCardImage] = useState('');
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
 
