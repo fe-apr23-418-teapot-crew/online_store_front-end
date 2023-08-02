@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/online_store_front-end/static/css/main.b9cd03e0.css",
-    "main.js": "/online_store_front-end/static/js/main.eab81b3a.js",
+    "main.css": "/online_store_front-end/static/css/main.622d9f12.css",
+    "main.js": "/online_store_front-end/static/js/main.3af32032.js",
     "static/media/LogoForBurger.svg": "/online_store_front-end/static/media/LogoForBurger.54f709f934da43e81c0a56cc67ac176a.svg",
     "static/media/Logo.svg": "/online_store_front-end/static/media/Logo.576473c8d00e9efc5d797e0c98f95870.svg",
     "static/media/Shopping bag (Cart).svg": "/online_store_front-end/static/media/Shopping bag (Cart).0463874fa7338ffce131c991a273a3bf.svg",
@@ -12,11 +12,11 @@
     "static/media/Close.svg": "/online_store_front-end/static/media/Close.6d7ba7bf99b2d90a5bbde95013328dbe.svg",
     "static/media/Menu.svg": "/online_store_front-end/static/media/Menu.d9749b7108ad61ee68f43d4dae073f22.svg",
     "static/media/Vector (Stroke).svg": "/online_store_front-end/static/media/Vector (Stroke).471dc71c0889055cf7220eeb8b0dc283.svg",
-    "main.b9cd03e0.css.map": "/online_store_front-end/static/css/main.b9cd03e0.css.map",
-    "main.eab81b3a.js.map": "/online_store_front-end/static/js/main.eab81b3a.js.map"
+    "main.622d9f12.css.map": "/online_store_front-end/static/css/main.622d9f12.css.map",
+    "main.3af32032.js.map": "/online_store_front-end/static/js/main.3af32032.js.map"
   },
   "entrypoints": [
-    "static/css/main.b9cd03e0.css",
-    "static/js/main.eab81b3a.js"
+    "static/css/main.622d9f12.css",
+    "static/js/main.3af32032.js"
   ]
 }
