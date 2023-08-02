@@ -4,9 +4,9 @@ import { ProductCard } from '../../components/ProductCard';
 import { useQuery } from 'react-query';
 import { fetchProducts } from '../../api/products';
 import CircularProgress from '@mui/material/CircularProgress';
-// import { ApiResponse } from '../../types/APIResponse';
 import { Product } from '../../types/Product';
 import { ApiResponse } from '../../types/APIResponse';
+// import { ProductDetails } from '../../components/ProductDetails';
 // import { Pagination } from '../../components/Pagination/Pagination';
 
 interface ContentLayoutProps {

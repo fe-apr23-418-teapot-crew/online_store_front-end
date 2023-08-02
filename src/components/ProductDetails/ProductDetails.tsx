@@ -9,11 +9,9 @@ export const ProductDetails: FC<Props> = ({ productId }) => {
   const [productDetails, setProductDetails] = useState(null);
 
   useEffect(() => {
-    fetch(`${API_URL}/products/${productId}`)
+    fetch(`${API_URL}products/${productId}`)
       .then((response) => response.json())
-      .then((data) => {
-        setProductDetails(data);
-      })
+      .then(setProductDetails)
       .catch((error) => {
         console.error('Error fetching product details:', error);
       });
