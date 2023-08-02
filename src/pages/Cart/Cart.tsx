@@ -8,18 +8,20 @@ interface CartProps {}
 
 export const Cart: React.FC<CartProps> = () => {
   const existingCartProducts = localStorage.getItem('cartItems');
-  const cartProducts: Product[] = existingCartProducts
+  const [cartProducts, setCartProducts]= useState<Product[]>(existingCartProducts
     ? JSON.parse(existingCartProducts)
-    : [];
+    : []);
 
   const [totalAmount, setTotalAmount] = useState(0);
   const totalCartItemsCount = cartProducts.length;
   const isCartItemsEmpty = totalCartItemsCount < 1;
 
-  const changeTotalAmount = (amout: number) => {
-    const currentTotalAmount = totalAmount;
+  const changeTotalAmount = (amount: number) => {
+    setTotalAmount((prevTotalAmount) => prevTotalAmount + amount);
+  };
 
-    setTotalAmount(currentTotalAmount + amout);
+  const changeCartProducts = (updatedCartItems: Product[]) => {
+    setCartProducts([...updatedCartItems]);
   };
 
   return (
@@ -41,17 +43,22 @@ export const Cart: React.FC<CartProps> = () => {
                   key={product.id}
                   product={product}
                   onChangeTotalAmount={changeTotalAmount}
+                  onChangeCartProducts={changeCartProducts}
                 />
               ))}
             </ul>
 
-            <form className={styles.cart__form}>
-              <span className={styles.cart__totalAmout}>{totalAmount}</span>
+            <div className={styles.cart__from}>
+              <div className={styles.cart__total}>
+                <span className={styles.cart__totalAmout}>{totalAmount}</span>
 
-              <span className={styles.cart__totalCount}>
-                {`Total for ${totalCartItemsCount}`}
-              </span>
-            </form>
+                <span className={styles.cart__totalCount}>
+                  {`Total for ${totalCartItemsCount}`}
+                </span>
+              </div>
+
+              <button className={styles.cart__button}>Checkout</button>
+            </div>
           </div>
         )}
       </div>

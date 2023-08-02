@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import { ProductCard } from '../../components/ProductCard';
-import { Product } from '../../types/Product';
 import { useQuery } from 'react-query';
 import { fetchProducts } from '../../api/products';
 import CircularProgress from '@mui/material/CircularProgress';
+import { ApiResponse } from '../../types/APIResponse';
 
 interface ContentLayoutProps {
   path: string;
@@ -18,7 +18,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   title,
 }) => {
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
-  const { data, isLoading, error } = useQuery<Product[]>(
+  const { data, isLoading, error } = useQuery<ApiResponse>(
     pathAPI,
     fetchProducts,
   );
@@ -30,6 +30,9 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   if (error) {
     return <div>Error: {error.toString()}</div>;
   }
+
+  const productFromServer = data?.rows;
+  const productCount = productFromServer?.length;
 
   return (
     <div className="products">
@@ -48,7 +51,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
       <h1 className="products__title">{title}</h1>
 
       <h6 className="products__count">
-        {data?.length} + {'models'}
+        {productCount} + {'models'}
       </h6>
 
       <div className="products__filter-fields">
@@ -67,8 +70,8 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
       </div>
 
       <ul className="products__gadgets">
-        {data?.map((gadget) => (
-          <ProductCard key={gadget.id} product={gadget} />
+        {productFromServer?.map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))}
       </ul>
     </div>

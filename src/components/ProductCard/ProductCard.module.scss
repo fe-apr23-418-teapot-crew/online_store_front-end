@@ -10,7 +10,7 @@ $image-min-height: 130px;
 
 $card-padding: 32px;
 
-.product-card {
+.productCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +20,7 @@ $card-padding: 32px;
   width: $card-width-mobile;
   height: $card-height-mobile;
   border-radius: 8px;
-  border: 1px solid #E2E6E9;
+  border: 1px solid #e2e6e9;
 
   &__image {
     min-height: $image-min-height;
@@ -47,12 +47,12 @@ $card-padding: 32px;
     position: relative;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       right: 0;
       bottom: 0;
-      border: 1px solid #89939A;
+      border: 1px solid #89939a;
     }
   }
 
@@ -79,22 +79,22 @@ $card-padding: 32px;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
+  }
 
-    &-title {
-      color: #89939A;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-    }
+  &__attributeTitle {
+    color: #89939a;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
 
-    &-value {
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      text-align: right;
-    }
+  &__attributeValue {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: right;
   }
 
   &__buttons {
@@ -103,11 +103,11 @@ $card-padding: 32px;
     width: 100%;
   }
 
-  &__cart-button {
+  &__cartButton {
     display: inline-block;
     margin-right: 8px;
     flex-grow: 1;
-    color: #FFF;
+    color: #fff;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -117,59 +117,62 @@ $card-padding: 32px;
     height: 40px;
     justify-content: center;
     align-items: center;
-    background: #216CFF;
-    border: #216CFF;
+    background: #216cff;
+    border: #216cff;
     border-radius: 8px;
     transition: 0.3s;
 
+    &--disabled {
+      background: red;
+    }
+
     &:hover {
-      box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.40);
+      box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
     }
 
     &:active {
-      color:#216CFF;
-      background-color: #FFF;
-      border: 1px solid #E2E6E9;
+      color: #216cff;
+      background-color: #fff;
+      border: 1px solid #e2e6e9;
     }
   }
 
-  &__favorite-button {
+  &__favoriteButton {
     width: 40px;
     height: 40px;
     border-radius: 100px;
-    border: 1px solid #B4BDC3;
-    background-color: #FFF;
-    background-image: url("../../icons/FavouriteBtn.svg");
+    border: 1px solid #b4bdc3;
+    background-color: #fff;
+    background-image: url('../../icons/FavouriteBtn.svg');
     background-repeat: no-repeat;
     background-position: center;
     transition: 0.3s;
 
     &:hover {
-      border-color: #0F0F11;
+      border-color: #0f0f11;
     }
-    
+
     &:active {
-      border-color: #B4BDC3;
-      background-image: url("../../icons/FavouritesFilledBtn.svg");
+      border-color: #b4bdc3;
+      background-image: url('../../icons/FavouritesFilledBtn.svg');
     }
   }
 }
 
-
 @media (min-width: 640px) {
-  .product-card {
+  .productCard {
     width: $card-width-tablet;
     height: $card-height-tablet;
   }
 }
 
 @media (min-width: 768px) {
-  .product-card {
+  .productCard {
     width: $card-width-desktop;
     height: $card-height-desktop;
 
     &__fullprice {
-      color: #89939A;
+      color: #89939a;
       font-size: 22px;
       font-style: normal;
       font-weight: 600;
@@ -179,4 +182,3 @@ $card-padding: 32px;
     }
   }
 }
-

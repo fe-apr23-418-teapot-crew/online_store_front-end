@@ -6,38 +6,65 @@ import styles from './CartItem.module.scss';
 interface CartItemProps {
   product: Product;
   onChangeTotalAmount: (amount: number) => void;
+  onChangeCartProducts: (updatedCartItems: Product[]) => void;
 }
 
 export const CartItem: React.FC<CartItemProps> = ({
   product,
   onChangeTotalAmount,
+  onChangeCartProducts,
 }) => {
   const { name, image, price } = product;
-  const [count, setCount] = useState(1);
+  const existingCount = localStorage.getItem(`count_${product.id}`);
+  const [count, setCount] = useState<number>(
+    existingCount ? parseInt(existingCount) : 1,
+  );
 
   const imageURL = API_URL + image;
 
-  const totalProductAmount = count * price;
-
   useEffect(() => {
-    onChangeTotalAmount(totalProductAmount);
-  }, [count]);
+    onChangeTotalAmount(price);
+  }, []);
 
   const handleCountChange = (action: string) => {
-    const currentCount = count;
+    const newCount = action === '+' 
+      ? count + 1 
+      : count - 1;
 
-    if (action === '+') {
-      setCount(currentCount + 1);
+    if (newCount >= 1) {
+      setCount(newCount);
+      localStorage.setItem(`count_${product.id}`, newCount.toString());
+
+      onChangeTotalAmount(action === '+' 
+        ? price 
+        : -price);
     }
+  };
 
-    if (action === '-' && currentCount > 0) {
-      setCount(currentCount - 1);
+  const handleRemoveItem = () => {
+    const existingCartItems = localStorage.getItem('cartItems');
+    const cartItems = existingCartItems ? JSON.parse(existingCartItems) : [];
+
+    const productIndex = cartItems.findIndex(
+      (item: Product) => item.id === product.id,
+    );
+
+    if (productIndex !== -1) {
+      cartItems.splice(productIndex, 1);
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+      onChangeCartProducts(cartItems);
     }
   };
 
   return (
     <div className={styles.cartItem}>
-      <button className={styles.cartItem__removeButton}>X</button>
+      <button
+        className={styles.cartItem__removeButton}
+        onClick={handleRemoveItem}
+      >
+        X
+      </button>
 
       <img
         className={styles.cartItem__img}
@@ -68,7 +95,7 @@ export const CartItem: React.FC<CartItemProps> = ({
         </button>
       </div>
 
-      <h3 className={styles.cartItem__price}>{`${price}$`}</h3>
+      <h3 className={styles.cartItem__price}>{`$${price}`}</h3>
     </div>
   );
 };
