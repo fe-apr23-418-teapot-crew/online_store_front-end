@@ -24,6 +24,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
     pathAPI,
     fetchProducts,
   );
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
   //const itemsOnPage = 16;
 
   if (isLoading) {
