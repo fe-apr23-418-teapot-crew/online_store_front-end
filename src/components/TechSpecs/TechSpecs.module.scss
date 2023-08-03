@@ -1,0 +1,36 @@
+.techspecs {
+    max-width: 511px;
+    min-width: 320px;
+    &__header {
+
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 140%;
+        margin: 0;
+        margin-bottom: 16px;
+        height: 31px;
+    }
+    &__container {
+        border-top: solid 1px #E2E6E9;
+        padding-top: 25px;
+    }
+    &__spec-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+    &__subtitle {
+        color: #89939A;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 21px;
+    }
+    &__data {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 21px;
+    }
+}
