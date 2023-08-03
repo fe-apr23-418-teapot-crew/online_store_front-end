@@ -1,6 +1,6 @@
 export const getCartItems = () => {
   const existingCartItems = localStorage.getItem('cartItems');
-  const cartItems = existingCartItems ? JSON.parse(existingCartItems) : [];
+  const storedCartItems = existingCartItems ? JSON.parse(existingCartItems) : [];
 
-  return cartItems;
+  return storedCartItems;
 };

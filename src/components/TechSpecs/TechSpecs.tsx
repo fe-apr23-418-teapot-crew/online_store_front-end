@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './TechSpecs.module.scss';
-import { ProductMain } from '../../types/ProductMain';
+import { DetailedProduct } from '../../types/DetailedProduct';
 
 interface Props {
-  product: ProductMain
+  product: DetailedProduct
 }
 
 export const TechSpecs: React.FC<Props> = ({ product }) => {
