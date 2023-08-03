@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate  } from 'react-router-dom';
 import { API_URL } from '../../consts/api';
 import { Product } from '../../types/Product';
 import cn from 'classnames';
@@ -41,6 +42,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     setIsAddToCartDisabled(true);
   };
 
+  const navigate = useNavigate();
+
+  const handleProductCardClickRedirect = () => {
+    if (handleProductCardClick) {
+      handleProductCardClick(+id); // Call the parent's click handler if it exists
+    }
+
+    // Redirect to the product page using the productId
+    navigate(`/product/${id}`);
+  };
+
   return (
     <article className={styles.productCard}>
       <img
@@ -48,7 +60,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         className={styles.productCard__image}
         alt={name}
         onClick={
-          handleProductCardClick ? () => handleProductCardClick(+id) : () => {}
+          handleProductCardClick ? () => handleProductCardClickRedirect() : () => {}
         }
       />
 
