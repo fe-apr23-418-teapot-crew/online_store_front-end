@@ -1,0 +1,124 @@
+.actions {
+    text-align: center;
+    margin-top: 32px;
+    min-width: 320px;
+    &__prices {
+        display: flex;
+        align-items: center;
+        margin-top: 32px;
+    }
+    &__priceDiscount {
+        margin-right: 8px;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 41px;
+        letter-spacing: -0.32px;
+    }
+    &__priceRegular {
+        color: var(--gray-secondary, #89939A);
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-decoration: line-through;
+
+    }
+    &__buttons {
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+    }
+    &__buttonToCart {
+        margin-right: 8px;
+        color: white;
+        border: 0 solid;
+        border-radius: 8px;
+        background: #216CFF;
+        display: flex;
+        width: 231px;
+        height: 48px;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 21px;
+        transition: 0.3s;
+        &:disabled {
+            background: rgb(206, 205, 205);
+            color: rgb(128, 127, 127);
+            &:hover {
+                box-shadow: none;
+            }
+        }
+        &:hover {
+            box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
+        }
+        &:active {
+        color: #216cff;
+        background-color: #fff;
+        border: 1px solid #e2e6e9;
+        }
+    }
+    &__buttonToFavourites {
+        width: 48px;
+        height: 48px;
+        border-radius: 100px;
+        border: 1px solid #b4bdc3;
+        background-color: #fff;
+        background-image: url('../../icons/FavouriteBtn.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: 0.3s;
+        &--active {
+            background-image: url('../../icons/FavouritesFilledBtn.svg');    
+        }
+        &:hover {
+            border-color: #0f0f11;
+        }
+        &:active {
+        border-color: #b4bdc3;
+        background-image: url('../../icons/FavouritesFilledBtn.svg');
+        }
+
+    }
+    &__infoContainer {
+        margin-top: 32px;
+    }
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+    }
+    &__subtitle {
+        color: var(--gray-secondary, #89939A);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+    &__data {
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+}
+// @media (min-width: 640px) {
+//     .actions {
+//         min-width: 237px;
+//         &__buttonToCart {
+//             width: 180px;
+//         }
+//     }
+// }
+// @media (min-width: 1200px) {
+//     .actions {
+//         min-width: 320px;
+//         &__buttonToCart {
+//             width: 263px;
+//         }
+//     }
+// }
