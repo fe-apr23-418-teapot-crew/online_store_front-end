@@ -1,4 +1,4 @@
-export interface ProductMain {
+export interface DetailedProduct {
   id: string;
   namespaceId: string;
   name: string;

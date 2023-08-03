@@ -1,59 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { API_URL } from '../../consts/api';
-import { Product } from '../../types/Product';
+import { LiteProduct } from '../../types/LiteProduct';
 import styles from './CartItem.module.scss';
 import closeButton from '../../icons/Close.svg';
 import minusButton from '../../icons/Minus.svg';
 import plusButton from '../../icons/Plus.svg';
+import { getCartItemCount } from '../../helpers/localStorage/getCartItemCount';
+import { updateCartItem } from '../../helpers/localStorage/updateCartItems';
 
 interface CartItemProps {
-  product: Product;
-  onChangeTotalAmount: (amount: number) => void;
-  onChangeCartProducts: (updatedCartItems: Product[]) => void;
+  product: LiteProduct;
+  onRemoveFromCart: (productId: number) => void;
+  onChangeTotalAmount: (newPrice: number) => void;
 }
 
 export const CartItem: React.FC<CartItemProps> = ({
   product,
+  onRemoveFromCart,
   onChangeTotalAmount,
-  onChangeCartProducts,
 }) => {
-  const { name, image, price } = product;
-  const existingCount = localStorage.getItem(`count_${product.id}`);
-  const [count, setCount] = useState<number>(
-    existingCount ? parseInt(existingCount) : 1,
-  );
-
+  const { id, name, image, price } = product;
+  const storedCartItemCount = getCartItemCount(id);
+  const [count, setCount] = useState<number>(storedCartItemCount);
   const imageURL = API_URL + image;
-
-  useEffect(() => {
-    onChangeTotalAmount(price);
-  }, []);
+  const isReduceCountDisabled = count === 1;
 
   const handleCountChange = (action: string) => {
-    const newCount = action === '+' ? count + 1 : count - 1;
+    let newCount = count;
 
-    if (newCount >= 1) {
-      setCount(newCount);
-      localStorage.setItem(`count_${product.id}`, newCount.toString());
-
-      onChangeTotalAmount(action === '+' ? price : -price);
+    if (action === '+') {
+      newCount += 1;
+      onChangeTotalAmount(price);
+    } 
+    
+    if (action === '-' && count > 1) {
+      newCount -= 1;
+      onChangeTotalAmount(-price);
     }
+
+    setCount(newCount);
+    updateCartItem(id, newCount);
   };
 
   const handleRemoveItem = () => {
-    const existingCartItems = localStorage.getItem('cartItems');
-    const cartItems = existingCartItems ? JSON.parse(existingCartItems) : [];
-
-    const productIndex = cartItems.findIndex(
-      (item: Product) => item.id === product.id,
-    );
-
-    if (productIndex !== -1) {
-      cartItems.splice(productIndex, 1);
-      localStorage.setItem('cartItems', JSON.stringify(cartItems));
-
-      onChangeCartProducts(cartItems);
-    }
+    onRemoveFromCart(id);
+    onChangeTotalAmount(-price * count);
   };
 
   return (
@@ -63,9 +54,9 @@ export const CartItem: React.FC<CartItemProps> = ({
           className={styles.cartItem__removeButton}
           onClick={handleRemoveItem}
         >
-          <img 
+          <img
             src={closeButton}
-            alt='Close Button'
+            alt="Close Button"
             className={styles.closeButton}
           />
         </button>
@@ -81,32 +72,29 @@ export const CartItem: React.FC<CartItemProps> = ({
         <h3 className={styles.cartItem__name}>{name}</h3>
       </div>
 
-
       <div className={styles.cartItem__counter}>
         <div className={styles.cartItem__counter__buttons}>
           <button
             className={styles.cartItem__counterButton}
             onClick={() => handleCountChange('-')}
-            disabled={count < 1}
+            disabled={isReduceCountDisabled}
           >
-            <img 
+            <img
               src={minusButton}
-              alt='Minus Button' 
+              alt="Minus Button"
               className={styles.minusButton}
             />
           </button>
 
-          <div className={styles.cartItem__count}>
-            {count}
-          </div>
+          <div className={styles.cartItem__count}>{count}</div>
 
           <button
             className={styles.cartItem__counterButton}
             onClick={() => handleCountChange('+')}
           >
-            <img 
+            <img
               src={plusButton}
-              alt='Plus button' 
+              alt="Plus button"
               className={styles.plusButton}
             />
           </button>
@@ -114,7 +102,6 @@ export const CartItem: React.FC<CartItemProps> = ({
 
         <h3 className={styles.cartItem__price}>{`$${price}`}</h3>
       </div>
-
     </div>
   );
 };

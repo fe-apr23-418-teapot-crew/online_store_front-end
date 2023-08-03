@@ -19,12 +19,16 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   pathAPI,
   title,
 }) => {
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(
+    null,
+  );
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
   const { data, isLoading, error } = useQuery<ApiResponse>(
     pathAPI,
     fetchProducts,
   );
   //const itemsOnPage = 16;
+  console.log(data);
 
   if (isLoading) {
     return <CircularProgress />;
@@ -34,8 +38,8 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
     return <div>Error: {error.toString()}</div>;
   }
 
-  const productFromServer = data?.rows;
-  const productCount = productFromServer?.length;
+  const productsFromServer = data?.rows;
+  const productCount = productsFromServer?.length;
 
   const handleProductCardClick = (productId: number) => {
     setSelectedProductId(productId);
@@ -85,11 +89,11 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
       </div>
 
       <ul className="products__gadgets">
-        {productFromServer?.map((product: Product) => (
+        {productsFromServer?.map((product: Product) => (
           <ProductCard
             key={product.id}
             product={product}
-            handleProductCardClick={handleProductCardClick}
+            handleProductCardClick={handleProductCardClick} // Add this prop
           />
         ))}
       </ul>
