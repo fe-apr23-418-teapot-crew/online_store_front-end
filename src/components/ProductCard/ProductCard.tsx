@@ -4,32 +4,42 @@ import { API_URL } from '../../consts/api';
 import { Product } from '../../types/Product';
 import cn from 'classnames';
 import styles from './ProductCard.module.scss';
-import { getProductIndex } from '../../helpers/getProductIndex';
-import { getCartItemsFromLocalStorage } from '../../helpers/getCartItemsFromLocalStorage';
+import { getCartItems } from '../../helpers/localStorage/getCartItems';
+import { getCartItemIndex } from '../../helpers/localStorage/getProductIndex';
 
 type ProductCardProps = {
   product: Product;
   handleProductCardClick?: (productId: number) => void;
 };
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, handleProductCardClick }) => {
-  const { id, image, name, capacity, color, fullPrice, price, screen, ram } =
-    product;
+export const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  handleProductCardClick,
+}) => {
+  const { 
+    id, 
+    image, 
+    name, 
+    capacity, 
+    color, 
+    fullPrice, 
+    price, 
+    screen, 
+    ram,
+  } = product;
 
-  const imageURL = API_URL + image;
-  const productIndex = getProductIndex(id);
+  const productIndex = getCartItemIndex(id);
   const isProductIndexValid = productIndex !== -1;
-
-  const [isAddToCartDisabled, setIsAddToCartDisabled] =
-    useState(isProductIndexValid);
+  const [isAddToCartDisabled, setIsAddToCartDisabled] = useState(isProductIndexValid);
+  const imageURL = API_URL + image;
 
   const handleAddToCart = () => {
-    const cartItems = getCartItemsFromLocalStorage();
+    const cartItems = getCartItems();
+
+    cartItems.push({ id, name, image, price, count: 1 });
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
     setIsAddToCartDisabled(true);
-
-    cartItems.push(product);
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   };
 
   const navigate = useNavigate();
@@ -45,11 +55,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, handleProduct
 
   return (
     <article className={styles.productCard}>
-      <img 
-        src={imageURL} 
-        className={styles.productCard__image} 
-        alt={name} 
-        onClick={handleProductCardClickRedirect}
+      <img
+        src={imageURL}
+        className={styles.productCard__image}
+        alt={name}
+        onClick={
+          handleProductCardClick ? () => handleProductCardClick(+id) : () => {}
+        }
       />
 
       <h2 className={styles.productCard__name}>
