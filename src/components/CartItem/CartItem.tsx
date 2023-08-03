@@ -3,6 +3,9 @@ import { API_URL } from '../../consts/api';
 import { getCartItems } from '../../helpers/localStorage/getCartItems';
 import { LiteProduct } from '../../types/LiteProduct';
 import styles from './CartItem.module.scss';
+import closeButton from '../../icons/Close.svg';
+import minusButton from '../../icons/Minus.svg';
+import plusButton from '../../icons/Plus.svg';
 
 interface CartItemProps {
   product: LiteProduct;
@@ -45,43 +48,63 @@ export const CartItem: React.FC<CartItemProps> = ({
 
   return (
     <div className={styles.cartItem}>
-      <button
-        className={styles.cartItem__removeButton}
-        onClick={handleRemoveItem}
-      >
-        X
-      </button>
-
-      <img
-        className={styles.cartItem__img}
-        width={80}
-        height={80}
-        alt={name}
-        src={imageURL}
-      />
-
-      <h3 className={styles.cartItem__name}>{name}</h3>
-
-      <div className={styles.cartItem__counter}>
+      <div className={styles.cartItem__productInfo}>
         <button
-          className={styles.cartItem__counterButton}
-          onClick={() => handleCountChange('-')}
-          disabled={count < 1}
+          className={styles.cartItem__removeButton}
+          onClick={handleRemoveItem}
         >
-          -
+          <img 
+            src={closeButton}
+            alt='Close Button'
+            className={styles.closeButton}
+          />
         </button>
 
-        {count}
+        <img
+          className={styles.cartItem__img}
+          width={80}
+          height={80}
+          alt={name}
+          src={imageURL}
+        />
 
-        <button
-          className={styles.cartItem__counterButton}
-          onClick={() => handleCountChange('+')}
-        >
-          +
-        </button>
+        <h3 className={styles.cartItem__name}>{name}</h3>
       </div>
 
-      <h3 className={styles.cartItem__price}>{`$${price}`}</h3>
+
+      <div className={styles.cartItem__counter}>
+        <div className={styles.cartItem__counter__buttons}>
+          <button
+            className={styles.cartItem__counterButton}
+            onClick={() => handleCountChange('-')}
+            disabled={count < 1}
+          >
+            <img 
+              src={minusButton}
+              alt='Minus Button' 
+              className={styles.minusButton}
+            />
+          </button>
+
+          <div className={styles.cartItem__count}>
+            {count}
+          </div>
+
+          <button
+            className={styles.cartItem__counterButton}
+            onClick={() => handleCountChange('+')}
+          >
+            <img 
+              src={plusButton}
+              alt='Plus button' 
+              className={styles.plusButton}
+            />
+          </button>
+        </div>
+
+        <h3 className={styles.cartItem__price}>{`$${price}`}</h3>
+      </div>
+
     </div>
   );
 };
