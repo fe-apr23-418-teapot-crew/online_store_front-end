@@ -31,7 +31,9 @@ export const CartItem: React.FC<CartItemProps> = ({
 
     const cartItems = getCartItems();
     const updatedCartItems = cartItems.map((item: LiteProduct) =>
-      item.id === id ? { ...item, count } : item,
+      item.id === id 
+        ? { ...item, count } 
+        : item,
     );
 
     localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));

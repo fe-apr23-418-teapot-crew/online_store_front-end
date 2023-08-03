@@ -20,6 +20,7 @@ export const Cart: React.FC<CartProps> = () => {
     const updatedCartItems = cartItems.filter(
       (product) => product.id !== productId,
     );
+    
     setCartItems(updatedCartItems);
     localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
   };
