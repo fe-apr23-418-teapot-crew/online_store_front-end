@@ -1,12 +1,13 @@
 .phoneSwiper {
-  width: 100%;
-  max-width: 1136px;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
   margin: 0 auto;
 
   &__head {
     display: flex;
     justify-content: space-between;
-    margin: 0 24px;
+    margin: 16px;
   }
 
   &__title {
@@ -15,8 +16,9 @@
   }
 
   &__cards {
-    margin: 24px 0 64px;
+    margin: 24px 16px 64px;
     display: flex;
+    max-width: 1136px;
     gap: 16px;
     overflow: hidden;
     width: 100%;
@@ -61,6 +63,8 @@
 
 @media (min-width: 768px) {
   .phoneSwiper {
+    // margin: 0 auto;
+
     &__title {
       font-size: 32px;
     }
@@ -75,7 +79,7 @@
     }
 
     &__head {
-      margin: 0;
+      padding: 0;
     }
   }
 }
