@@ -1,0 +1,81 @@
+.phoneSwiper {
+  width: 100%;
+  max-width: 1136px;
+  margin: 0 auto;
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 24px;
+  }
+
+  &__title {
+    font-weight: 800;
+    font-size: 22px;
+  }
+
+  &__cards {
+    margin: 24px 0 64px;
+    display: flex;
+    gap: 16px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &__card {
+    transition: transform 0.3s linear;
+  }
+
+  &__buttons {
+    gap: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border: 1px solid #e2e6e9;
+    border-radius: 50%;
+    
+    &__image {
+      fill:#0f0f11;
+    }
+
+    &:hover {
+      border: 1px solid #0f0f11;
+      color: #0f0f11;
+    }
+
+    &:disabled {
+      cursor: auto;
+      opacity: 50%;
+      border: 0;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .phoneSwiper {
+    &__title {
+      font-size: 32px;
+    }
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .phoneSwiper {
+    &__cards {
+      margin-bottom: 80px;
+    }
+
+    &__head {
+      margin: 0;
+    }
+  }
+}

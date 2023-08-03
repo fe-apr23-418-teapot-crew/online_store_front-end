@@ -54,7 +54,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <article className={styles.productCard}>
+    <article id='ProductCard' className={styles.productCard}>
       <img
         src={imageURL}
         className={styles.productCard__image}
