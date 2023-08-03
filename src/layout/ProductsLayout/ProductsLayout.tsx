@@ -6,7 +6,6 @@ import { fetchProducts } from '../../api/products';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Product } from '../../types/Product';
 import { ApiResponse } from '../../types/APIResponse';
-// import { ProductDetails } from '../../components/ProductDetails';
 // import { Pagination } from '../../components/Pagination/Pagination';
 
 interface ContentLayoutProps {
@@ -21,16 +20,11 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   title,
 }) => {
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
-  const { data, isLoading, error } = useQuery<ApiResponse>(pathAPI, fetchProducts);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [itemsOnPage, setItemsOnPage] = useState<string>('16');
-
-  const handleDisplayedQuantity = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setItemsOnPage(event.target.value);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+  const { data, isLoading, error } = useQuery<ApiResponse>(
+    pathAPI,
+    fetchProducts,
+  );
+  //const itemsOnPage = 16;
 
   if (isLoading) {
     return <CircularProgress />;
@@ -79,10 +73,10 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
         <select
           name="pagination"
           className="products__select"
-          onChange={handleDisplayedQuantity}
+          // onChange={handleDisplayedQuantity}
         >
           <option value="16" selected>
-          16
+            16
           </option>
           <option value="32">32</option>
           <option value="64">64</option>
@@ -92,17 +86,15 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
 
       <ul className="products__gadgets">
         {productFromServer?.map((product: Product) => (
-          <ProductCard key={product.id} product={product} handleProductCardClick={handleProductCardClick} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            handleProductCardClick={handleProductCardClick}
+          />
         ))}
       </ul>
-      {/* {itemsOnPage !== 'all'
-        ? data && <Pagination pages={+itemsOnPage} products={data} />
-        : <ul className="products__gadgets">
-          {data?.map((gadget) => (
-            <ProductCard key={gadget.id} product={gadget} />
-          ))}
-        </ul>
-      } */}
     </div>
   );
 };
+
+// <Pagination pages={+itemsOnPage} products={productFromServer} />

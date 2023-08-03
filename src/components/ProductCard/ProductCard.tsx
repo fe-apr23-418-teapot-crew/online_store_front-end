@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { API_URL } from '../../consts/api';
 import { Product } from '../../types/Product';
 import cn from 'classnames';
@@ -16,24 +16,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, handleProduct
     product;
 
   const imageURL = API_URL + image;
-  const [isAddToCartDisabled, setIsAddToCartDisabled] = useState(false);
+  const productIndex = getProductIndex(id);
+  const isProductIndexValid = productIndex !== -1;
 
-  useEffect(() => {
-    const productIndex = getProductIndex(id);
-
-    if (productIndex !== -1) {
-      setIsAddToCartDisabled(true);
-    }
-  }, [product.id]);
+  const [isAddToCartDisabled, setIsAddToCartDisabled] =
+    useState(isProductIndexValid);
 
   const handleAddToCart = () => {
-    const productIndex = getProductIndex(id);
-
-    if (productIndex !== -1) {
-      return;
-    }
-
     const cartItems = getCartItemsFromLocalStorage();
+
+    setIsAddToCartDisabled(true);
 
     cartItems.push(product);
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
