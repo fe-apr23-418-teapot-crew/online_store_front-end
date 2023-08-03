@@ -19,6 +19,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   pathAPI,
   title,
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedProductId, setSelectedProductId] = useState<number | null>(
     null,
   );
@@ -28,7 +29,6 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
     fetchProducts,
   );
   //const itemsOnPage = 16;
-  console.log(data);
 
   if (isLoading) {
     return <CircularProgress />;
@@ -44,8 +44,6 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   const handleProductCardClick = (productId: number) => {
     setSelectedProductId(productId);
   };
-
-  console.log(selectedProductId);
 
   return (
     <div className="products">

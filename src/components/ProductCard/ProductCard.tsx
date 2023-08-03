@@ -46,10 +46,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const handleProductCardClickRedirect = () => {
     if (handleProductCardClick) {
-      handleProductCardClick(+id); // Call the parent's click handler if it exists
+      handleProductCardClick(+id);
     }
 
-    // Redirect to the product page using the productId
     navigate(`/product/${id}`);
   };
 

@@ -11,6 +11,7 @@ import {
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { Masonry } from '@mui/lab';
+import { Categories } from '../../components/Categories';
 
 const heights = [150, 1];
 
@@ -21,19 +22,23 @@ const StyledAccordion = styled(Accordion)(({ theme }) => ({
 
 export const Home: React.FC = () => {
   return (
-    <Box sx={{ width: 500, minHeight: 377 }}>
-      <Masonry columns={3} spacing={2}>
-        {heights.map((height, index) => (
-          <Paper key={index}>
-            <StyledAccordion sx={{ minHeight: height }}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>Accordion {index + 1}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>Contents</AccordionDetails>
-            </StyledAccordion>
-          </Paper>
-        ))}
-      </Masonry>
-    </Box>
+    <>
+      <Box sx={{ width: 500, minHeight: 377 }}>
+        <Masonry columns={3} spacing={2}>
+          {heights.map((height, index) => (
+            <Paper key={index}>
+              <StyledAccordion sx={{ minHeight: height }}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography>Accordion {index + 1}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>Contents</AccordionDetails>
+              </StyledAccordion>
+            </Paper>
+          ))}
+        </Masonry>
+      </Box>
+
+      <Categories />
+    </>
   );
 };
