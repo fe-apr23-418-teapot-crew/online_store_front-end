@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../consts/api';
 import { Product } from '../../types/Product';
 import cn from 'classnames';
@@ -9,28 +9,16 @@ import { getCartItemIndex } from '../../helpers/localStorage/getProductIndex';
 
 type ProductCardProps = {
   product: Product;
-  handleProductCardClick?: (productId: number) => void;
 };
 
-export const ProductCard: React.FC<ProductCardProps> = ({
-  product,
-  handleProductCardClick,
-}) => {
-  const { 
-    id, 
-    image, 
-    name, 
-    capacity, 
-    color, 
-    fullPrice, 
-    price, 
-    screen, 
-    ram,
-  } = product;
+export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const { id, image, name, capacity, color, fullPrice, price, screen, ram } =
+    product;
 
   const productIndex = getCartItemIndex(id);
   const isProductIndexValid = productIndex !== -1;
-  const [isAddToCartDisabled, setIsAddToCartDisabled] = useState(isProductIndexValid);
+  const [isAddToCartDisabled, setIsAddToCartDisabled] =
+    useState(isProductIndexValid);
   const imageURL = API_URL + image;
 
   const handleAddToCart = () => {
@@ -45,22 +33,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const navigate = useNavigate();
 
   const handleProductCardClickRedirect = () => {
-    if (handleProductCardClick) {
-      handleProductCardClick(+id);
-    }
-
     navigate(`/product/${id}`);
   };
 
   return (
-    <article id='ProductCard' className={styles.productCard}>
+    <article id="ProductCard" className={styles.productCard}>
       <img
         src={imageURL}
         className={styles.productCard__image}
         alt={name}
-        onClick={
-          handleProductCardClick ? () => handleProductCardClickRedirect() : () => {}
-        }
+        onClick={handleProductCardClickRedirect}
       />
 
       <h2 className={styles.productCard__name}>

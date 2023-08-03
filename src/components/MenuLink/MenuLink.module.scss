@@ -3,7 +3,7 @@ $gray-secondary: #89939a;
 $gray-primary: #0f0f11;
 
 .menuLink {
-  &-burger {
+  &--burger {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,8 +18,8 @@ $gray-primary: #0f0f11;
     }
   }
 
-  &-active {
-    background: red;
+  &--active {
+    background: grey;
   }
 
   @media (min-width: 640px) {

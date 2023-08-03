@@ -43,9 +43,9 @@ export const Cart: React.FC<CartProps> = () => {
             <img
               src={chevron}
               alt="Chevron"
-              className={styles.cart__navigation__chevronButton}
+              className={styles['cart__navigation--chevronButton']}
             />
-            <div className={styles.cart__navigation__backBotton}>{'Back'}</div>
+            <div className={styles['cart__navigation--backButton']}>{'Back'}</div>
           </MenuLink>
         </div>
 
