@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
-import { ProductCard } from '../../components/ProductCard';
 import { useQuery } from 'react-query';
 import { fetchProducts } from '../../api/products';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Product } from '../../types/Product';
 import { ApiResponse } from '../../types/APIResponse';
+import { ProductList } from '../../components/ProductList/ProductList';
 // import { Pagination } from '../../components/Pagination/Pagination';
 
 interface ContentLayoutProps {
   path: string;
   pathAPI: string;
   title: string;
+  localStorageItem?: string;
 }
 
 export const ProductsLayout: React.FC<ContentLayoutProps> = ({
@@ -19,16 +19,11 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   pathAPI,
   title,
 }) => {
-  const [selectedProductId, setSelectedProductId] = useState<number | null>(
-    null,
-  );
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
   const { data, isLoading, error } = useQuery<ApiResponse>(
     pathAPI,
     fetchProducts,
   );
-  //const itemsOnPage = 16;
-  console.log(data);
 
   if (isLoading) {
     return <CircularProgress />;
@@ -41,11 +36,9 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   const productsFromServer = data?.rows;
   const productCount = productsFromServer?.length;
 
-  const handleProductCardClick = (productId: number) => {
-    setSelectedProductId(productId);
-  };
-
-  console.log(selectedProductId);
+  const filteredProducts = productsFromServer?.filter(
+    (product) => product.category === path,
+  );
 
   return (
     <div className="products">
@@ -74,11 +67,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
           <option value="by-price">By price</option>
         </select>
 
-        <select
-          name="pagination"
-          className="products__select"
-          // onChange={handleDisplayedQuantity}
-        >
+        <select name="pagination" className="products__select">
           <option value="16" selected>
             16
           </option>
@@ -88,17 +77,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
         </select>
       </div>
 
-      <ul className="products__gadgets">
-        {productsFromServer?.map((product: Product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            handleProductCardClick={handleProductCardClick} // Add this prop
-          />
-        ))}
-      </ul>
+      {filteredProducts && <ProductList products={filteredProducts} />}
     </div>
   );
 };
-
-// <Pagination pages={+itemsOnPage} products={productFromServer} />
