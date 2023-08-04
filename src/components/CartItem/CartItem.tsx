@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { API_URL } from '../../consts/api';
-import { LiteProduct } from '../../types/LiteProduct';
 import styles from './CartItem.module.scss';
 import closeButton from '../../icons/Close.svg';
 import minusButton from '../../icons/Minus.svg';
 import plusButton from '../../icons/Plus.svg';
-import { getCartItemCount } from '../../helpers/localStorage/getCartItemCount';
-import { updateCartItem } from '../../helpers/localStorage/updateCartItems';
+import { getStoredItemCount } from '../../helpers/localStorage/getStoredItemCount';
+import { LiteProduct } from '../../types/LiteProduct';
+import { updateStoredItems } from '../../helpers/localStorage/updateStoredtItems';
 
 interface CartItemProps {
   product: LiteProduct;
@@ -20,7 +20,7 @@ export const CartItem: React.FC<CartItemProps> = ({
   onChangeTotalAmount,
 }) => {
   const { id, name, image, price } = product;
-  const storedCartItemCount = getCartItemCount(id);
+  const storedCartItemCount = getStoredItemCount(id);
   const [count, setCount] = useState<number>(storedCartItemCount);
   const imageURL = API_URL + image;
   const isReduceCountDisabled = count === 1;
@@ -31,15 +31,15 @@ export const CartItem: React.FC<CartItemProps> = ({
     if (action === '+') {
       newCount += 1;
       onChangeTotalAmount(price);
-    } 
-    
+    }
+
     if (action === '-' && count > 1) {
       newCount -= 1;
       onChangeTotalAmount(-price);
     }
 
     setCount(newCount);
-    updateCartItem(id, newCount);
+    updateStoredItems(id, newCount);
   };
 
   const handleRemoveItem = () => {

@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
-import { useQuery } from 'react-query';
-import { fetchProducts } from '../../api/products';
 import CircularProgress from '@mui/material/CircularProgress';
-import { ApiResponse } from '../../types/APIResponse';
 import { ProductList } from '../../components/ProductList/ProductList';
+import { ProductsContext } from '../../contexts/Products';
 // import { Pagination } from '../../components/Pagination/Pagination';
 
 interface ContentLayoutProps {
@@ -16,14 +14,10 @@ interface ContentLayoutProps {
 
 export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   path,
-  pathAPI,
   title,
 }) => {
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
-  const { data, isLoading, error } = useQuery<ApiResponse>(
-    pathAPI,
-    fetchProducts,
-  );
+  const { data, isLoading, error } = useContext(ProductsContext);
 
   if (isLoading) {
     return <CircularProgress />;

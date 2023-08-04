@@ -1,16 +1,16 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { HashRouter as Router } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { App } from './App';
+import { ProductsProvider } from './Providers/Products';
+import { QueryProvider } from './Providers/Query';
 
-const queryClient = new QueryClient();
-
-createRoot(document.getElementById('root') as HTMLDivElement)
-  .render(
-    <QueryClientProvider client={queryClient}>
+createRoot(document.getElementById('root') as HTMLDivElement).render(
+  <QueryProvider>
+    <ProductsProvider>
       <Router>
         <App />
-      </Router>,
-    </QueryClientProvider>
-  );
+      </Router>
+    </ProductsProvider>
+  </QueryProvider>,
+);

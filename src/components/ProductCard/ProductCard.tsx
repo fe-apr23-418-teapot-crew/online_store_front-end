@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../consts/api';
 import { Product } from '../../types/Product';
-import cn from 'classnames';
 import styles from './ProductCard.module.scss';
-import { getCartItems } from '../../helpers/localStorage/getCartItems';
+import { getStoredItems } from '../../helpers/localStorage/getStoredItems';
 import { getCartItemIndex } from '../../helpers/localStorage/getProductIndex';
 
 type ProductCardProps = {
@@ -22,12 +21,29 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const imageURL = API_URL + image;
 
   const handleAddToCart = () => {
-    const cartItems = getCartItems();
+    const cartItems = getStoredItems('cart');
 
-    cartItems.push({ id, name, image, price, count: 1 });
+    const newCartItem = {
+      id,
+      name,
+      image,
+      price,
+      count: 1,
+    };
+
+    cartItems.push(newCartItem);
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
     setIsAddToCartDisabled(true);
+  };
+
+  const handleAddToFavs = () => {
+    const favsItems = getStoredItems('favs');
+
+    const newFavsItem = { product };
+
+    favsItems.push(newFavsItem);
+    localStorage.setItem('favsItems', JSON.stringify(favsItems));
   };
 
   const navigate = useNavigate();
@@ -74,16 +90,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       <div className={styles.productCard__buttons}>
         <button
-          className={cn(styles.productCard__cartButton, {
-            [styles['productCard__cartButton--disabled']]: isAddToCartDisabled,
-          })}
+          className={styles.productCard__cartButton}
           onClick={handleAddToCart}
           disabled={isAddToCartDisabled}
         >
           Add to cart
         </button>
 
-        <button className={styles.productCard__favoriteButton} />
+        <button
+          onClick={handleAddToFavs}
+          className={styles.productCard__favoriteButton}
+        />
       </div>
     </article>
   );

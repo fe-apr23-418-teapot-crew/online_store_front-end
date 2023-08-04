@@ -7,13 +7,13 @@ import styles from './Cart.module.scss';
 import chevron from '../../icons/Chevron (Arrow Right).svg';
 import lineCheckout from '../../icons/LineCheckout.svg';
 import { LiteProduct } from '../../types/LiteProduct';
-import { getCartItems } from '../../helpers/localStorage/getCartItems';
+import { getStoredItems } from '../../helpers/localStorage/getStoredItems';
 import { getTotalAmount } from '../../helpers/localStorage/getTotalAmount';
 
 interface CartProps {}
 
 export const Cart: React.FC<CartProps> = () => {
-  const storedCartItems = getCartItems();
+  const storedCartItems = getStoredItems('cart');
   const storedTotalAmount = getTotalAmount(storedCartItems);
   const [cartItems, setCartItems] = useState<LiteProduct[]>(storedCartItems);
   const [totalAmount, setTotalAmount] = useState(storedTotalAmount);
@@ -23,11 +23,12 @@ export const Cart: React.FC<CartProps> = () => {
   const isCartEmpty = cartItemsCount < 1;
 
   const handleRemoveFromCart = (productId: number) => {
-    const updatedCartItems = cartItems
-      .filter((product) => product.id !== productId);
-    
+    const updatedCartItems = cartItems.filter(
+      (product) => product.id !== productId,
+    );
+
     setCartItems(updatedCartItems);
-  
+
     localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
   };
 
@@ -45,7 +46,9 @@ export const Cart: React.FC<CartProps> = () => {
               alt="Chevron"
               className={styles['cart__navigation--chevronButton']}
             />
-            <div className={styles['cart__navigation--backButton']}>{'Back'}</div>
+            <div className={styles['cart__navigation--backButton']}>
+              {'Back'}
+            </div>
           </MenuLink>
         </div>
 

@@ -1,11 +1,12 @@
 import { Product } from '../../types/Product';
-import { getCartItems } from './getCartItems';
+import { getStoredItems } from './getStoredItems';
 
 export const getCartItemIndex = (productId: number) => {
-  const storedCartItems = getCartItems();
+  const storedCartItems = getStoredItems('cart');
 
-  const productIndex = storedCartItems
-    .findIndex((item: Product) => item.id === productId);
+  const productIndex = storedCartItems.findIndex(
+    (item: Product) => item.id === productId,
+  );
 
   return productIndex;
 };
