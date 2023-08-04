@@ -9,7 +9,7 @@ import { Sort } from '../../components/Sort/Sort';
 import { useSearchParams } from 'react-router-dom';
 import { API_URL } from '../../consts/api';
 import { Product } from '../../types/Product';
-// import { Pagination } from '../../components/Pagination/Pagination';
+import { Pagination } from '../../components/Pagination/Pagination';
 
 interface ContentLayoutProps {
   path: string;
@@ -26,8 +26,10 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
+  const [productsCount, setProductsCount] = useState<number>(0);
   const sortBy = searchParams.get('sortBy') || 'discount';
   const limit = searchParams.get('limit') || '16';
+  const offset = searchParams.get('offset') || '0';
 
   // const { data, isLoading, error } = useQuery<ApiResponse>(
   //   pathAPI,
@@ -42,21 +44,33 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   //   return <div>Error: {error.toString()}</div>;
   // }
 
-  const fetchProductsMethod = (endpoint: string, sortVal: string, limitVal: string) => {
-    fetch(`${API_URL}${endpoint}?limit=${limitVal}&sortBy=${sortVal}`)
+  const fetchProductsMethod = (endpoint: string, sortVal: string, offsetVal: string, limitVal: string) => {
+    fetch(`${API_URL}${endpoint}?limit=${limitVal}&offset=${offsetVal}&sortBy=${sortVal}`)
       .then(response => response.json())
       .then(data => setProducts(data.rows));
   };
 
-  useEffect(() => {
-    fetchProductsMethod('phones', sortBy, limit);
-  }, [sortBy, limit]);
+  const getProductCount = (endpoint: string) => {
+    fetch(`${API_URL}${endpoint}`)
+      .then(response => response.json())
+      .then(data => setProductsCount(data.count));
+  };
+  console.log(productsCount);
 
-  const productCount = products.length;
+  useEffect(() => {
+    fetchProductsMethod(path, sortBy, offset, limit);
+    getProductCount(path);
+  }, [path, sortBy, offset, limit]);
 
   const changeSortBy = (sortValue: string) => {
     const params = new URLSearchParams(searchParams);
     params.set('sortBy', sortValue);
+    setSearchParams(params);
+  };
+
+  const changeOffset = (offsetValue: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('offset', offsetValue);
     setSearchParams(params);
   };
 
@@ -86,7 +100,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
       <h1 className="products__title">{title}</h1>
 
       <h6 className="products__count">
-        {productCount} + {'models'}
+        {productsCount} + {'models'}
       </h6>
 
       <div className="products__section">
@@ -98,6 +112,11 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
         />
 
         {products.length && <ProductList products={products} />}
+        <Pagination
+          productsOnPage={+limit}
+          productsNumber={productsCount}
+          changeOffset={changeOffset}
+        />
       </div>
 
     </div>

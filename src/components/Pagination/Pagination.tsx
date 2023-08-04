@@ -1,38 +1,54 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import cn from 'classnames';
 import styles from './Pagination.module.scss';
-import { Product } from '../../types/Product';
+import { useSearchParams } from 'react-router-dom';
 
 interface Props {
-  pages: number;
-  products: Product[];
+  productsOnPage: number;
+  productsNumber: number;
+  changeOffset: (serverData: string) => void;
 }
 
-export const Pagination: React.FC<Props> = ({ pages, products }) => {
+export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, changeOffset }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [activePage, setActivePage] = useState<number>(1);
   const [translateX, setTranslateX] = useState(0);
-  const lastPage = Math.ceil(products.length / pages);
+  const lastPage = Math.ceil(productsNumber / productsOnPage);
 
   const pageNumbers = useMemo(() => {
-    const lastPage = Math.ceil(products.length / pages);
+    const lastPage = Math.ceil(productsNumber / productsOnPage);
     return Array.from({ length: lastPage }, (_, index) => index + 1);
-  }, [products, pages]);
+  }, [productsNumber, productsOnPage]);
+
+  useEffect(() => {
+    searchParams.set('offset', `${productsOnPage * (activePage - 1)}`);
+    setSearchParams(searchParams);
+  }, [productsOnPage, activePage]);
 
   const handleMoveLeft = () => {
     if (activePage === 1) {
       setActivePage(1);
+      changeOffset(`${productsOnPage * (activePage - 1)}`);
       return;
     }
     setActivePage(activePage - 1);
     if (activePage < 5 && translateX === 0) {
+      changeOffset(`${productsOnPage * (activePage - 1)}`);
       return;
     }
     setTranslateX(translateX + 40);
+    changeOffset(`${productsOnPage * (activePage - 1)}`);
   };
 
   const handleMoveRight = () => {
     if (activePage === lastPage) {
       setActivePage(activePage);
+      changeOffset(`${productsOnPage * (activePage - 1)}`);
+      return;
+    }
+    if (lastPage <= 4) {
+      setActivePage(activePage + 1);
+      changeOffset(`${productsOnPage * (activePage - 1)}`);
       return;
     }
     setActivePage(activePage + 1);
@@ -40,6 +56,7 @@ export const Pagination: React.FC<Props> = ({ pages, products }) => {
       return;
     }
     setTranslateX(translateX - 40);
+    changeOffset(`${productsOnPage * (activePage - 1)}`);
   };
 
   return (
@@ -50,9 +67,9 @@ export const Pagination: React.FC<Props> = ({ pages, products }) => {
       >
         {'<'}
       </button>
-      <div className={styles['pagination__pages-list-container']}>
+      <div className={styles.pagination__pagesListContainer}>
         <div
-          className={styles['pagination__pages-list']}
+          className={styles.pagination__pagesList}
           style={{
             transform: `translateX(${translateX}px)`,
             transition: 'transform 0.3s ease',

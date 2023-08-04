@@ -3,11 +3,11 @@
     display: flex;
     margin: 40px 0 64px;
     justify-content: center;
-    &__pages-list-container {
+    &__pagesListContainer {
         max-width: 160px;
         overflow-x: hidden;
     }
-    &__pages-list {
+    &__pagesList {
         white-space: nowrap;
         transform: translateX(-40px);
     }
