@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
-import { useQuery } from 'react-query';
-import { fetchProducts } from '../../api/products';
-import CircularProgress from '@mui/material/CircularProgress';
-import { ApiResponse } from '../../types/APIResponse';
+// import { useQuery } from 'react-query';
+// import { fetchProducts } from '../../api/products';
+// import CircularProgress from '@mui/material/CircularProgress';
+// import { ApiResponse } from '../../types/APIResponse';
 import { ProductList } from '../../components/ProductList/ProductList';
+import { Sort } from '../../components/Sort/Sort';
+import { useSearchParams } from 'react-router-dom';
+import { API_URL } from '../../consts/api';
+import { Product } from '../../types/Product';
 // import { Pagination } from '../../components/Pagination/Pagination';
 
 interface ContentLayoutProps {
@@ -16,29 +20,54 @@ interface ContentLayoutProps {
 
 export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   path,
-  pathAPI,
+  // pathAPI,
   title,
 }) => {
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
-  const { data, isLoading, error } = useQuery<ApiResponse>(
-    pathAPI,
-    fetchProducts,
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [products, setProducts] = useState<Product[]>([]);
+  const sortBy = searchParams.get('sortBy') || 'discount';
+  const limit = searchParams.get('limit') || '16';
 
-  if (isLoading) {
-    return <CircularProgress />;
-  }
+  // const { data, isLoading, error } = useQuery<ApiResponse>(
+  //   pathAPI,
+  //   fetchProducts,
+  // );
 
-  if (error) {
-    return <div>Error: {error.toString()}</div>;
-  }
+  // if (isLoading) {
+  //   return <CircularProgress />;
+  // }
 
-  const productsFromServer = data?.rows;
-  const productCount = productsFromServer?.length;
+  // if (error) {
+  //   return <div>Error: {error.toString()}</div>;
+  // }
 
-  const filteredProducts = productsFromServer?.filter(
-    (product) => product.category === path,
-  );
+  const fetchProductsMethod = (endpoint: string, sortVal: string, limitVal: string) => {
+    fetch(`${API_URL}${endpoint}?limit=${limitVal}&sortBy=${sortVal}`)
+      .then(response => response.json())
+      .then(data => setProducts(data.rows));
+  };
+
+  useEffect(() => {
+    fetchProductsMethod('phones', sortBy, limit);
+  }, [sortBy, limit]);
+
+  const productCount = products.length;
+
+  const changeSortBy = (sortValue: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('sortBy', sortValue);
+    setSearchParams(params);
+  };
+
+  const changeLimit = (limitValue: string) => {
+    const params = new URLSearchParams(searchParams);
+    console.log(params);
+
+    params.set('limit', limitValue);
+
+    setSearchParams(params);
+  };
 
   return (
     <div className="products">
@@ -60,24 +89,17 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
         {productCount} + {'models'}
       </h6>
 
-      <div className="products__filter-fields">
-        <select name="sort-by" className="products__select">
-          <option value="by-date">By date</option>
-          <option value="by-name">By name</option>
-          <option value="by-price">By price</option>
-        </select>
+      <div className="products__section">
+        <Sort
+          sortBy={sortBy}
+          limit={limit}
+          changeSortBy={changeSortBy}
+          changeLimit={changeLimit}
+        />
 
-        <select name="pagination" className="products__select">
-          <option value="16" selected>
-            16
-          </option>
-          <option value="32">32</option>
-          <option value="64">64</option>
-          <option value="all">All</option>
-        </select>
+        {products.length && <ProductList products={products} />}
       </div>
 
-      {filteredProducts && <ProductList products={filteredProducts} />}
     </div>
   );
 };
