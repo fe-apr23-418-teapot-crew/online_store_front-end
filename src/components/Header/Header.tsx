@@ -7,6 +7,7 @@ import shopBag from '../../images/Shopping bag (Cart).svg';
 import closeMenu from '../../images/Close.svg';
 import menu from '../../images/Menu.svg';
 import { MenuLink } from '../MenuLink';
+import { NavLink } from 'react-router-dom';
 
 export const Header = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -68,20 +69,44 @@ export const Header = () => {
             </div>
 
             <div className={styles.burgerMenuItems}>
-              <MenuLink to="/" path="Home" />
-              <MenuLink to="/phones" path="Phones" />
-              <MenuLink to="/tablets" path="Tablets" />
-              <MenuLink to="/accessories" path="Accessories" />
+              <MenuLink 
+                to="/" 
+                path="Home" 
+                onClick={setIsBurgerMenuOpen} 
+              />
+              <MenuLink 
+                to="/phones" 
+                path="Phones" 
+                onClick={setIsBurgerMenuOpen} 
+              />
+              <MenuLink 
+                to="/tablets" 
+                path="Tablets"
+                onClick={setIsBurgerMenuOpen} 
+              />
+              <MenuLink 
+                to="/accessories" 
+                path="Accessories" 
+                onClick={setIsBurgerMenuOpen} 
+              />
             </div>
 
             <div className={styles.burgerButtons}>
-              <a href="#" className={styles.burgerButton}>
+              <NavLink 
+                to="/favourites" 
+                className={styles.burgerButton}
+                onClick={() => setIsBurgerMenuOpen(false)}
+              >
                 <img src={likes} alt="LIKES" />
-              </a>
+              </NavLink>
 
-              <a href="#" className={styles.burgerButton}>
+              <NavLink 
+                to="/cart" 
+                className={styles.burgerButton}
+                onClick={() => setIsBurgerMenuOpen(false)}
+              >
                 <img src={shopBag} alt="SHOPPING BAG" />
-              </a>
+              </NavLink>
             </div>
           </div>
         )}

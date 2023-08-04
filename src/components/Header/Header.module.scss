@@ -134,6 +134,11 @@ $gray-primary: #0f0f11;
 
     &_buttons {
       display: flex;
+      justify-content: center;
+    }
+
+    &_buttons a {
+      margin: 0;
     }
 
     &_button {
