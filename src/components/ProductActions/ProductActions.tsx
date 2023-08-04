@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styles from './ProductActions.module.scss';
-import { ProductMain } from '../../types/ProductMain';
+import { DetailedProduct } from '../../types/DetailedProduct';
 import cn from 'classnames';
 
 interface Props {
-  product: ProductMain
+  product: DetailedProduct
 }
 
 export const ProductActions: React.FC<Props> = ({ product }) => {
