@@ -1,0 +1,94 @@
+.sort {
+  &__filter {
+    display: flex;
+    gap: 16px;
+    // align-items: center;
+    // justify-content: center;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      left: calc(100% - 24px);
+      bottom: 12px;
+      background-image: url(../../icons/ArrowDown.svg);
+      pointer-events: none;
+    }
+  }
+
+  &__title {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: #89939A;
+    margin-bottom: 4px;
+  }
+
+
+  &__select {
+    width: 136px;
+    height: 40px;
+    position: relative;
+    appearance: none;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 21px;
+    background-color: #fff;
+    border: 1px solid #b4bdc3;
+    border-radius: 8px;
+    padding: 8px;
+
+    &:hover {
+      border-color: #89939A;
+    }
+
+    &:focus {
+      border-color: #0F0F11;
+      outline: none;
+    }
+  }
+}
+
+.option {
+  font-family: inherit;
+  font-weight: 500;
+  height: 32px;
+}
+
+@media (min-width: 640px) {
+  .sort {
+    &__filter {
+      justify-content: flex-start;
+    }
+    &__select {
+      width: 187px;
+      
+      &--perPage {
+        width: 136px
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .sort {
+    &__select {
+      width: 176px;
+      
+      &--perPage {
+        width: 128px
+      }
+    }
+  }
+}

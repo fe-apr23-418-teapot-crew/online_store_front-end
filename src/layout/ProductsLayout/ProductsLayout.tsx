@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+import React, { useEffect, useState } from 'react';
+import HomeIcon from '@mui/icons-material/Home';
+// import { useQuery } from 'react-query';
+// import { fetchProducts } from '../../api/products';
+// import CircularProgress from '@mui/material/CircularProgress';
+// import { ApiResponse } from '../../types/APIResponse';
 import { ProductList } from '../../components/ProductList/ProductList';
-import { ProductsContext } from '../../contexts/Products';
-import { getStoredItems } from '../../helpers/localStorage/getStoredItems';
-import { LiteProduct } from '../../types/LiteProduct';
-import { LocationHistory } from '../../components/LocationHistory';
-//import { Product } from '../../types/Product';
-// import { Pagination } from '../../components/Pagination/Pagination';
+import { Sort } from '../../components/Sort/Sort';
+import { useSearchParams } from 'react-router-dom';
+import { API_URL } from '../../consts/api';
+import { Product } from '../../types/Product';
+import { Pagination } from '../../components/Pagination/Pagination';
 
 interface ContentLayoutProps {
   path: string;
@@ -17,23 +20,66 @@ interface ContentLayoutProps {
 
 export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   path,
+  // pathAPI,
   title,
   localStorageItem,
 }) => {
-  const { data, isLoading, error } = useContext(ProductsContext);
+  const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [productsCount, setProductsCount] = useState<number>(0);
+  const sortBy = searchParams.get('sortBy') || 'discount';
+  const limit = searchParams.get('limit') || '16';
+  const offset = searchParams.get('offset') || '0';
 
-  let visibleProducts;
+  // const { data, isLoading, error } = useQuery<ApiResponse>(
+  //   pathAPI,
+  //   fetchProducts,
+  // );
 
-  if (isLoading) {
-    return <CircularProgress />;
-  }
+  // if (isLoading) {
+  //   return <CircularProgress />;
+  // }
 
-  if (error) {
-    return <div>Error: {error.toString()}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error.toString()}</div>;
+  // }
 
-  const productsFromServer = data?.rows;
-  const productCount = productsFromServer?.length;
+  const fetchProductsMethod = (endpoint: string, sortVal: string, offsetVal: string, limitVal: string) => {
+    fetch(`${API_URL}${endpoint}?limit=${limitVal}&offset=${offsetVal}&sortBy=${sortVal}`)
+      .then(response => response.json())
+      .then(data => setProducts(data.rows));
+  };
+
+  const getProductCount = (endpoint: string) => {
+    fetch(`${API_URL}${endpoint}`)
+      .then(response => response.json())
+      .then(data => setProductsCount(data.count));
+  };
+  console.log(productsCount);
+
+  useEffect(() => {
+    fetchProductsMethod(path, sortBy, offset, limit);
+    getProductCount(path);
+  }, [path, sortBy, offset, limit]);
+
+  const changeSortBy = (sortValue: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('sortBy', sortValue);
+    setSearchParams(params);
+  };
+
+  const changeOffset = (offsetValue: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('offset', offsetValue);
+    setSearchParams(params);
+  };
+
+  const changeLimit = (limitValue: string) => {
+    const params = new URLSearchParams(searchParams);
+    console.log(params);
+
+    params.set('limit', limitValue);
 
   if (localStorageItem === 'favs') {
     const favsIds = getStoredItems('favs').map(
@@ -60,7 +106,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
       <h1 className="products__title">{title}</h1>
 
       <h6 className="products__count">
-        {productCount} + {'models'}
+        {productsCount} + {'models'}
       </h6>
 
       <div className="products__filter-fields">
@@ -70,15 +116,14 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
           <option value="by-price">By price</option>
         </select>
 
-        <select name="pagination" className="products__select">
-          <option value="16">16</option>
-          <option value="32">32</option>
-          <option value="64">64</option>
-          <option value="all">All</option>
-        </select>
+        {products.length && <ProductList products={products} />}
+        <Pagination
+          productsOnPage={+limit}
+          productsNumber={productsCount}
+          changeOffset={changeOffset}
+        />
       </div>
 
-      {visibleProducts && <ProductList products={visibleProducts} />}
     </div>
   );
 };
