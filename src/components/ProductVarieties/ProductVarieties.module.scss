@@ -1,0 +1,75 @@
+.varieties {
+  margin-top: 32px;
+  width: 320px;
+
+  color: #89939A;
+  font-size: 12px;
+  font-style: normal;
+  line-height: normal;
+  &__header {
+      display: flex;
+      justify-content: space-between;
+  }
+  &__title {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 8px;
+  }
+  &__productId {
+    text-align: right;
+    font-weight: 700;
+  }
+  &__wrapper {
+      padding-bottom: 24px;
+      border-bottom: 1px solid #89939A;
+      margin-bottom: 24px;
+    }
+  &__colorsItem {
+      outline: max(1px, 1px) solid #E2E6E9;
+      border: #FFFFFF 2px solid;
+      margin-right: 8px;
+      width: 32px;
+      height: 32px;
+      border-radius: 100%;
+      transition: box-shadow 0.3s ease;
+      &--active {
+        outline-color: black;
+      }
+      &:hover {
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
+      }
+  }
+  &__colorRadio {
+      width: 25px;
+  }
+  &__capacity {
+  }
+  &__capacityItem {
+    color: #89939A;
+    margin-right: 8px;
+    padding: 7px 8px 4px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 21px;
+    height: 32px;
+    border: 1px solid #89939A;
+    border-radius: 4px;
+    transition: box-shadow 0.3s ease;
+    &:hover {
+      box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
+    }
+    &--active {
+      background-color: black;
+      border-color: black;
+      color: white;
+    }
+  }
+}
+// @media (min-width: 640px) {
+//     
+// }
+// @media (min-width: 1200px) {
+//     
+// }
