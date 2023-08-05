@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../consts/api';
 import { Product } from '../../types/Product';
@@ -6,7 +6,7 @@ import styles from './ProductCard.module.scss';
 import { setStoredItem } from '../../helpers/localStorage/setStoredItem';
 import cn from 'classnames';
 import { isProductInStorage } from '../../helpers/localStorage/isProductInStorage';
-import { removeStoredItem } from '../../helpers/localStorage/removeStoredItem';
+import { FavsContext } from '../../contexts/FavsContext';
 
 type ProductCardProps = {
   product: Product;
@@ -15,6 +15,8 @@ type ProductCardProps = {
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { id, image, name, capacity, color, fullPrice, price, screen, ram } =
     product;
+
+  const { removeFavProduct, addFavProduct } = useContext(FavsContext);
 
   const isProductInCart = isProductInStorage('cart', id);
   const isProductInFavs = isProductInStorage('favs', id);
@@ -36,15 +38,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleAddToFavs = () => {
     if (isProductInFavs) {
-      removeStoredItem('favs', id);
-      setIsFavIconActive(true);
-    } else {
-      const newFavsItem = { ...product };
-
-      setStoredItem('favs', newFavsItem);
-
+      removeFavProduct(id);
       setIsFavIconActive(false);
+
+      return;
     }
+
+    const newFavsItem = { ...product };
+
+    addFavProduct(newFavsItem);
+    setIsFavIconActive(true);
   };
 
   const navigate = useNavigate();
