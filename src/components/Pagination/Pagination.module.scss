@@ -1,13 +1,13 @@
 .pagination {
+    min-width: 320px;
     display: flex;
-    margin-top: 40px;
+    margin: 40px 0 64px;
     justify-content: center;
-    &__pages-list-container {
-        // display: flex;
-        width: 160px;
+    &__pagesListContainer {
+        max-width: 160px;
         overflow-x: hidden;
     }
-    &__pages-list {
+    &__pagesList {
         white-space: nowrap;
         transform: translateX(-40px);
     }
@@ -29,5 +29,11 @@
                 border-color: black;
             }
         }
+    }
+}
+
+@media (min-width: 1200px) {
+    .pagination {
+        margin-bottom: 80px;
     }
 }
