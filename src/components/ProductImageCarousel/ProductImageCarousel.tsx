@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import './ProductImageCarousel.scss';
-// import { Product } from "../../types/Product";
+import { DetailedProduct } from '../../types/DetailedProduct';
+import { API_URL } from '../../consts/api';
 
-// type Props = {
-//   product: Product;
-// };
+interface ProductImageCarouselProps {
+  product: DetailedProduct;
+}
 
-export const ProductImageCarousel: React.FC = () => {
-  const images: string[] = [];
-  
-  const [cardImage, setCardImage] = useState('');
+export const ProductImageCarousel: React.FC<ProductImageCarouselProps> = ({
+  product,
+}) => {
+  const images: string[] = product.images;
+
+  console.log(product);
+
+  const [cardImage, setCardImage] = useState(API_URL + images[0]);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-
   const changeImage = (image: string, index: number) => {
-    setCardImage(image);
+    setCardImage(API_URL + image);
     setActiveImageIndex(index);
   };
 
@@ -26,11 +30,15 @@ export const ProductImageCarousel: React.FC = () => {
           <button
             key={image}
             className={cn('carousel__selector-button', {
-              'carousel__selector-button--active': activeImageIndex === index 
+              'carousel__selector-button--active': activeImageIndex === index,
             })}
             onClick={() => changeImage(image, index)}
           >
-            <img src={image} className="carousel__selector-image" alt="selector image" />
+            <img
+              src={API_URL + image}
+              className="carousel__selector-image"
+              alt="selector image"
+            />
           </button>
         ))}
       </div>

@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import { CartItem } from '../../components/CartItem/CartItem';
 import { MenuLink } from '../../components/MenuLink';
-//import { Product } from '../../types/Product';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
 import styles from './Cart.module.scss';
 import chevron from '../../icons/Chevron (Arrow Right).svg';
 import lineCheckout from '../../icons/LineCheckout.svg';
-import { LiteProduct } from '../../types/LiteProduct';
-import { getCartItems } from '../../helpers/localStorage/getCartItems';
 import { getTotalAmount } from '../../helpers/localStorage/getTotalAmount';
+import { Product } from '../../types/Product';
+import { removeStoredItem } from '../../helpers/localStorage/removeStoredItem';
+import { getStoredItems } from '../../helpers/localStorage/getStoredItems';
+import { resetStoredItems } from '../../helpers/localStorage/resetStoredItems';
 
 interface CartProps {}
 
 export const Cart: React.FC<CartProps> = () => {
-  const storedCartItems = getCartItems();
+  const storedCartItems = getStoredItems('cart');
   const storedTotalAmount = getTotalAmount(storedCartItems);
-  const [cartItems, setCartItems] = useState<LiteProduct[]>(storedCartItems);
+  const [cartItems, setCartItems] = useState<Product[]>(storedCartItems);
   const [totalAmount, setTotalAmount] = useState(storedTotalAmount);
   const [isModal, setIsModal] = useState(false);
 
@@ -23,16 +24,20 @@ export const Cart: React.FC<CartProps> = () => {
   const isCartEmpty = cartItemsCount < 1;
 
   const handleRemoveFromCart = (productId: number) => {
-    const updatedCartItems = cartItems
-      .filter((product) => product.id !== productId);
-    
+    const updatedCartItems = removeStoredItem('cart', productId, cartItems);
+
     setCartItems(updatedCartItems);
-  
-    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
   };
 
   const changeTotalAmount = (newPrice: number) => {
-    setTotalAmount((prevTotalAmount) => prevTotalAmount + newPrice);
+    setTotalAmount((prevTotalAmount: number) => prevTotalAmount + newPrice);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    resetStoredItems('cart');
+    setIsModal(true);
   };
 
   return (
@@ -45,7 +50,9 @@ export const Cart: React.FC<CartProps> = () => {
               alt="Chevron"
               className={styles['cart__navigation--chevronButton']}
             />
-            <div className={styles['cart__navigation--backButton']}>{'Back'}</div>
+            <div className={styles['cart__navigation--backButton']}>
+              {'Back'}
+            </div>
           </MenuLink>
         </div>
 
@@ -54,7 +61,7 @@ export const Cart: React.FC<CartProps> = () => {
         {!isCartEmpty ? (
           <div className={styles.cart__content}>
             <ul className={styles.cart__products}>
-              {cartItems.map((product) => (
+              {cartItems?.map((product) => (
                 <CartItem
                   key={product.id}
                   product={product}
@@ -64,7 +71,7 @@ export const Cart: React.FC<CartProps> = () => {
               ))}
             </ul>
 
-            <div className={styles.cart__from}>
+            <form className={styles.cart__from} onSubmit={handleSubmit}>
               <div className={styles.cart__total}>
                 <span
                   className={styles.cart__totalAmout}
@@ -79,13 +86,8 @@ export const Cart: React.FC<CartProps> = () => {
                 alt="lineCheckout"
                 className={styles.lineCheckout}
               />
-              <button
-                className={styles.cart__button}
-                onClick={() => setIsModal(true)}
-              >
-                Checkout
-              </button>
-            </div>
+              <button className={styles.cart__button}>Checkout</button>
+            </form>
           </div>
         ) : (
           <h2>Empty cart! Lets make the first purchase!</h2>

@@ -10,6 +10,8 @@ $image-min-height: 130px;
 
 $card-padding: 32px;
 
+$secondary-accent: #f447af;
+
 .productCard {
   display: flex;
   flex-direction: column;
@@ -122,18 +124,17 @@ $card-padding: 32px;
     border-radius: 8px;
     transition: 0.3s;
 
-    &--disabled {
-      background: red;
+    &:disabled {
+      background: #f447af;
+      border: black;
+
+      &:hover {
+        box-shadow: none;
+      }
     }
 
     &:hover {
       box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
-    }
-
-    &:active {
-      color: #216cff;
-      background-color: #fff;
-      border: 1px solid #e2e6e9;
     }
   }
 
@@ -152,7 +153,8 @@ $card-padding: 32px;
       border-color: #0f0f11;
     }
 
-    &:active {
+    &:active,
+    &--active {
       border-color: #b4bdc3;
       background-image: url('../../icons/FavouritesFilledBtn.svg');
     }
