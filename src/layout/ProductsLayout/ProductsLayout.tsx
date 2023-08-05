@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
-import HomeIcon from '@mui/icons-material/Home';
+import React, { useContext } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import { ProductList } from '../../components/ProductList/ProductList';
 import { ProductsContext } from '../../contexts/Products';
 import { getStoredItems } from '../../helpers/localStorage/getStoredItems';
 import { LiteProduct } from '../../types/LiteProduct';
+import { LocationHistory } from '../../components/LocationHistory';
 //import { Product } from '../../types/Product';
 // import { Pagination } from '../../components/Pagination/Pagination';
 
@@ -20,11 +20,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   title,
   localStorageItem,
 }) => {
-  const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
   const { data, isLoading, error } = useContext(ProductsContext);
-  // const [visibleProducts, setVisibleProducts] = useState<Product[] | undefined>(
-  //   undefined,
-  // );
 
   let visibleProducts;
 
@@ -59,17 +55,7 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
 
   return (
     <div className="products">
-      <div className="products__location-history">
-        <HomeIcon className="products__home-icon" />
-
-        <ul className="products__location-history-list">
-          {locationHistory.map((location) => (
-            <li key={location} className="products__location-history-item">
-              {`> ${location}`}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <LocationHistory path={path} />
 
       <h1 className="products__title">{title}</h1>
 
