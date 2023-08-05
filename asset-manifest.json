@@ -1,26 +1,31 @@
 {
   "files": {
-    "main.css": "/online_store_front-end/static/css/main.2acdd6df.css",
-    "main.js": "/online_store_front-end/static/js/main.bbeeb152.js",
+    "main.css": "/online_store_front-end/static/css/main.2cb8fa0a.css",
+    "main.js": "/online_store_front-end/static/js/main.c64128fb.js",
+    "static/media/categories_2.svg": "/online_store_front-end/static/media/categories_2.f63c98c861f10f07fde7c728955d2d14.svg",
+    "static/media/categoties_3.svg": "/online_store_front-end/static/media/categoties_3.c0fc7279e52088a8131bb0323b90dae9.svg",
+    "static/media/categories_1.svg": "/online_store_front-end/static/media/categories_1.0b1f084e07519602f23307cfaa5e3456.svg",
     "static/media/LogoForBurger.svg": "/online_store_front-end/static/media/LogoForBurger.54f709f934da43e81c0a56cc67ac176a.svg",
     "static/media/Logo.svg": "/online_store_front-end/static/media/Logo.576473c8d00e9efc5d797e0c98f95870.svg",
     "static/media/Shopping bag (Cart).svg": "/online_store_front-end/static/media/Shopping bag (Cart).0463874fa7338ffce131c991a273a3bf.svg",
     "static/media/FavouriteBtn.svg": "/online_store_front-end/static/media/FavouriteBtn.12bf57dc810c29d93244.svg",
     "static/media/Favourites (Heart Like).svg": "/online_store_front-end/static/media/Favourites (Heart Like).a6ae19238c42da9bf9fcd2bc5d33f5c6.svg",
+    "static/media/Home.svg": "/online_store_front-end/static/media/Home.9a24a70540404ccecd05fd9f900ddeeb.svg",
     "static/media/FavouritesFilledBtn.svg": "/online_store_front-end/static/media/FavouritesFilledBtn.19cc3bb52394ad1b86a2.svg",
-    "index.html": "/online_store_front-end/index.html",
     "static/media/Close.svg": "/online_store_front-end/static/media/Close.50c10c10972396ba023825c21cea3b47.svg",
+    "index.html": "/online_store_front-end/index.html",
     "static/media/Menu.svg": "/online_store_front-end/static/media/Menu.d9749b7108ad61ee68f43d4dae073f22.svg",
     "static/media/Plus.svg": "/online_store_front-end/static/media/Plus.7c1298ab79730c6552a0384ce09f63b8.svg",
     "static/media/Vector (Stroke).svg": "/online_store_front-end/static/media/Vector (Stroke).471dc71c0889055cf7220eeb8b0dc283.svg",
     "static/media/Chevron (Arrow Right).svg": "/online_store_front-end/static/media/Chevron (Arrow Right).74404e9d379c6643018b23642c33a611.svg",
+    "static/media/ArrowDown.svg": "/online_store_front-end/static/media/ArrowDown.24d44fed422f6846ee6b.svg",
     "static/media/Minus.svg": "/online_store_front-end/static/media/Minus.4f727ec4693f6105d0f625b4efa653f6.svg",
     "static/media/LineCheckout.svg": "/online_store_front-end/static/media/LineCheckout.e5617385cec614b3dac55951c66ee25e.svg",
-    "main.2acdd6df.css.map": "/online_store_front-end/static/css/main.2acdd6df.css.map",
-    "main.bbeeb152.js.map": "/online_store_front-end/static/js/main.bbeeb152.js.map"
+    "main.2cb8fa0a.css.map": "/online_store_front-end/static/css/main.2cb8fa0a.css.map",
+    "main.c64128fb.js.map": "/online_store_front-end/static/js/main.c64128fb.js.map"
   },
   "entrypoints": [
-    "static/css/main.2acdd6df.css",
-    "static/js/main.bbeeb152.js"
+    "static/css/main.2cb8fa0a.css",
+    "static/js/main.c64128fb.js"
   ]
 }
