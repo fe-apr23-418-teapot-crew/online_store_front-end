@@ -1,8 +1,8 @@
 import React from 'react';
-import { ApiResponse } from '../types/APIResponse';
+import { APIResponse } from '../types/APIResponse';
 
 interface ProductsContextType {
-  data: ApiResponse | undefined;
+  data: APIResponse | undefined;
   isLoading: boolean;
   error: Error | null;
 }

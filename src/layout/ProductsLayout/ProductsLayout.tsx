@@ -3,6 +3,9 @@ import HomeIcon from '@mui/icons-material/Home';
 import CircularProgress from '@mui/material/CircularProgress';
 import { ProductList } from '../../components/ProductList/ProductList';
 import { ProductsContext } from '../../contexts/Products';
+import { getStoredItems } from '../../helpers/localStorage/getStoredItems';
+import { LiteProduct } from '../../types/LiteProduct';
+//import { Product } from '../../types/Product';
 // import { Pagination } from '../../components/Pagination/Pagination';
 
 interface ContentLayoutProps {
@@ -15,9 +18,15 @@ interface ContentLayoutProps {
 export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   path,
   title,
+  localStorageItem,
 }) => {
   const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
   const { data, isLoading, error } = useContext(ProductsContext);
+  // const [visibleProducts, setVisibleProducts] = useState<Product[] | undefined>(
+  //   undefined,
+  // );
+
+  let visibleProducts;
 
   if (isLoading) {
     return <CircularProgress />;
@@ -30,9 +39,23 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   const productsFromServer = data?.rows;
   const productCount = productsFromServer?.length;
 
-  const filteredProducts = productsFromServer?.filter(
-    (product) => product.category === path,
-  );
+  if (localStorageItem === 'favs') {
+    const favsIds = getStoredItems('favs').map(
+      (favItem: LiteProduct) => favItem.id,
+    );
+
+    const filteredProducts = productsFromServer?.filter((product) =>
+      favsIds.includes(product.id),
+    );
+
+    visibleProducts = filteredProducts;
+  } else {
+    const filteredProducts = productsFromServer?.filter(
+      (product) => product.category === path,
+    );
+
+    visibleProducts = filteredProducts;
+  }
 
   return (
     <div className="products">
@@ -62,16 +85,14 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
         </select>
 
         <select name="pagination" className="products__select">
-          <option value="16" selected>
-            16
-          </option>
+          <option value="16">16</option>
           <option value="32">32</option>
           <option value="64">64</option>
           <option value="all">All</option>
         </select>
       </div>
 
-      {filteredProducts && <ProductList products={filteredProducts} />}
+      {visibleProducts && <ProductList products={visibleProducts} />}
     </div>
   );
 };

@@ -1,8 +1,5 @@
-export const getStoredItems = (data?: string) => {
-  const existingItems =
-    data === 'cart'
-      ? localStorage.getItem('cartItems')
-      : localStorage.getItem('favsItems');
+export const getStoredItems = (data: string) => {
+  const existingItems = localStorage.getItem(data);
 
   const storedItems = existingItems ? JSON.parse(existingItems) : [];
 

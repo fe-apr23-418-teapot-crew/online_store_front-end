@@ -5,11 +5,11 @@ import closeButton from '../../icons/Close.svg';
 import minusButton from '../../icons/Minus.svg';
 import plusButton from '../../icons/Plus.svg';
 import { getStoredItemCount } from '../../helpers/localStorage/getStoredItemCount';
-import { LiteProduct } from '../../types/LiteProduct';
+import { Product } from '../../types/Product';
 import { updateStoredItems } from '../../helpers/localStorage/updateStoredtItems';
 
 interface CartItemProps {
-  product: LiteProduct;
+  product: Product;
   onRemoveFromCart: (productId: number) => void;
   onChangeTotalAmount: (newPrice: number) => void;
 }
@@ -22,6 +22,7 @@ export const CartItem: React.FC<CartItemProps> = ({
   const { id, name, image, price } = product;
   const storedCartItemCount = getStoredItemCount(id);
   const [count, setCount] = useState<number>(storedCartItemCount);
+
   const imageURL = API_URL + image;
   const isReduceCountDisabled = count === 1;
 

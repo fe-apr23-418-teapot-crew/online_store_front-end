@@ -1,6 +1,6 @@
 import { Product } from './Product';
 
-export interface ApiResponse {
+export interface APIResponse {
   count: number;
   rows: Product[];
 }

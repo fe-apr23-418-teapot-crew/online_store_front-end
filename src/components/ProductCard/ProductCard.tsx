@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../consts/api';
 import { Product } from '../../types/Product';
 import styles from './ProductCard.module.scss';
-import { getStoredItems } from '../../helpers/localStorage/getStoredItems';
-import { getCartItemIndex } from '../../helpers/localStorage/getProductIndex';
+import { setStoredItem } from '../../helpers/localStorage/setStoredItem';
+import cn from 'classnames';
+import { isProductInStorage } from '../../helpers/localStorage/isProductInStorage';
+import { removeStoredItem } from '../../helpers/localStorage/removeStoredItem';
 
 type ProductCardProps = {
   product: Product;
@@ -14,36 +16,35 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { id, image, name, capacity, color, fullPrice, price, screen, ram } =
     product;
 
-  const productIndex = getCartItemIndex(id);
-  const isProductIndexValid = productIndex !== -1;
+  const isProductInCart = isProductInStorage('cart', id);
+  const isProductInFavs = isProductInStorage('favs', id);
   const [isAddToCartDisabled, setIsAddToCartDisabled] =
-    useState(isProductIndexValid);
+    useState(isProductInCart);
+  const [isFavIconActive, setIsFavIconActive] = useState(isProductInFavs);
   const imageURL = API_URL + image;
 
   const handleAddToCart = () => {
-    const cartItems = getStoredItems('cart');
-
     const newCartItem = {
-      id,
-      name,
-      image,
-      price,
+      ...product,
       count: 1,
     };
 
-    cartItems.push(newCartItem);
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    setStoredItem('cart', newCartItem);
 
     setIsAddToCartDisabled(true);
   };
 
   const handleAddToFavs = () => {
-    const favsItems = getStoredItems('favs');
+    if (isProductInFavs) {
+      removeStoredItem('favs', id);
+      setIsFavIconActive(true);
+    } else {
+      const newFavsItem = { ...product };
 
-    const newFavsItem = { product };
+      setStoredItem('favs', newFavsItem);
 
-    favsItems.push(newFavsItem);
-    localStorage.setItem('favsItems', JSON.stringify(favsItems));
+      setIsFavIconActive(false);
+    }
   };
 
   const navigate = useNavigate();
@@ -99,7 +100,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         <button
           onClick={handleAddToFavs}
-          className={styles.productCard__favoriteButton}
+          className={cn(styles.productCard__favoriteButton, {
+            [styles['productCard__favoriteButton--active']]: isFavIconActive,
+          })}
         />
       </div>
     </article>

@@ -157,7 +157,8 @@ $card-padding: 32px;
       border-color: #0f0f11;
     }
 
-    &:active {
+    &:active,
+    &--active {
       border-color: #b4bdc3;
       background-image: url('../../icons/FavouritesFilledBtn.svg');
     }

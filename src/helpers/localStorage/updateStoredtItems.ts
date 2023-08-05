@@ -9,6 +9,6 @@ export const updateStoredItems = (id: number, newCount: number) => {
 
   if (itemIndex !== -1) {
     storedCartItems[itemIndex].count = newCount;
-    localStorage.setItem('cartItems', JSON.stringify(storedCartItems));
+    localStorage.setItem('cart', JSON.stringify(storedCartItems));
   }
 };
