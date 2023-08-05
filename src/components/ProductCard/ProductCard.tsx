@@ -13,8 +13,19 @@ type ProductCardProps = {
 };
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { id, image, name, capacity, color, fullPrice, price, screen, ram } =
-    product;
+  const {
+    id,
+    itemId,
+    category,
+    image,
+    name,
+    capacity,
+    color,
+    fullPrice,
+    price,
+    screen,
+    ram,
+  } = product;
 
   const { removeFavProduct, addFavProduct } = useContext(FavsContext);
 
@@ -53,7 +64,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const navigate = useNavigate();
 
   const handleProductCardClickRedirect = () => {
-    navigate(`/product/${id}`);
+    navigate(`/${category}/${itemId}`);
   };
 
   return (

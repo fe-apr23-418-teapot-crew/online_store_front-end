@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import HomeIcon from '@mui/icons-material/Home';
 // import { useQuery } from 'react-query';
 // import { fetchProducts } from '../../api/products';
 // import CircularProgress from '@mui/material/CircularProgress';
@@ -10,21 +9,20 @@ import { useSearchParams } from 'react-router-dom';
 import { API_URL } from '../../consts/api';
 import { Product } from '../../types/Product';
 import { Pagination } from '../../components/Pagination/Pagination';
+import { LocationHistory } from '../../components/LocationHistory';
 
-interface ContentLayoutProps {
+interface ProductsLayoutProps {
   path: string;
   pathAPI: string;
   title: string;
   localStorageItem?: string;
 }
 
-export const ProductsLayout: React.FC<ContentLayoutProps> = ({
+export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
   path,
   // pathAPI,
   title,
-  localStorageItem,
 }) => {
-  const [locationHistory] = useState([path, 'iphone 10 Pro Max']);
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
   const [productsCount, setProductsCount] = useState<number>(0);
@@ -45,16 +43,23 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
   //   return <div>Error: {error.toString()}</div>;
   // }
 
-  const fetchProductsMethod = (endpoint: string, sortVal: string, offsetVal: string, limitVal: string) => {
-    fetch(`${API_URL}${endpoint}?limit=${limitVal}&offset=${offsetVal}&sortBy=${sortVal}`)
-      .then(response => response.json())
-      .then(data => setProducts(data.rows));
+  const fetchProductsMethod = (
+    endpoint: string,
+    sortVal: string,
+    offsetVal: string,
+    limitVal: string,
+  ) => {
+    fetch(
+      `${API_URL}${endpoint}?limit=${limitVal}&offset=${offsetVal}&sortBy=${sortVal}`,
+    )
+      .then((response) => response.json())
+      .then((data) => setProducts(data.rows));
   };
 
   const getProductCount = (endpoint: string) => {
     fetch(`${API_URL}${endpoint}`)
-      .then(response => response.json())
-      .then(data => setProductsCount(data.count));
+      .then((response) => response.json())
+      .then((data) => setProductsCount(data.count));
   };
   console.log(productsCount);
 
@@ -77,27 +82,12 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
 
   const changeLimit = (limitValue: string) => {
     const params = new URLSearchParams(searchParams);
-    console.log(params);
-
     params.set('limit', limitValue);
+    setSearchParams(params);
+  };
 
-  if (localStorageItem === 'favs') {
-    const favsIds = getStoredItems('favs').map(
-      (favItem: LiteProduct) => favItem.id,
-    );
-
-    const filteredProducts = productsFromServer?.filter((product) =>
-      favsIds.includes(product.id),
-    );
-
-    visibleProducts = filteredProducts;
-  } else {
-    const filteredProducts = productsFromServer?.filter(
-      (product) => product.category === path,
-    );
-
-    visibleProducts = filteredProducts;
-  }
+  console.log(limit);
+  console.log(sortBy);
 
   return (
     <div className="products">
@@ -110,11 +100,12 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
       </h6>
 
       <div className="products__filter-fields">
-        <select name="sort-by" className="products__select">
-          <option value="by-date">By date</option>
-          <option value="by-name">By name</option>
-          <option value="by-price">By price</option>
-        </select>
+        <Sort
+          sortBy={sortBy}
+          limit={limit}
+          changeSortBy={changeSortBy}
+          changeLimit={changeLimit}
+        />
 
         {products.length && <ProductList products={products} />}
         <Pagination
@@ -123,7 +114,6 @@ export const ProductsLayout: React.FC<ContentLayoutProps> = ({
           changeOffset={changeOffset}
         />
       </div>
-
     </div>
   );
 };

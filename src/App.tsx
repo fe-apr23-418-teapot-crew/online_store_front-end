@@ -15,6 +15,10 @@ export const App = () => (
     <Route path="/" element={<MainLayout />}>
       <Route index element={<Home />} />
       <Route path="home" element={<Navigate to="/" replace />} />
+      <Route path="phones/:productId" element={<ProductPage />} />
+
+      <Route path="tablets/:productId" element={<ProductPage />} />
+      <Route path="accessories/:productId" element={<ProductPage />} />
 
       <Route path="phones" element={<Phones />}>
         <Route path=":selectedSlug" element={<Phones />} />
@@ -36,7 +40,6 @@ export const App = () => (
         <Route path=":selectedSlug" element={<Cart />} />
       </Route>
 
-      <Route path="/product/:productId" element={<ProductPage />} />
       {/* <Route path="*" element={<NotFound />} /> */}
     </Route>
   </Routes>
