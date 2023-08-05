@@ -4,6 +4,24 @@ import { API_URL } from '../../consts/api';
 import { DetailedProduct } from '../../types/DetailedProduct';
 import { ProductImageCarousel } from '../ProductImageCarousel/ProductImageCarousel';
 
+
+interface FetchProductProps<T> {
+  url: string
+  setFunc: (v: T) => void
+  errorText: string
+}
+
+const fetchProduct = async <T extends object>(
+  { url, setFunc, errorText }: FetchProductProps<T>
+) => {
+  fetch(url)
+    .then((response) => response.json())
+    .then(setFunc)
+    .catch((error) => {
+      console.error(errorText, error);
+    });
+};
+
 export const ProductPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [productDetails, setProductDetails] = useState<DetailedProduct | null>(
@@ -19,7 +37,7 @@ export const ProductPage = () => {
   useEffect(() => {
     fetch(`${API_URL}${normalizedPathName}`)
       .then((response) => response.json())
-      .then(setProductDetails)
+      .then(setProduct)
       .catch((error) => {
         console.error('Error fetching product details:', error);
       });
