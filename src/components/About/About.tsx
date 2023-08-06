@@ -11,7 +11,7 @@ export const About: React.FC<Props> = ({ product }) => {
     <section className={styles.about}>
       <h3 className={styles.about__header}>About</h3>
       <div className={styles.about__description}>
-        {product.description.map((desc) => (
+        {product?.description?.map((desc) => (
           <React.Fragment key={desc.title}>
             <h4 className={styles['about__description-title']}>{desc.title}</h4>
             <p className={styles['about__description-text']}>{desc.text}</p>
