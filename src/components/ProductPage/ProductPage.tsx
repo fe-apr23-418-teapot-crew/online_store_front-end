@@ -18,7 +18,7 @@ interface FetchProductProps<T> {
   errorText: string;
 }
 
-const fetchProduct = async <T extends DetailedProduct | null>({
+export const fetchProduct = async <T extends DetailedProduct | null>({
   url,
   setFunc,
   errorText,
@@ -32,7 +32,6 @@ const fetchProduct = async <T extends DetailedProduct | null>({
 };
 
 export const ProductPage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [productDetails, setProductDetails] = useState<DetailedProduct | null>(
     null,
   );
@@ -75,7 +74,10 @@ export const ProductPage = () => {
 
               <div className={styles['product--varieties--actions']}>
                 <div className={styles.product__variants}>
-                  <ProductVarieties product={productDetails} />
+                  <ProductVarieties
+                    product={productDetails}
+                    changeProduct={setProductDetails}
+                  />
                 </div>
                 <div className={styles.product__actions}>
                   <ProductActions product={productDetails} />
