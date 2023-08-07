@@ -23,6 +23,7 @@ export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, ch
   useEffect(() => {
     searchParams.set('offset', `${productsOnPage * (activePage - 1)}`);
     setSearchParams(searchParams);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [productsOnPage, activePage]);
 
   const handleMoveLeft = () => {
@@ -64,6 +65,7 @@ export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, ch
       <button
         className={`${styles.pagination__button} ${styles['pagination__button--arrow']}`}
         onClick={handleMoveLeft}
+        disabled={activePage === 1}
       >
         {'<'}
       </button>
@@ -81,7 +83,10 @@ export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, ch
                 [styles['pagination__button--active']]: activePage === num,
               })}
               key={num}
-              onClick={() => setActivePage(num)}
+              onClick={() => {
+                setActivePage(num);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
             >
               {num}
             </button>
@@ -91,6 +96,7 @@ export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, ch
       <button
         className={`${styles.pagination__button} ${styles['pagination__button--arrow']}`}
         onClick={handleMoveRight}
+        disabled={activePage === lastPage}
       >
         {'>'}
       </button>
