@@ -91,13 +91,14 @@
   }
 
   @media (min-width: 640px) {
-    &-varieties--actions {
-      display: flex;
-      flex-direction: column;
-    }
     &--images--varieties--actions {
       display: flex;
       flex-direction: row;
+    }
+    &--varieties--actions {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
   }
   @media (min-width: 1200px) {
