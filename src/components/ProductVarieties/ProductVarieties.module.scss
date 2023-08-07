@@ -6,9 +6,6 @@
   font-size: 12px;
   font-style: normal;
   line-height: normal;
-  @media (min-width: 640px) {
-    min-width: 213px;
-  }
   &__header {
       display: flex;
       justify-content: space-between;
@@ -66,5 +63,10 @@
       border-color: black;
       color: white;
     }
+  }
+}
+@media (min-width: 640px) {
+  .varieties {
+    min-width: 200px;
   }
 }
