@@ -1,0 +1,116 @@
+@import '~slick-carousel/slick/slick.scss';
+@import '~slick-carousel/slick/slick-theme.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+.slider {
+  max-width: 1200px;
+  margin: 0 auto 64px;
+}
+
+.slick-slider {
+  display: flex;
+  justify-content: space-between;
+  gap: 19px;
+}
+
+.slick-arrow {
+  position: relative;
+  width: 32px;
+  display: none;
+  height: inherit;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transform: translateY(0);
+  border: 1px solid #B4BDC3;
+  border-radius: 48px;
+  background-color: #fff;
+  transition: 0.5s;
+}
+
+.slick-arrow:hover {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+.slick-arrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 32px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translateY(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.slick-prev::before {
+  content: '';
+  background-image: url('../../icons/ArrowLeft.svg');
+}
+
+.slick-next::before {
+  content: '';
+  background-image: url('../../icons/ArrowRight.svg');
+}
+
+#slick-slide__img-desk {
+  display: none;
+}
+
+#slick-slide__img-mob {
+  width: 100%;
+}
+
+.slick-list {
+  max-width: 640px;
+  width: 100vw;
+}
+
+@media(min-width: 640px){
+  .slick-list {
+    max-width: 490px;
+  }
+
+  #slick-slide__img-mob {
+    display: none;
+  }
+
+  #slick-slide__img-desk {
+    display: block;
+    width: 100%;
+  }
+
+  .slick-arrow {
+    display: block;
+  }
+}
+
+@media(min-width: 1200px){
+  .slick-list {
+    max-width: 1040px;
+  }
+}
+
+.slick-dots {
+  bottom: -38px;
+  left: 0;
+}
+
+.slick-dots li button:before {
+  content: '';
+  width: 14px;
+  height: 4px;
+  background-color: #B4BDC3;
+  opacity: 0.25;
+}
+
+.slick-dots li.slick-active button:before {
+  background-color: #000;
+  opacity: 0.75;
+}
