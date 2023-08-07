@@ -1,9 +1,15 @@
 .sort {
+  display: flex;
+  justify-content: center;
   &__filter {
     display: flex;
     gap: 16px;
-    // align-items: center;
-    // justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 14px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
   }
 
   &__field {
@@ -49,6 +55,10 @@
     border-radius: 8px;
     padding: 8px;
 
+    &--perPage {
+      width: 136px
+    }
+
     &:hover {
       border-color: #89939A;
     }
@@ -73,16 +83,16 @@
     }
     &__select {
       width: 187px;
-      
-      &--perPage {
-        width: 136px
-      }
     }
   }
 }
 
 @media (min-width: 768px) {
   .sort {
+    &__filter {
+      padding: 0 14px;
+    }
+
     &__select {
       width: 176px;
       

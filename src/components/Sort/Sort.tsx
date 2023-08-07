@@ -39,6 +39,9 @@ export const Sort: React.FC<Props> = ({
           <option className='option' value="price">By price</option>
         </select>
       </div>
+
+
+
       <div className="sort__field ">
         <div className="sort__title">Items on page</div>
         <select
