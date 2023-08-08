@@ -51,7 +51,7 @@ export const ProductPage = () => {
 
   return (
     <>
-      <LocationHistory path={normalizedPathName}/>
+      <LocationHistory path={normalizedPathName} productDetails={productDetails} />
 
       <section className={styles.product}>
         <div className={styles.product__navigation}>
