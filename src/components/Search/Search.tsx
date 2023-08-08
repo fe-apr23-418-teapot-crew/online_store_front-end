@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styles from './Search.module.scss';
 
 type Props = {
-  query: string,
+  query?: string,
   changeQuery: (query: string) => void,
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const Search: React.FC<Props> = ({ changeQuery, query }) => {
-  function onChangeQuery(event: React.ChangeEvent<HTMLInputElement>) {
-    changeQuery(event.target.value);
+export const Search: React.FC<Props> = ({ changeQuery }) => {
+  const [inputValue, setInputValue] = useState('');
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  const debounce = (func: Function, delay: number) => {
+    let timer: ReturnType<typeof setTimeout>;
+    return (...args: unknown[]) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => func(...args), delay);
+    };
+  };
+
+  const debouncedChangeQuery = useCallback(
+    debounce((value: string) => {
+      changeQuery(value);
+    }, 500),
+    []
+  );
+
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const value = event.target.value;
+    setInputValue(value);
+    debouncedChangeQuery(value);
   }
 
   return (
@@ -18,8 +37,8 @@ export const Search: React.FC<Props> = ({ changeQuery, query }) => {
         className={styles.search__input}
         type="text"
         placeholder='Search'
-        value={query}
-        onChange={onChangeQuery}
+        value={inputValue}
+        onChange={handleInputChange}
       >
       </input>
     </div>

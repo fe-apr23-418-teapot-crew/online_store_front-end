@@ -120,7 +120,6 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
         <Sort
           sortBy={sortBy}
           limit={limit}
-          query={query}
           changeSortBy={changeSortBy}
           changeLimit={changeLimit}
           changeQuery={changeQuery}
