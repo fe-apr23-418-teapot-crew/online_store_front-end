@@ -5,7 +5,7 @@ import { Search } from '../Search/Search';
 type Props = {
   sortBy: string,
   limit: string,
-  query: string[],
+  query: string,
   changeSortBy: (sortValue: string) => void,
   changeLimit: (limitValue: string) => void,
   changeQuery: (query: string) => void,
@@ -14,6 +14,7 @@ type Props = {
 export const Sort: React.FC<Props> = ({
   sortBy,
   limit,
+  query,
   changeSortBy,
   changeLimit,
   changeQuery,
@@ -64,7 +65,7 @@ export const Sort: React.FC<Props> = ({
       </div>
       <div className="search__filter">
         <div className="sort__title">Search products</div>
-        <Search changeQuery={changeQuery}/>
+        <Search query={query} changeQuery={changeQuery}/>
       </div>
     </div>
   );
