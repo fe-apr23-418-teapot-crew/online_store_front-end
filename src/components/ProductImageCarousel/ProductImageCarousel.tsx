@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, {
+  useState,
+  useEffect,
+} from 'react';
 import cn from 'classnames';
 import './ProductImageCarousel.scss';
 import { DetailedProduct } from '../../types/DetailedProduct';
@@ -13,8 +16,6 @@ export const ProductImageCarousel: React.FC<ProductImageCarouselProps> = ({
 }) => {
   const images: string[] = product.images;
 
-  console.log(product);
-
   const [cardImage, setCardImage] = useState(API_URL + images[0]);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -22,6 +23,8 @@ export const ProductImageCarousel: React.FC<ProductImageCarouselProps> = ({
     setCardImage(API_URL + image);
     setActiveImageIndex(index);
   };
+
+  useEffect(() => {setCardImage(API_URL + images[0]);}, [images]);
 
   return (
     <div className="carousel__container">

@@ -1,6 +1,8 @@
 .techspecs {
-    max-width: 511px;
-    min-width: 320px;
+    min-width: 288px;
+    @media (min-width: 640px) {
+        min-width: 213px;
+    }
     &__header {
 
         font-size: 22px;

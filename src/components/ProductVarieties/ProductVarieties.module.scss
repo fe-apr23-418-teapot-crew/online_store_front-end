@@ -1,6 +1,6 @@
 .varieties {
   margin-top: 32px;
-  width: 320px;
+  min-width: 288px;
 
   color: #89939A;
   font-size: 12px;
@@ -43,8 +43,6 @@
   &__colorRadio {
       width: 25px;
   }
-  &__capacity {
-  }
   &__capacityItem {
     color: #89939A;
     margin-right: 8px;
@@ -67,9 +65,8 @@
     }
   }
 }
-// @media (min-width: 640px) {
-//     
-// }
-// @media (min-width: 1200px) {
-//     
-// }
+@media (min-width: 640px) {
+  .varieties {
+    min-width: 200px;
+  }
+}

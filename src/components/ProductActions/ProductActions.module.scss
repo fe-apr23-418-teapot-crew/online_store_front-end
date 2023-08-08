@@ -1,7 +1,10 @@
 .actions {
     text-align: center;
     margin-top: 32px;
-    min-width: 320px;
+    min-width: 288px;
+    // @media (min-width: 640px) {
+    //     min-width: 200px;
+    // }
     &__prices {
         display: flex;
         align-items: center;
@@ -22,7 +25,6 @@
         font-weight: 500;
         line-height: normal;
         text-decoration: line-through;
-
     }
     &__buttons {
         margin-top: 16px;
@@ -30,13 +32,14 @@
         align-items: center;
     }
     &__buttonToCart {
+        flex-grow: 1;
         margin-right: 8px;
         color: white;
         border: 0 solid;
         border-radius: 8px;
         background: #216CFF;
         display: flex;
-        width: 231px;
+        min-width: 231px;
         height: 48px;
         justify-content: center;
         align-items: center;
@@ -82,7 +85,6 @@
         border-color: #b4bdc3;
         background-image: url('../../icons/FavouritesFilledBtn.svg');
         }
-
     }
     &__infoContainer {
         margin-top: 32px;
@@ -106,19 +108,12 @@
         line-height: normal;
     }
 }
-// @media (min-width: 640px) {
-//     .actions {
-//         min-width: 237px;
-//         &__buttonToCart {
-//             width: 180px;
-//         }
-//     }
-// }
-// @media (min-width: 1200px) {
-//     .actions {
-//         min-width: 320px;
-//         &__buttonToCart {
-//             width: 263px;
-//         }
-//     }
-// }
+@media (min-width: 640px) {
+  .actions {
+    min-width: 200px;
+    &__buttonToCart {
+        min-width: 180px;
+        max-width: 263px;
+    }
+  }
+}
