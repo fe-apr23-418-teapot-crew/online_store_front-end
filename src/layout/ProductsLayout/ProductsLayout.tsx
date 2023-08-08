@@ -3,24 +3,22 @@ import React, { useEffect, useState } from 'react';
 // import { fetchProducts } from '../../api/products';
 // import CircularProgress from '@mui/material/CircularProgress';
 // import { ApiResponse } from '../../types/APIResponse';
-import { ProductList } from '../../components/ProductList/ProductList';
+import { ProductList } from '../../components/Product/ProductList/ProductList';
 import { Sort } from '../../components/Sort/Sort';
 import { useSearchParams } from 'react-router-dom';
 import { API_URL } from '../../consts/api';
 import { Product } from '../../types/Product';
 import { Pagination } from '../../components/Pagination/Pagination';
-import { LocationHistory } from '../../components/LocationHistory';
+import { Breadcrumbs } from '../../components/Breadcrumbs';
 
 interface ProductsLayoutProps {
   path: string;
-  pathAPI: string;
-  title: string;
-  localStorageItem?: string;
+  title?: string;
+  children: React.ReactNode;
 }
 
 export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
   path,
-  // pathAPI,
   title,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -100,7 +98,7 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
   // const filteredProducts = products.filter(product => {
   //   const loweredQuery = query.join(' ').toLowerCase().trim();
   //   const normalizedProductName = product.name.toLowerCase();
-    
+
   //   return normalizedProductName.includes(loweredQuery);
   // });
 
@@ -108,12 +106,13 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
 
   return (
     <div className="products">
-      <LocationHistory path={path} />
+      <Breadcrumbs path={path} />
 
-      <h1 className="products__title">{title}</h1>
+      <h1 className="products__title">{title ? title : path}</h1>
 
       <h6 className="products__count">
-        {productsCount} + {'models'}
+        {productsCount}
+        {' models'}
       </h6>
 
       <div className="products__filter-fields">

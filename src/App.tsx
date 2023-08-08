@@ -1,46 +1,37 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { MainLayout } from './layout/MainLayout';
-import { Home } from './pages/Home';
-import { Phones } from './pages/Phones';
+import { HomePage } from './pages/HomePage';
+import { PhonesPage } from './pages/PhonesPage';
+import { TabletsPage } from './pages/TabletsPage';
+import { ProductPage } from './components/Product/ProductPage';
+import { FavsPage } from './pages/FavsPage/FavsPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { AccessoriesPage } from './pages/AccessoriesPage';
+//import { CartPage } from './pages/CartPage';
+import { CartPage } from './pages/CartPage/CartPage';
 import './styles/App.scss';
-import { Tablets } from './pages/Tablets';
-import { Accessories } from './pages/Accessories';
-import { Cart } from './pages/Cart';
-import { ProductPage } from './components/ProductPage';
-import { Favs } from './pages/Favs/Favs';
 
 export const App = () => (
   <Routes>
     <Route path="/" element={<MainLayout />}>
-      <Route index element={<Home />} />
-      <Route path="home" element={<Navigate to="/" replace />} />
-      <Route path="phones/:productId" element={<ProductPage />} />
+      <Route index element={<HomePage />} />
+      <Route path="homepage" element={<Navigate to="/" replace />} />
 
-      <Route path="tablets/:productId" element={<ProductPage />} />
+      <Route path="phonespage/:productId" element={<ProductPage />} />
+      <Route path="phonespage" element={<PhonesPage />} />
+
+      <Route path="tabletspage/:productId" element={<ProductPage />} />
+      <Route path="tabletspage" element={<TabletsPage />}></Route>
+
       <Route path="accessories/:productId" element={<ProductPage />} />
+      <Route path="accessories" element={<AccessoriesPage />} />
 
-      <Route path="phones" element={<Phones />}>
-        <Route path=":selectedSlug" element={<Phones />} />
-      </Route>
+      <Route path="favourites" element={<FavsPage />} />
 
-      <Route path="tablets" element={<Tablets />}>
-        <Route path=":selectedSlug" element={<Tablets />} />
-      </Route>
+      <Route path="cart" element={<CartPage />} />
 
-      <Route path="accessories" element={<Accessories />}>
-        <Route path=":selectedSlug" element={<Accessories />} />
-      </Route>
-
-      <Route path="favourites" element={<Favs />}>
-        <Route path=":selectedSlug" element={<Favs />} />
-      </Route>
-
-      <Route path="cart" element={<Cart />}>
-        <Route path=":selectedSlug" element={<Cart />} />
-      </Route>
-
-      {/* <Route path="*" element={<NotFound />} /> */}
+      <Route path="*" element={<NotFoundPage />} />
     </Route>
   </Routes>
 );

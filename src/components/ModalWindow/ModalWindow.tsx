@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './ModalWindow.module.scss';
-import logo from '../../images/Logo.svg';
+import logo from '../../icons/Logo.svg';
 import close from '../../icons/Close.svg';
 
 export const ModalWindow = () => {
@@ -13,31 +13,17 @@ export const ModalWindow = () => {
   };
 
   return (
-    <div
-      className={cn(
-        styles.modal, { [styles['is-active']]: isModal },
-      )}
-    >
+    <div className={cn(styles.modal, { [styles['is-active']]: isModal })}>
       <div className={styles.modal__content}>
         <div className={styles.modal__header}>
-          <img 
-            src={logo}
-            alt='Logo'
-            className={styles.modal__header__logo}
-          />
+          <img src={logo} alt="Logo" className={styles.modal__header__logo} />
 
-          <NavLink
-            onClick={closeModal}
-            to="/"
-          >
+          <NavLink onClick={closeModal} to="/">
             <button
               className={styles.modal__header__icon__close}
               onClick={closeModal}
             >
-              <img 
-                src={close}
-                alt='CloseButton'
-              />
+              <img src={close} alt="CloseButton" />
             </button>
           </NavLink>
         </div>
@@ -46,16 +32,12 @@ export const ModalWindow = () => {
           Thank you for shopping in our store!
         </div>
 
-        <img 
-          className={styles.modal__img} 
-          src='https://nebo-trk.com/wp-content/uploads/2018/12/logo-Be-Happy-chernyjj-na-prozrachnom.png' />
-        <NavLink
-          onClick={closeModal}
-          to="/"
-        >
-          <button className={styles.modal__button}>
-            OK
-          </button>
+        <img
+          className={styles.modal__img}
+          src="https://nebo-trk.com/wp-content/uploads/2018/12/logo-Be-Happy-chernyjj-na-prozrachnom.png"
+        />
+        <NavLink onClick={closeModal} to="/">
+          <button className={styles.modal__button}>OK</button>
         </NavLink>
       </div>
     </div>

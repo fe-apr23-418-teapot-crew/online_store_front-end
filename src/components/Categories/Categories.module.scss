@@ -32,15 +32,15 @@
   }
 
   &_imgFirst {
-    background: #6D6474;
+    background: #6d6474;
   }
 
   &_imgSecond {
-    background: #89939A;
+    background: #8d8d92;
   }
 
   &_imgThird {
-    background: #D53C51;
+    background: #973d5f;
   }
 
   &_type {
@@ -50,7 +50,7 @@
     margin: 0;
     margin-bottom: 4px;
 
-    color: #0F0F11;
+    color: var(--primary);
   }
 
   &_models {
@@ -58,7 +58,7 @@
     font-style: normal;
     font-weight: 600;
 
-    color: #89939A;
+    color: var(--secondary);
   }
 }
 
@@ -70,7 +70,7 @@
     .container {
       padding: 24px;
     }
-  
+
     &_title {
       font-size: 32px;
     }
@@ -81,7 +81,7 @@
       justify-content: center;
       gap: 16px;
     }
-  
+
     & img {
       height: 187px;
       width: 187px;
@@ -96,7 +96,7 @@
     .container {
       padding: 32px;
     }
-  
+
     & img {
       height: 370px;
       width: 370px;
