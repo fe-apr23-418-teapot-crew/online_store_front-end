@@ -4,13 +4,22 @@ import logo from '../../images/Logo.svg';
 import logoBurger from '../../images/LogoForBurger.svg';
 import likes from '../../images/Favourites (Heart Like).svg';
 import shopBag from '../../images/Shopping bag (Cart).svg';
+import user from '../../icons/User.svg';
+import logOut from '../../icons/Logout.svg';
 import closeMenu from '../../images/Close.svg';
 import menu from '../../images/Menu.svg';
 import { MenuLink } from '../MenuLink';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { AuthScreens } from '../AuthScreens/AuthScreens';
 
 export const Header = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const [isLogging, setIsLogging] = useState(false);
+  const [loggedUser, setLoggedUser] = useState<{ userEmail: string; password: string; userName: string; } | null>(
+    null
+  );
+  const { pathname } = useLocation();
+  
 
   return (
     <>
@@ -29,6 +38,26 @@ export const Header = () => {
         </div>
 
         <div className={styles.header_buttons}>
+          {loggedUser
+            ? <>
+              <p className={styles.header__authUserName}>{loggedUser.userName}</p>
+              <Link 
+                to={'/'}
+                className={styles.header__authButton}
+                onClick={() => setLoggedUser(null)}
+              >
+                <img src={logOut} alt="LOG OUT" />
+              </Link>
+            </>
+            : <Link 
+              to={pathname}
+              className={styles.header__authButton}
+              onClick={() => setIsLogging(true)}
+            >
+              <img src={user} alt="USER AUTH" />
+            </Link>
+          
+          }
           <MenuLink isBurgerItem={true} to="/favourites" path="Favourites">
             <img src={likes} alt="LIKES" />
           </MenuLink>
@@ -110,6 +139,10 @@ export const Header = () => {
             </div>
           </div>
         )}
+        {isLogging && <AuthScreens
+          setIsLogging={setIsLogging}
+          setLoggedUser={setLoggedUser}
+        />}
       </header>
     </>
   );

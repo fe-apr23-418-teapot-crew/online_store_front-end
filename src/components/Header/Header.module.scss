@@ -35,6 +35,20 @@ $gray-primary: #0f0f11;
     display: none;
   }
 
+  &__authButton {
+    text-align: center;
+    line-height: 48px;
+    width: 48px;
+  }
+  
+  &__authUserName {
+    line-height: 48px;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.48px;
+  }
+
   &_buttonMenu {
     display: flex;
     justify-content: center;
@@ -184,6 +198,14 @@ $gray-primary: #0f0f11;
 
     &_button {
       padding: 24px;
+    }
+
+    &__authButton {
+      line-height: 64px;
+      width: 64px;
+    }
+    &__authUserName {
+      line-height: 64px;
     }
   }
 }
