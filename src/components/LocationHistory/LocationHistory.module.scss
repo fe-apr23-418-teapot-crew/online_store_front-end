@@ -12,5 +12,14 @@
 
   &__item {
     margin-right: 10px;
+
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  &__link {
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
   }
 }

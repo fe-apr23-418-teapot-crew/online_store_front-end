@@ -13,7 +13,7 @@ export const Favs: React.FC<FavsProps> = () => {
 
   return (
     <section className={styles.favs}>
-      <LocationHistory path="Favourites" />
+      <LocationHistory path="favourites" />
 
       <h1 className={styles.favs__title}>Favourites</h1>
       <h6 className={styles.favs__count}>
