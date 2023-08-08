@@ -2,34 +2,80 @@ import React, { useCallback, useState } from 'react';
 import { FavsContext } from '../contexts/FavsContext';
 import { getStoredItems } from '../helpers/localStorage/getStoredItems';
 import { removeStoredItem } from '../helpers/localStorage/removeStoredItem';
+import { resetStoredItems } from '../helpers/localStorage/resetStoredItems';
 import { setStoredItem } from '../helpers/localStorage/setStoredItem';
 import { Product } from '../types/Product';
+
+const FAVS_LOCAL_STORAGE_KEY = 'favs';
+const CART_LOCAL_STORAGE_KEY = 'cart';
 
 interface FavsProviderProps {
   children: React.ReactNode;
 }
 
 export const FavsProvider: React.FC<FavsProviderProps> = ({ children }) => {
-  const storedFavsProducts = getStoredItems('favs');
-  const [favsProducts, setFavsProducts] = useState(storedFavsProducts);
+  const [favsProducts, setFavsProducts] = useState<Product[]>(
+    getStoredItems(FAVS_LOCAL_STORAGE_KEY) || [],
+  );
+  const [cartProducts, setCartProducts] = useState<Product[]>(
+    getStoredItems(CART_LOCAL_STORAGE_KEY) || [],
+  );
 
-  const addFavProduct = useCallback((newProduct: Product) => {
-    setStoredItem('favs', newProduct);
+  const addToStorage = useCallback((key: string, newProduct: Product) => {
+    setStoredItem(key, newProduct);
 
-    setFavsProducts((prevProducts: Product[]) => [...prevProducts, newProduct]);
+    if (key === FAVS_LOCAL_STORAGE_KEY) {
+      setFavsProducts((prevProducts: Product[]) => [
+        ...prevProducts,
+        newProduct,
+      ]);
+    }
+
+    if (key === CART_LOCAL_STORAGE_KEY) {
+      setCartProducts((prevProducts: Product[]) => [
+        ...prevProducts,
+        newProduct,
+      ]);
+    }
   }, []);
 
-  const removeFavProduct = useCallback((productId: number) => {
-    removeStoredItem('favs', productId);
+  const removeFromStorage = useCallback((key: string, productId: number) => {
+    removeStoredItem(key, productId);
 
-    setFavsProducts((prevProducts: Product[]) =>
-      prevProducts.filter((product) => product.id !== productId),
-    );
+    if (key === FAVS_LOCAL_STORAGE_KEY) {
+      setFavsProducts((prevProducts: Product[]) =>
+        prevProducts.filter((product) => product.id !== productId),
+      );
+    }
+
+    if (key === CART_LOCAL_STORAGE_KEY) {
+      setCartProducts((prevProducts: Product[]) =>
+        prevProducts.filter((product) => product.id !== productId),
+      );
+    }
+  }, []);
+
+  const resetStorage = useCallback((key: string) => {
+    resetStoredItems(key);
+
+    if (key === FAVS_LOCAL_STORAGE_KEY) {
+      setFavsProducts([]);
+    }
+
+    if (key === CART_LOCAL_STORAGE_KEY) {
+      setCartProducts([]);
+    }
   }, []);
 
   return (
     <FavsContext.Provider
-      value={{ favsProducts, addFavProduct, removeFavProduct }}
+      value={{
+        favsProducts,
+        cartProducts,
+        addToStorage,
+        removeFromStorage,
+        resetStorage,
+      }}
     >
       {children}
     </FavsContext.Provider>

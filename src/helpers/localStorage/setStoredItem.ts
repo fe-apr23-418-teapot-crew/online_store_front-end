@@ -1,9 +1,9 @@
 import { LiteProduct } from '../../types/LiteProduct';
 import { getStoredItems } from './getStoredItems';
 
-export const setStoredItem = (items: string, newItem: LiteProduct | number) => {
-  const updatedItems = getStoredItems(items);
+export const setStoredItem = (key: string, newItem: LiteProduct | number) => {
+  const storedItems = getStoredItems(key);
+  const updatedItems = [...storedItems, newItem];
 
-  updatedItems.push(newItem);
-  localStorage.setItem(items, JSON.stringify(updatedItems));
+  localStorage.setItem(key, JSON.stringify(updatedItems));
 };

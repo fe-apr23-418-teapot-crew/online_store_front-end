@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { API_URL } from '../../consts/api';
 import styles from './CartItem.module.scss';
 import closeButton from '../../icons/Close.svg';
@@ -6,22 +6,22 @@ import minusButton from '../../icons/Minus.svg';
 import plusButton from '../../icons/Plus.svg';
 import { getStoredItemCount } from '../../helpers/localStorage/getStoredItemCount';
 import { Product } from '../../types/Product';
-import { updateStoredItems } from '../../helpers/localStorage/updateStoredtItems';
+import { updateStoredCount } from '../../helpers/localStorage/updateStoredCount';
+import { FavsContext } from '../../contexts/FavsContext';
 
 interface CartItemProps {
   product: Product;
-  onRemoveFromCart: (productId: number) => void;
   onChangeTotalAmount: (newPrice: number) => void;
 }
 
 export const CartItem: React.FC<CartItemProps> = ({
   product,
-  onRemoveFromCart,
   onChangeTotalAmount,
 }) => {
   const { id, name, image, price } = product;
-  const storedCartItemCount = getStoredItemCount(id);
+  const storedCartItemCount = getStoredItemCount('cart', id);
   const [count, setCount] = useState<number>(storedCartItemCount);
+  const { removeFromStorage } = useContext(FavsContext);
 
   const imageURL = API_URL + image;
   const isReduceCountDisabled = count === 1;
@@ -40,11 +40,12 @@ export const CartItem: React.FC<CartItemProps> = ({
     }
 
     setCount(newCount);
-    updateStoredItems(id, newCount);
+    updateStoredCount('cart', id, newCount);
   };
 
   const handleRemoveItem = () => {
-    onRemoveFromCart(id);
+    removeFromStorage('cart', id);
+    //onRemoveFromCart(id);
     onChangeTotalAmount(-price * count);
   };
 
