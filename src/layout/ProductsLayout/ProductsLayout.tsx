@@ -29,6 +29,7 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
   const sortBy = searchParams.get('sortBy') || 'discount';
   const limit = searchParams.get('limit') || '16';
   const offset = searchParams.get('offset') || '0';
+  const query = searchParams.getAll('query');
 
   // const { data, isLoading, error } = useQuery<ApiResponse>(
   //   pathAPI,
@@ -61,7 +62,7 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
       .then((response) => response.json())
       .then((data) => setProductsCount(data.count));
   };
-  console.log(productsCount);
+  console.log(query);
 
   useEffect(() => {
     fetchProductsMethod(path, sortBy, offset, limit);
@@ -86,8 +87,20 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
     setSearchParams(params);
   };
 
-  console.log(limit);
-  console.log(sortBy);
+  const changeQuery = (query: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('query', query);
+    setSearchParams(params);
+  };
+
+  const filteredProducts = products.filter(product => {
+    const loweredQuery = query.join().toLowerCase().trim();
+    const normalizedProductName = product.name.toLowerCase();
+    
+    return normalizedProductName.includes(loweredQuery);
+  });
+
+  console.log(filteredProducts);
 
   return (
     <div className="products">
@@ -103,17 +116,19 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
         <Sort
           sortBy={sortBy}
           limit={limit}
+          query={query}
           changeSortBy={changeSortBy}
           changeLimit={changeLimit}
-        />
-
-        {products.length && <ProductList products={products} />}
-        <Pagination
-          productsOnPage={+limit}
-          productsNumber={productsCount}
-          changeOffset={changeOffset}
+          changeQuery={changeQuery}
         />
       </div>
+
+      {filteredProducts.length && <ProductList products={filteredProducts} />}
+      <Pagination
+        productsOnPage={+limit}
+        productsNumber={productsCount}
+        changeOffset={changeOffset}
+      />
     </div>
   );
 };
