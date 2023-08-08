@@ -1,30 +1,37 @@
 import React from 'react';
 import home from '../../icons/Home.svg';
 import styles from './LocationHistory.module.scss';
+import { Link, useLocation } from 'react-router-dom';
 
 interface LocationHistoryProps {
   path: string;
   locationHistoryList?: string[];
 }
 
-export const LocationHistory: React.FC<LocationHistoryProps> = ({
-  path,
-  locationHistoryList,
-}) => {
+export const LocationHistory: React.FC<LocationHistoryProps> = () => {
+  const location = useLocation();
+  const productUrl = location.pathname.slice(1);
+
+  const pathParts = productUrl.split('/');
+  const parentRoute = `/${pathParts[0]}`;
+
   return (
     <div className={styles.locationHistory}>
-      <img src={home} className={styles.locationHistory__homeIcon} />
+      <Link to="/">
+        <img src={home} className={styles.locationHistory__homeIcon} alt="Home" />
+      </Link>
 
-      {locationHistoryList ? (
+      {pathParts.length > 1 ? (
         <ul className={styles.locationHistory__list}>
-          {locationHistoryList.map((location) => (
-            <li key={location} className={styles.locationHistory__item}>
-              {`> ${location}`}
-            </li>
-          ))}
+          <li className={styles.locationHistory__item}>
+            <Link className={styles.locationHistory__link} to={parentRoute}>
+              {`> ${pathParts[0]}`}
+            </Link>
+          </li>
+          <li className={styles.locationHistory__item}>{`> ${pathParts[1]}`}</li>
         </ul>
       ) : (
-        <div className={styles.locationHistory__item}>{`> ${path}`}</div>
+        <div className={styles.locationHistory__item}>{`> ${productUrl}`}</div>
       )}
     </div>
   );

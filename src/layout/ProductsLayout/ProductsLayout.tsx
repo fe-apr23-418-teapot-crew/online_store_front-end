@@ -86,8 +86,8 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
     setSearchParams(params);
   };
 
-  console.log(limit);
-  console.log(sortBy);
+  // console.log(limit);
+  // console.log(sortBy);
 
   return (
     <div className="products">

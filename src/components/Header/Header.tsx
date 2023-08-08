@@ -95,7 +95,7 @@ export const Header = () => {
               <NavLink 
                 to="/favourites" 
                 className={styles.burgerButton}
-                onClick={() => setIsBurgerMenuOpen(false)}
+                onClick={() => setTimeout(() => setIsBurgerMenuOpen(false), 500)}
               >
                 <img src={likes} alt="LIKES" />
               </NavLink>
@@ -103,7 +103,7 @@ export const Header = () => {
               <NavLink 
                 to="/cart" 
                 className={styles.burgerButton}
-                onClick={() => setIsBurgerMenuOpen(false)}
+                onClick={() => setTimeout(() => setIsBurgerMenuOpen(false), 500)}
               >
                 <img src={shopBag} alt="SHOPPING BAG" />
               </NavLink>

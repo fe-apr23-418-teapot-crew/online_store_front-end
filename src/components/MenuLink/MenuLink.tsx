@@ -26,7 +26,7 @@ export const MenuLink: React.FC<MenuLinkProps> = ({
         [styles['menuLink--burger']]: isBurgerItem,
       })
     }
-    onClick={onClick ? () => onClick(false) : () => {}}
+    onClick={onClick ? () => setTimeout(() => onClick(false), 500) : () => {}}
   >
     {children ? children : path}
   </NavLink>

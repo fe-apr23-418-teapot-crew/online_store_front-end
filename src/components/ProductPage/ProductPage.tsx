@@ -11,6 +11,7 @@ import { ProductActions } from '../ProductActions';
 import { ProductVarieties } from '../ProductVarieties';
 import { MenuLink } from '../MenuLink';
 import chevron from '../../icons/Chevron (Arrow Right).svg';
+import { LocationHistory } from '../LocationHistory';
 
 interface FetchProductProps<T> {
   url: string;
@@ -51,6 +52,8 @@ export const ProductPage = () => {
 
   return (
     <>
+      <LocationHistory path={normalizedPathName}/>
+
       <section className={styles.product}>
         <div className={styles.product__navigation}>
           <MenuLink to="/" path="Back">
