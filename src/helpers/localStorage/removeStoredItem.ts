@@ -1,28 +1,14 @@
-import { LiteProduct } from '../../types/LiteProduct';
 import { Product } from '../../types/Product';
 import { getStoredItems } from './getStoredItems';
 
-export const removeStoredItem = (
-  items: string,
-  productId: number,
-  currentItems?: Product[] | undefined,
-) => {
-  if (items === 'cart') {
-    const updatedItems = currentItems?.filter(
-      (product: Product) => product.id !== productId,
-    );
+export const removeStoredItem = (key: string, productId: number) => {
+  const storedItems = getStoredItems(key);
 
-    localStorage.setItem(items, JSON.stringify(updatedItems));
-
-    return updatedItems;
-  }
-  const storedItems = getStoredItems('favs');
-
-  const updatedItems = storedItems.filter(
-    (item: LiteProduct) => item.id !== productId,
+  const updatedItems = (storedItems || []).filter(
+    (product: Product) => product.id !== productId,
   );
 
-  localStorage.setItem(items, JSON.stringify(updatedItems));
+  localStorage.setItem(key, JSON.stringify(updatedItems));
 
   return updatedItems;
 };

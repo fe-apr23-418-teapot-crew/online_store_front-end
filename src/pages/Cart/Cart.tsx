@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { CartItem } from '../../components/CartItem/CartItem';
 import { MenuLink } from '../../components/MenuLink';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
@@ -6,28 +6,22 @@ import styles from './Cart.module.scss';
 import chevron from '../../icons/Chevron (Arrow Right).svg';
 import lineCheckout from '../../icons/LineCheckout.svg';
 import { getTotalAmount } from '../../helpers/localStorage/getTotalAmount';
-import { Product } from '../../types/Product';
-import { removeStoredItem } from '../../helpers/localStorage/removeStoredItem';
-import { getStoredItems } from '../../helpers/localStorage/getStoredItems';
-import { resetStoredItems } from '../../helpers/localStorage/resetStoredItems';
+import { FavsContext } from '../../contexts/FavsContext';
 
 interface CartProps {}
 
 export const Cart: React.FC<CartProps> = () => {
-  const storedCartItems = getStoredItems('cart');
-  const storedTotalAmount = getTotalAmount(storedCartItems);
-  const [cartItems, setCartItems] = useState<Product[]>(storedCartItems);
+  const { cartProducts, resetStorage } = useContext(FavsContext);
+  const storedTotalAmount = getTotalAmount(cartProducts);
   const [totalAmount, setTotalAmount] = useState(storedTotalAmount);
   const [isModal, setIsModal] = useState(false);
 
-  const cartItemsCount = storedCartItems.length;
+  const cartItemsCount = cartProducts.length;
   const isCartEmpty = cartItemsCount < 1;
 
-  const handleRemoveFromCart = (productId: number) => {
-    const updatedCartItems = removeStoredItem('cart', productId, cartItems);
-
-    setCartItems(updatedCartItems);
-  };
+  // const handleRemoveFromCart = (productId: number) => {
+  //   setCartItems(updatedCartItems);
+  // };
 
   const changeTotalAmount = (newPrice: number) => {
     setTotalAmount((prevTotalAmount: number) => prevTotalAmount + newPrice);
@@ -36,7 +30,7 @@ export const Cart: React.FC<CartProps> = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    resetStoredItems('cart');
+    resetStorage('cart');
     setIsModal(true);
   };
 
@@ -61,11 +55,10 @@ export const Cart: React.FC<CartProps> = () => {
         {!isCartEmpty ? (
           <div className={styles.cart__content}>
             <ul className={styles.cart__products}>
-              {cartItems?.map((product) => (
+              {cartProducts?.map((product) => (
                 <CartItem
                   key={product.id}
                   product={product}
-                  onRemoveFromCart={handleRemoveFromCart}
                   onChangeTotalAmount={changeTotalAmount}
                 />
               ))}

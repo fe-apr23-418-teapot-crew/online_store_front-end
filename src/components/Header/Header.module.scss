@@ -1,6 +1,4 @@
-$gray-white: #ffffff;
-$gray-secondary: #89939a;
-$gray-primary: #0f0f11;
+@import '../../styles/global.scss';
 
 .header {
   display: flex;
@@ -14,7 +12,7 @@ $gray-primary: #0f0f11;
   background-color: $gray-white;
   box-shadow: 0px 1px 0px 0px #e2e6e9;
 
-  &_logo {
+  &__logo {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,20 +20,28 @@ $gray-primary: #0f0f11;
     padding: 13px 16px;
   }
 
-  &_logoImage {
+  &__logoImage {
     height: 22px;
     width: 64px;
   }
 
-  &_menuItems {
+  &__menuItems {
     display: none;
   }
 
-  &_buttons {
+  &__buttons {
     display: none;
   }
 
-  &_buttonMenu {
+  &__button,
+  &__burgerButton {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    box-shadow: none;
+  }
+
+  &__buttonMenu {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,6 +49,37 @@ $gray-primary: #0f0f11;
     padding: 16px;
 
     box-shadow: -1px 0px 0px 0px #e2e6e9;
+  }
+
+  &__productsCount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    bottom: 55%;
+    left: 50%;
+
+    width: 14px;
+    height: 14px;
+
+    background: $secondary-accent;
+    border-radius: 50%;
+
+    font-weight: 700;
+    font-size: 9px;
+    color: $gray-white;
+
+    box-shadow: none;
+
+    &--burger {
+      position: relative;
+      transform: translateY(-300%);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 50%;
+    }
   }
 }
 
@@ -128,30 +165,30 @@ $gray-primary: #0f0f11;
       gap: 16px;
     }
 
-    &_menuItems {
+    &__menuItems {
       display: block;
     }
 
-    &_buttons {
+    &__buttons {
       display: flex;
       justify-content: center;
     }
 
-    &_buttons a {
+    &__buttons a {
       margin: 0;
     }
 
-    &_button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    // &__button {
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
 
-      padding: 16px;
+    //   padding: 16px;
 
-      box-shadow: -1px 0px 0px 0px #e2e6e9;
-    }
+    //   box-shadow: -1px 0px 0px 0px #e2e6e9;
+    // }
 
-    &_buttonBurgerMenu {
+    &__buttonBurgerMenu {
       display: none;
     }
   }
@@ -169,7 +206,7 @@ $gray-primary: #0f0f11;
       gap: 24px;
     }
 
-    &_logo {
+    &__logo {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -177,13 +214,13 @@ $gray-primary: #0f0f11;
       padding: 18px 24px;
     }
 
-    &_logoImage {
+    &__logoImage {
       height: 28px;
       width: 80px;
     }
 
-    &_button {
-      padding: 24px;
-    }
+    // &__button {
+    //   padding: 24px;
+    // }
   }
 }

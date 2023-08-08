@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../consts/api';
 import { Product } from '../../types/Product';
 import styles from './ProductCard.module.scss';
-import { setStoredItem } from '../../helpers/localStorage/setStoredItem';
 import cn from 'classnames';
 import { isProductInStorage } from '../../helpers/localStorage/isProductInStorage';
 import { FavsContext } from '../../contexts/FavsContext';
@@ -27,7 +26,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     ram,
   } = product;
 
-  const { removeFavProduct, addFavProduct } = useContext(FavsContext);
+  const { addToStorage, removeFromStorage } = useContext(FavsContext);
 
   const isProductInCart = isProductInStorage('cart', id);
   const isProductInFavs = isProductInStorage('favs', id);
@@ -42,14 +41,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       count: 1,
     };
 
-    setStoredItem('cart', newCartItem);
+    addToStorage('cart', newCartItem);
 
     setIsAddToCartDisabled(true);
   };
 
   const handleAddToFavs = () => {
     if (isProductInFavs) {
-      removeFavProduct(id);
+      removeFromStorage('favs', id);
       setIsFavIconActive(false);
 
       return;
@@ -57,7 +56,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
     const newFavsItem = { ...product };
 
-    addFavProduct(newFavsItem);
+    addToStorage('favs', newFavsItem);
     setIsFavIconActive(true);
   };
 

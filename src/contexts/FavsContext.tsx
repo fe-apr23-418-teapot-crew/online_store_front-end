@@ -3,12 +3,16 @@ import { Product } from '../types/Product';
 
 interface FavsContextType {
   favsProducts: Product[];
-  addFavProduct: (product: Product) => void;
-  removeFavProduct: (productId: number) => void;
+  cartProducts: Product[];
+  addToStorage: (key: string, newProduct: Product) => void;
+  removeFromStorage: (key: string, productId: number) => void;
+  resetStorage: (key: string) => void;
 }
 
 export const FavsContext = React.createContext<FavsContextType>({
   favsProducts: [],
-  addFavProduct: () => {},
-  removeFavProduct: () => {},
+  cartProducts: [],
+  addToStorage: () => {},
+  removeFromStorage: () => {},
+  resetStorage: () => {},
 });
