@@ -8,11 +8,11 @@ export const NotFoundPage: React.FC = () => {
       <h1 className={s.section__title}>Oops!</h1>
       <p>Sorry, we can’t find the page you’re looking for.</p>
       <Link to="/" className={s.section__link}>
-        Home page
+        - Back to Home page -
       </Link>
       <img
         className={s.section__img}
-        src="https://www.mtwmag.com/wp-content/uploads/2018/06/manufacturing-Error.jpg"
+        src="https://media.istockphoto.com/id/1266144552/vector/emoticon-with-sorry-sign.jpg?s=612x612&w=0&k=20&c=SxPesZy6zIYB2lbY3l8cQgpXaQdeBN_GcHrsOlsc4J8="
       />
     </div>
   );
