@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { API_URL } from '../../consts/api';
-import { DetailedProduct } from '../../types/DetailedProduct';
 import { About } from '../../components/About';
 import { ProductImageCarousel } from '../../components/Product/ProductImageCarousel/ProductImageCarousel';
 import { TechSpecs } from '../../components/TechSpecs';
@@ -12,42 +10,28 @@ import chevron from '../../icons/Chevron (Arrow Right).svg';
 import styles from './ProductPage.module.scss';
 import { CardCarousel } from '../../components/CardCarousel/CardCarousel';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
-
-interface FetchProductProps<T> {
-  url: string;
-  setFunc: (v: T) => void;
-  errorText: string;
-}
-
-export const fetchProduct = async <T extends DetailedProduct | null>({
-  url,
-  setFunc,
-  errorText,
-}: FetchProductProps<T>) => {
-  fetch(url)
-    .then((response) => response.json())
-    .then(setFunc)
-    .catch((error) => {
-      console.error(errorText, error);
-    });
-};
+import { getDetailedProductByItemId } from '../../api/products';
+import { useQuery } from 'react-query';
+import { Loader } from '../../components/Loader';
+import { useErrorHandling } from '../../hooks/useErrorHandling';
 
 export const ProductPage = () => {
-  const [productDetails, setProductDetails] = useState<DetailedProduct | null>(
-    null,
+  const { pathname } = useLocation();
+  const [category, itemId] = pathname.slice(1).split('/');
+
+  const { data, error } = useQuery(['detailedProduct', pathname], () =>
+    getDetailedProductByItemId(category, itemId),
   );
 
-  const { pathname } = useLocation();
+  const { handleError } = useErrorHandling();
+
+  if (error) {
+    handleError(error);
+  }
 
   const normalizedPathName = pathname.slice(1);
 
-  useEffect(() => {
-    fetchProduct({
-      url: `${API_URL}${normalizedPathName}`,
-      setFunc: setProductDetails,
-      errorText: 'Error fetching product details:',
-    });
-  }, [pathname]);
+  const productDetails = data || null;
 
   return (
     <>
@@ -68,7 +52,7 @@ export const ProductPage = () => {
         </div>
 
         {productDetails ? (
-          <>
+          <div className={styles.product__details}>
             <h1 className={styles.product__title}>{productDetails?.name}</h1>
             <div className={styles['product--images--varieties--actions']}>
               <div className={styles.product__images}>
@@ -77,10 +61,7 @@ export const ProductPage = () => {
 
               <div className={styles['product--varieties--actions']}>
                 <div className={styles.product__variants}>
-                  <ProductVarieties
-                    product={productDetails}
-                    changeProduct={setProductDetails}
-                  />
+                  <ProductVarieties product={productDetails} />
                 </div>
                 <div className={styles.product__actions}>
                   <ProductActions product={productDetails} />
@@ -104,8 +85,10 @@ export const ProductPage = () => {
                 category="1/recommended"
               />
             </div>
-          </>
-        ) : null}
+          </div>
+        ) : (
+          <Loader />
+        )}
       </section>
     </>
   );

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Categories } from '../../components/Categories';
 import styles from './HomePage.module.scss';
 import { CardCarousel } from '../../components/CardCarousel/CardCarousel';
-import { HotPriceModels } from '../../components/HotPriceModels';
 
 export const HomePage: React.FC = () => {
   return (
@@ -11,7 +10,6 @@ export const HomePage: React.FC = () => {
 
       <CardCarousel title="Brand new models" category="new" />
       <Categories />
-      <HotPriceModels />
     </section>
   );
 };

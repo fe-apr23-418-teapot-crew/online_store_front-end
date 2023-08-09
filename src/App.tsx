@@ -10,6 +10,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { AccessoriesPage } from './pages/AccessoriesPage';
 import { CartPage } from './pages/CartPage/CartPage';
 import './styles/App.scss';
+import { ErrorPage } from './pages/ErrorPage';
 
 export const App = () => (
   <Routes>
@@ -29,6 +30,8 @@ export const App = () => (
       <Route path="favourites" element={<FavsPage />} />
 
       <Route path="cart" element={<CartPage />} />
+
+      <Route path="error" element={<ErrorPage />} />
 
       <Route path="*" element={<NotFoundPage />} />
     </Route>

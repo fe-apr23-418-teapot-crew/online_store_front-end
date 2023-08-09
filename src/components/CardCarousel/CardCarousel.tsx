@@ -7,6 +7,7 @@ import { ProductCard } from '../Product/ProductCard';
 import { Loader } from '../Loader';
 import { useQuery } from 'react-query';
 import { getSelectedProducts } from '../../api/products';
+import { useErrorHandling } from '../../hooks/useErrorHandling';
 
 const responsiveSettings = {
   desktop: {
@@ -44,9 +45,16 @@ interface Props {
 }
 
 export const CardCarousel: React.FC<Props> = ({ title, category }) => {
-  const { data, isLoading } = useQuery(['selectedModels', category], () =>
-    getSelectedProducts(category),
+  const { data, isLoading, error } = useQuery(
+    ['selectedModels', category],
+    () => getSelectedProducts(category),
   );
+
+  const { handleError } = useErrorHandling();
+
+  if (error) {
+    handleError(error);
+  }
 
   const products = data?.rows.slice(0, 8) || [];
 

@@ -4,14 +4,21 @@ import phones from '../../images/categories_1.svg';
 import tablets from '../../images/categories_2.svg';
 import accessories from '../../images/categoties_3.svg';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from 'react-query';
 import { getCountOfCategory } from '../../api/products';
+import { useErrorHandling } from '../../hooks/useErrorHandling';
+import { useQuery } from 'react-query';
 
 export const Categories = () => {
-  const { data } = useQuery('countCategoryProducts', getCountOfCategory);
+  const navigate = useNavigate();
+  const { data, error } = useQuery('countCategoryProducts', getCountOfCategory);
+
+  const { handleError } = useErrorHandling();
+
+  if (error) {
+    handleError(error);
+  }
 
   const count = data?.count || 0;
-  const navigate = useNavigate();
 
   const handleNavigate = (endpoint: string) => {
     navigate(endpoint);

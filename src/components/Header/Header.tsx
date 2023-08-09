@@ -22,9 +22,9 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <div className={styles.header__logo}>
+        <a href="#" className={styles.header__logo}>
           <img src={logo} alt="LOGO" className={styles.header__logoImage} />
-        </div>
+        </a>
 
         <div className={styles.header__menuItems}>
           <MenuLink to="/" path="Home" />
