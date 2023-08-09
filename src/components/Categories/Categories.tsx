@@ -14,15 +14,17 @@ export const Categories = () => {
 
   return (
     <section className={styles.categories}>
+      <h2 className={styles.categories_title}>
+        Shop by category
+      </h2>
       <div className={styles.container}>
-        <h2 className={styles.categories_title}>Shop by category</h2>
 
         <div className={styles.categories_container}>
           <div className={styles.categories_product}>
             <img
               src={phones}
               alt="PHONES"
-              className={styles.categories_imgFirst}
+              className={`${styles['categories_image']} ${styles['categories_imgFirst']}`}
               onClick={() => handleNavigate('phones')}
             />
 
@@ -35,7 +37,7 @@ export const Categories = () => {
             <img
               src={tablets}
               alt="TABLETS"
-              className={styles.categories_imgSecond}
+              className={`${styles['categories_image']} ${styles['categories_imgSecond']}`}
               onClick={() => handleNavigate('tablets')}
             />
 
@@ -48,7 +50,7 @@ export const Categories = () => {
             <img
               src={accessories}
               alt="ACCESSORIES"
-              className={styles.categories_imgThird}
+              className={`${styles['categories_image']} ${styles['categories_imgThird']}`}
               onClick={() => handleNavigate('accessories')}
             />
 
