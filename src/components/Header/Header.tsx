@@ -10,12 +10,18 @@ import closeMenu from '../../images/Close.svg';
 import menu from '../../images/Menu.svg';
 import { MenuLink } from '../MenuLink';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { AuthScreens } from '../AuthScreens/AuthScreens';
+import { AuthScreens, RegScreens } from '../AuthScreens/AuthScreens';
 
 export const Header = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [isLogging, setIsLogging] = useState(false);
-  const [loggedUser, setLoggedUser] = useState<{ userEmail: string; password: string; userName: string; } | null>(
+  const [isRegistration, setIsRegistration] = useState(false);
+  const [loggedUser, setLoggedUser] = useState<{
+    userEmail: string;
+    password: string;
+    userName: string;
+    // photo: string | null;
+  } | null>(
     null
   );
   const { pathname } = useLocation();
@@ -39,7 +45,7 @@ export const Header = () => {
 
         <div className={styles.header_buttons}>
           {loggedUser
-            ? <>
+            ? <div className={styles.header__authUserData}>
               <p className={styles.header__authUserName}>{loggedUser.userName}</p>
               <Link 
                 to={'/'}
@@ -48,7 +54,7 @@ export const Header = () => {
               >
                 <img src={logOut} alt="LOG OUT" />
               </Link>
-            </>
+            </div>
             : <Link 
               to={pathname}
               className={styles.header__authButton}
@@ -142,6 +148,12 @@ export const Header = () => {
         {isLogging && <AuthScreens
           setIsLogging={setIsLogging}
           setLoggedUser={setLoggedUser}
+          setIsRegistration={setIsRegistration}
+        />}
+        {isRegistration && <RegScreens
+          // setIsLogging={setIsLogging}
+          setLoggedUser={setLoggedUser}
+          setIsRegistration={setIsRegistration}
         />}
       </header>
     </>
