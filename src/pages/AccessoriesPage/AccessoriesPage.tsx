@@ -4,7 +4,7 @@ import { ProductsLayout } from '../../layout/ProductsLayout/ProductsLayout';
 
 export const AccessoriesPage: React.FC = () => {
   return (
-    <ProductsLayout path="accessories">
+    <ProductsLayout category="accessories">
       <Outlet />
     </ProductsLayout>
   );

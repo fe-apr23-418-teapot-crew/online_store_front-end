@@ -1,6 +1,6 @@
 import { Product } from './Product';
 
-export interface APIResponse {
+export interface ProductsData {
   count: number;
   rows: Product[];
 }

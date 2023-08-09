@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { API_URL } from '../consts/api';
-import { APIResponse } from '../types/APIResponse';
+import { ProductsData } from '../types/ProductsData';
+import { DetailedProduct } from '../types/DetailedProduct';
 import { Product } from '../types/Product';
 
 export const getAllProducts = async () => {
-  const response = await axios.get<APIResponse>(`${API_URL}products`);
+  const response = await axios.get<ProductsData>(`${API_URL}products`);
 
   return response.data;
 };
@@ -15,9 +16,16 @@ export const getProductById = async (productId: number) => {
   return response.data;
 };
 
-export const getAllProductsByCategory = async (category: string) => {
-  const response = await axios.get<APIResponse>(`${API_URL}/${category}`);
-
+export const getAllProductsByCategory = async (
+  category: string,
+  sort: string,
+  offset: string,
+  limit: string,
+  query: string,
+) => {
+  const response = await axios.get<ProductsData>(
+    `${API_URL}${category}?limit=${limit}&offset=${offset}&sortBy=${sort}&name=${query}`,
+  );
   return response.data;
 };
 
@@ -25,7 +33,7 @@ export const getDetailedProductByItemId = async (
   category: string,
   itemId: string,
 ) => {
-  const response = await axios.get<APIResponse>(
+  const response = await axios.get<DetailedProduct>(
     `${API_URL}/${category}/${itemId}`,
   );
 

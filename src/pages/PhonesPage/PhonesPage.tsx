@@ -4,7 +4,7 @@ import { ProductsLayout } from '../../layout/ProductsLayout/ProductsLayout';
 
 export const PhonesPage: React.FC = () => {
   return (
-    <ProductsLayout path="phones" title="Mobile Phones">
+    <ProductsLayout category="phones" title="Mobile Phones">
       <Outlet />
     </ProductsLayout>
   );
