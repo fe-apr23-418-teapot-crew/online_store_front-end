@@ -8,7 +8,6 @@ import { ProductPage } from './components/Product/ProductPage';
 import { FavsPage } from './pages/FavsPage/FavsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { AccessoriesPage } from './pages/AccessoriesPage';
-//import { CartPage } from './pages/CartPage';
 import { CartPage } from './pages/CartPage/CartPage';
 import './styles/App.scss';
 
@@ -16,13 +15,13 @@ export const App = () => (
   <Routes>
     <Route path="/" element={<MainLayout />}>
       <Route index element={<HomePage />} />
-      <Route path="homepage" element={<Navigate to="/" replace />} />
+      <Route path="home" element={<Navigate to="/" replace />} />
 
-      <Route path="phonespage/:productId" element={<ProductPage />} />
-      <Route path="phonespage" element={<PhonesPage />} />
+      <Route path="phones/:productId" element={<ProductPage />} />
+      <Route path="phones" element={<PhonesPage />} />
 
-      <Route path="tabletspage/:productId" element={<ProductPage />} />
-      <Route path="tabletspage" element={<TabletsPage />}></Route>
+      <Route path="tablets/:productId" element={<ProductPage />} />
+      <Route path="tablets" element={<TabletsPage />} />
 
       <Route path="accessories/:productId" element={<ProductPage />} />
       <Route path="accessories" element={<AccessoriesPage />} />
