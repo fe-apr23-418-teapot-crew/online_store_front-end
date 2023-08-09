@@ -2,6 +2,9 @@ import React from 'react';
 import { Product } from '../types/Product';
 
 interface StorageContextType {
+  selectedProductId: number;
+  addSelectedId: (id: number) => void;
+  removeSelectedId: () => void;
   favsProducts: Product[];
   cartProducts: Product[];
   addToStorage: (key: string, newProduct: Product) => void;
@@ -10,6 +13,9 @@ interface StorageContextType {
 }
 
 export const StorageContext = React.createContext<StorageContextType>({
+  selectedProductId: 0,
+  addSelectedId: () => {},
+  removeSelectedId: () => {},
   favsProducts: [],
   cartProducts: [],
   addToStorage: () => {},

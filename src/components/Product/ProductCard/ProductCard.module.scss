@@ -110,7 +110,7 @@ $card-padding: 32px;
     color: var(--light);
     font-size: 14px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 21px;
     text-align: center;
     display: flex;
@@ -123,8 +123,9 @@ $card-padding: 32px;
     transition: 0.3s;
 
     &:disabled {
-      background: var(--secondary-accent);
-      border: var(--dark);
+      background: transparent;
+      border: 1px solid var(--elements);
+      color: var(--accent);
 
       &:hover {
         box-shadow: none;
@@ -133,6 +134,12 @@ $card-padding: 32px;
 
     &:hover {
       box-shadow: 0px 3px 13px 0px var(--shadow);
+    }
+
+    &:active {
+      color: var(--accent);
+      background-color: var(--light);
+      border: 1px solid var(--elements);
     }
   }
 
@@ -147,13 +154,15 @@ $card-padding: 32px;
     background-position: center;
     transition: 0.3s;
 
-    &:hover {
-      border-color: var(--primary);
+    &--active {
+      background-image: url('../../../icons/FavouritesFilledBtn.svg');
     }
 
-    &:active,
-    &--active {
-      border-color: var(--icons);
+    &:hover {
+      border-color: var(--accent);
+    }
+    &:active {
+      border-color: var(--accent);
       background-image: url('../../../icons/FavouritesFilledBtn.svg');
     }
   }

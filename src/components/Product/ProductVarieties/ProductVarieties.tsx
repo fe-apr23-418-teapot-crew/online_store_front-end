@@ -3,7 +3,7 @@ import styles from './ProductVarieties.module.scss';
 import cn from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
 import { DetailedProduct } from '../../../types/DetailedProduct';
-import { fetchProduct } from '../ProductPage';
+import { fetchProduct } from '../../../pages/ProductPage';
 import { API_URL } from '../../../consts/api';
 
 interface Props {

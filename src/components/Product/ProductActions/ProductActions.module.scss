@@ -35,7 +35,7 @@
     flex-grow: 1;
     margin-right: 8px;
     color: var(--light);
-    border: 0 solid;
+    border: 1px solid var(--accent);
     border-radius: 8px;
     background: var(--accent);
     display: flex;
@@ -51,8 +51,9 @@
     transition: 0.3s;
 
     &:disabled {
-      background: rgb(206, 205, 205);
-      color: rgb(128, 127, 127);
+      background: transparent;
+      border: 1px solid var(--elements);
+      color: var(--accent);
 
       &:hover {
         box-shadow: none;
@@ -66,7 +67,7 @@
     &:active {
       color: var(--accent);
       background-color: var(--light);
-      border: 1px solidvar(--elements);
+      border: 1px solid var(--elements);
     }
   }
   &__buttonToFavourites {
@@ -79,14 +80,15 @@
     background-repeat: no-repeat;
     background-position: center;
     transition: 0.3s;
+
     &--active {
       background-image: url('../../../icons/FavouritesFilledBtn.svg');
     }
     &:hover {
-      border-color: var(--primary);
+      border-color: var(--accent);
     }
     &:active {
-      border-color: var(--icons);
+      border-color: var(--accent);
       background-image: url('../../../icons/FavouritesFilledBtn.svg');
     }
   }

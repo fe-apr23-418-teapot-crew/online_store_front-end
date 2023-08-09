@@ -22,6 +22,7 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({
   const [cartProducts, setCartProducts] = useState<Product[]>(
     getStoredItems(CART_LOCAL_STORAGE_KEY) || [],
   );
+  const [selectedProductId, setSelectedProductId] = useState<number>(0);
 
   const addToStorage = useCallback((key: string, newProduct: Product) => {
     setStoredItem(key, newProduct);
@@ -69,9 +70,20 @@ export const StorageProvider: React.FC<StorageProviderProps> = ({
     }
   }, []);
 
+  const addSelectedId = (id: number) => {
+    setSelectedProductId(id);
+  };
+
+  const removeSelectedId = () => {
+    setSelectedProductId(0);
+  };
+
   return (
     <StorageContext.Provider
       value={{
+        selectedProductId,
+        addSelectedId,
+        removeSelectedId,
         favsProducts,
         cartProducts,
         addToStorage,

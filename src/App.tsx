@@ -4,7 +4,7 @@ import { MainLayout } from './layout/MainLayout';
 import { HomePage } from './pages/HomePage';
 import { PhonesPage } from './pages/PhonesPage';
 import { TabletsPage } from './pages/TabletsPage';
-import { ProductPage } from './components/Product/ProductPage';
+import { ProductPage } from './pages/ProductPage';
 import { FavsPage } from './pages/FavsPage/FavsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { AccessoriesPage } from './pages/AccessoriesPage';

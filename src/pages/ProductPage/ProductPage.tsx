@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { API_URL } from '../../../consts/api';
-import { DetailedProduct } from '../../../types/DetailedProduct';
-import { About } from '../../About';
-import { ProductImageCarousel } from '../ProductImageCarousel/ProductImageCarousel';
-import { RecommendedGoods } from '../../RecommendedGoods/RecommendedGoods';
-import { TechSpecs } from '../../TechSpecs';
+import { API_URL } from '../../consts/api';
+import { DetailedProduct } from '../../types/DetailedProduct';
+import { About } from '../../components/About';
+import { ProductImageCarousel } from '../../components/Product/ProductImageCarousel/ProductImageCarousel';
+import { RecommendedGoods } from '../../components/RecommendedGoods/RecommendedGoods';
+import { TechSpecs } from '../../components/TechSpecs';
+import { ProductActions } from '../../components/Product/ProductActions';
+import { ProductVarieties } from '../../components/Product/ProductVarieties';
+import { MenuLink } from '../../components/MenuLink';
+import chevron from '../../icons/Chevron (Arrow Right).svg';
+import { Breadcrumbs } from '../../components/Breadcrumbs';
 import styles from './ProductPage.module.scss';
-import { ProductActions } from '../ProductActions';
-import { ProductVarieties } from '../ProductVarieties';
-import { MenuLink } from '../../MenuLink';
-import chevron from '../../../icons/Chevron (Arrow Right).svg';
-import { Breadcrumbs } from '../../Breadcrumbs';
 
 interface FetchProductProps<T> {
   url: string;

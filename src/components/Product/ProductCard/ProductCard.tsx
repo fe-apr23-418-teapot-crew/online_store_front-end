@@ -26,7 +26,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     ram,
   } = product;
 
-  const { addToStorage, removeFromStorage } = useContext(StorageContext);
+  const { addToStorage, removeFromStorage, addSelectedId } =
+    useContext(StorageContext);
   const navigate = useNavigate();
 
   const isProductInCart = isProductInStorage('cart', id);
@@ -47,7 +48,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     setIsAddToCartDisabled(true);
   };
 
-  const handleAddToFavs = () => {
+  const handleFavClick = () => {
     if (isProductInFavs) {
       removeFromStorage('favs', id);
       setIsFavIconActive(false);
@@ -63,6 +64,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleProductCardClickRedirect = () => {
     navigate(`/${category}/${itemId}`);
+    addSelectedId(id);
   };
 
   return (
@@ -111,7 +113,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </button>
 
         <button
-          onClick={handleAddToFavs}
+          onClick={handleFavClick}
           className={cn(styles.productCard__favoriteButton, {
             [styles['productCard__favoriteButton--active']]: isFavIconActive,
           })}
