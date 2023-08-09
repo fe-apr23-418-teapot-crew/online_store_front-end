@@ -1,40 +1,33 @@
-import React, { useEffect, useState } from 'react';
-// import { useQuery } from 'react-query';
-// import { fetchProducts } from '../../api/products';
-// import CircularProgress from '@mui/material/CircularProgress';
-// import { ApiResponse } from '../../types/APIResponse';
-import { ProductList } from '../../components/ProductList/ProductList';
+import React from 'react';
+import { ProductList } from '../../components/Product/ProductList/ProductList';
 import { Sort } from '../../components/Sort/Sort';
 import { useSearchParams } from 'react-router-dom';
-import { API_URL } from '../../consts/api';
-import { Product } from '../../types/Product';
 import { Pagination } from '../../components/Pagination/Pagination';
-import { LocationHistory } from '../../components/LocationHistory';
+import { Breadcrumbs } from '../../components/Breadcrumbs';
+import { getAllProductsByCategory } from '../../api/products';
+import { useQuery } from 'react-query';
+import { Loader } from '../../components/Loader';
 
 interface ProductsLayoutProps {
-  path: string;
-  pathAPI: string;
-  title: string;
-  localStorageItem?: string;
+  category: string;
+  title?: string;
+  children: React.ReactNode;
 }
 
 export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
-  path,
-  // pathAPI,
+  category,
   title,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [productsCount, setProductsCount] = useState<number>(0);
   const sortBy = searchParams.get('sortBy') || 'discount';
   const limit = searchParams.get('limit') || '16';
   const offset = searchParams.get('offset') || '0';
   const query = searchParams.get('query') || '';
 
-  // const { data, isLoading, error } = useQuery<ApiResponse>(
-  //   pathAPI,
-  //   fetchProducts,
-  // );
+  const { data, isLoading } = useQuery(
+    ['products', category, sortBy, offset, limit, query],
+    () => getAllProductsByCategory(category, sortBy, offset, limit, query),
+  );
 
   // if (isLoading) {
   //   return <CircularProgress />;
@@ -44,80 +37,46 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
   //   return <div>Error: {error.toString()}</div>;
   // }
 
-  const fetchProductsMethod = (
-    endpoint: string,
-    sortVal: string,
-    offsetVal: string,
-    limitVal: string,
-    query: string,
-  ) => {
-    fetch(
-      `${API_URL}${endpoint}?limit=${limitVal}&offset=${offsetVal}&sortBy=${sortVal}&name=${query}`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data.rows);
-        setProductsCount(data.count);
-      });
+  const products = data?.rows || [];
+  const productsCount = data?.count || 0;
+
+  const updateSearchParams = (params: Record<string, string>) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+
+    for (const [key, value] of Object.entries(params)) {
+      newSearchParams.set(key, value);
+    }
+
+    setSearchParams(newSearchParams);
   };
 
-  // const getProductCount = (endpoint: string) => {
-  //   fetch(`${API_URL}${endpoint}?limit=${limit}&offset=${offset}&sortBy=${sortBy}&name=${query}`)
-  //     .then((response) => response.json())
-  //     .then((data) => setProductsCount(data.count));
-  // };
-  console.log(query);
-
-  useEffect(() => {
-    fetchProductsMethod(path, sortBy, offset, limit, query);
-    // getProductCount(path);
-  }, [path, sortBy, offset, limit, query]);
-
   const changeSortBy = (sortValue: string) => {
-    const params = new URLSearchParams(searchParams);
-    params.set('sortBy', sortValue);
-    setSearchParams(params);
+    updateSearchParams({ sortBy: sortValue });
   };
 
   const changeOffset = (offsetValue: string) => {
-    const params = new URLSearchParams(searchParams);
-    params.set('offset', offsetValue);
-    setSearchParams(params);
+    updateSearchParams({ offset: offsetValue });
   };
 
   const changeLimit = (limitValue: string) => {
-    const params = new URLSearchParams(searchParams);
-    params.set('limit', limitValue);
-    setSearchParams(params);
+    updateSearchParams({ limit: limitValue });
   };
 
-  const changeQuery = (query: string) => {
-    const params = new URLSearchParams(searchParams);
-    params.set('query', query);
-    setSearchParams(params);
+  const changeQuery = (newQuery: string) => {
+    updateSearchParams({ query: newQuery });
   };
-
-  // const filteredProducts = products.filter(product => {
-  //   const loweredQuery = query.join(' ').toLowerCase().trim();
-  //   const normalizedProductName = product.name.toLowerCase();
-    
-  //   return normalizedProductName.includes(loweredQuery);
-  // });
-
-  // console.log(filteredProducts);
 
   return (
     <div className="products">
-      <LocationHistory path={path} />
+      <Breadcrumbs path={category} />
 
-      <h1 className="products__title">{title}</h1>
+      <h1 className="products__title">{title || category}</h1>
 
-      <h6 className="products__count">
-        {productsCount} + {'models'}
-      </h6>
+      <h6 className="products__count">{productsCount} models</h6>
 
       <div className="products__filter-fields">
         <Sort
+          query={query}
           sortBy={sortBy}
           limit={limit}
           changeSortBy={changeSortBy}
@@ -126,7 +85,7 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
         />
       </div>
 
-      {products.length && <ProductList products={products} />}
+      {isLoading ? <Loader /> : <ProductList products={products} />}
       <Pagination
         productsOnPage={+limit}
         productsNumber={productsCount}

@@ -17,7 +17,6 @@
     padding: 0 14px;
     align-items: center;
     justify-content: center;
-
   }
 
   &__field {
@@ -26,7 +25,7 @@
     position: relative;
 
     &::after {
-      content: "";
+      content: '';
       width: 16px;
       height: 16px;
       position: absolute;
@@ -42,10 +41,9 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    color: #89939A;
+    color: var(--secondary);
     margin-bottom: 4px;
   }
-
 
   &__select {
     width: 136px;
@@ -58,21 +56,21 @@
     font-style: normal;
     font-weight: 700;
     line-height: 21px;
-    background-color: #fff;
-    border: 1px solid #b4bdc3;
+    background-color: var(--light);
+    border: 1px solid var(--icons);
     border-radius: 8px;
     padding: 8px;
 
     &--perPage {
-      width: 136px
+      width: 136px;
     }
 
     &:hover {
-      border-color: #89939A;
+      border-color: var(--secondary);
     }
 
     &:focus {
-      border-color: #0F0F11;
+      border-color: var(--primary);
       outline: none;
     }
   }
@@ -106,9 +104,9 @@
 
     &__select {
       width: 176px;
-      
+
       &--perPage {
-        width: 128px
+        width: 128px;
       }
     }
   }
