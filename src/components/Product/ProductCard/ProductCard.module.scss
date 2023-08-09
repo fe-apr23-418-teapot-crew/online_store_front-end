@@ -21,7 +21,7 @@ $card-padding: 32px;
   max-width: $card-width-mobile;
   height: $card-height-mobile;
   border-radius: 8px;
-  border: 1px solidvar(--elements);
+  border: 1px solid var(--elements);
 
   &__image {
     min-height: $image-min-height;
