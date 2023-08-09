@@ -5,7 +5,7 @@ import { Search } from '../Search/Search';
 type Props = {
   sortBy: string;
   limit: string;
-  query: string;
+  query?: string;
   changeSortBy: (sortValue: string) => void;
   changeLimit: (limitValue: string) => void;
   changeQuery: (query: string) => void;

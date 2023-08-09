@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Categories } from '../../components/Categories';
-import styles from './HomePage.module.scss';
-import { HotPriceModels } from '../../components/HotPriceModels';
-import { NewModels } from '../../components/NewModels';
+import styles from './Home.module.scss';
+import { CardCarousel } from '../../components/CardCarousel/CardCarousel';
 
 export const HomePage: React.FC = () => {
   return (
@@ -11,8 +10,7 @@ export const HomePage: React.FC = () => {
         <h1 className={styles.homePage__title}>
           Welcome to Nice Gargets store!
         </h1>
-
-        <NewModels />
+        <CardCarousel title="Brand new models" endpoint="new" />
         <Categories />
         <HotPriceModels />
       </section>

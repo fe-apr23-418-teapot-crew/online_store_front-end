@@ -10,8 +10,8 @@ import { ProductActions } from '../../components/Product/ProductActions';
 import { ProductVarieties } from '../../components/Product/ProductVarieties';
 import { MenuLink } from '../../components/MenuLink';
 import chevron from '../../icons/Chevron (Arrow Right).svg';
-import { Breadcrumbs } from '../../components/Breadcrumbs';
-import styles from './ProductPage.module.scss';
+import { LocationHistory } from '../LocationHistory';
+import { CardCarousel } from '../CardCarousel/CardCarousel';
 
 interface FetchProductProps<T> {
   url: string;
@@ -99,7 +99,10 @@ export const ProductPage = () => {
             </div>
 
             <div className={styles.product__recommended}>
-              <RecommendedGoods />
+              <CardCarousel
+                title="You may also like"
+                endpoint="1/recommended"
+              />
             </div>
           </>
         ) : null}

@@ -11,13 +11,14 @@ $image-min-height: 130px;
 $card-padding: 32px;
 
 .productCard {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
   padding: $card-padding;
-  width: $card-width-mobile;
+  max-width: $card-width-mobile;
   height: $card-height-mobile;
   border-radius: 8px;
   border: 1px solidvar(--elements);
@@ -170,14 +171,14 @@ $card-padding: 32px;
 
 @media (min-width: 640px) {
   .productCard {
-    width: $card-width-tablet;
+    max-width: $card-width-tablet;
     height: $card-height-tablet;
   }
 }
 
 @media (min-width: 768px) {
   .productCard {
-    width: $card-width-desktop;
+    max-width: $card-width-desktop;
     height: $card-height-desktop;
 
     &__fullprice {
