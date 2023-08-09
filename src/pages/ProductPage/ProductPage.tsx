@@ -101,7 +101,7 @@ export const ProductPage = () => {
             <div className={styles.product__recommended}>
               <CardCarousel
                 title="You may also like"
-                endpoint="1/recommended"
+                category="1/recommended"
               />
             </div>
           </>

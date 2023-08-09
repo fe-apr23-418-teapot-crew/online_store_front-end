@@ -10,6 +10,14 @@ export const getAllProducts = async () => {
   return response.data;
 };
 
+export const getSelectedProducts = async (category: string) => {
+  const response = await axios.get<ProductsData>(
+    `${API_URL}products/${category}`,
+  );
+
+  return response.data;
+};
+
 export const getProductById = async (productId: number) => {
   const response = await axios.get<Product>(`${API_URL}products/${productId}`);
 
@@ -36,6 +44,12 @@ export const getDetailedProductByItemId = async (
   const response = await axios.get<DetailedProduct>(
     `${API_URL}/${category}/${itemId}`,
   );
+
+  return response.data;
+};
+
+export const getCountOfCategory = async () => {
+  const response = await axios.get<ProductsData>(`${API_URL}products`);
 
   return response.data;
 };

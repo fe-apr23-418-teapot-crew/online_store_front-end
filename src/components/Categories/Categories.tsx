@@ -4,8 +4,13 @@ import phones from '../../images/categories_1.svg';
 import tablets from '../../images/categories_2.svg';
 import accessories from '../../images/categoties_3.svg';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { getCountOfCategory } from '../../api/products';
 
 export const Categories = () => {
+  const { data } = useQuery('countCategoryProducts', getCountOfCategory);
+
+  const count = data?.count || 0;
   const navigate = useNavigate();
 
   const handleNavigate = (endpoint: string) => {
@@ -28,7 +33,7 @@ export const Categories = () => {
 
             <h4 className={styles.categories_type}>Mobile Phones</h4>
 
-            <p className={styles.categories_models}>100 models</p>
+            <p className={styles.categories_models}>{count} models</p>
           </div>
 
           <div className={styles.categories_product}>
@@ -41,7 +46,7 @@ export const Categories = () => {
 
             <h4 className={styles.categories_type}>Tablets</h4>
 
-            <p className={styles.categories_models}>100 models</p>
+            <p className={styles.categories_models}>{count} models</p>
           </div>
 
           <div className={styles.categories_product}>
@@ -54,7 +59,7 @@ export const Categories = () => {
 
             <h4 className={styles.categories_type}>Accessories</h4>
 
-            <p className={styles.categories_models}>100 models</p>
+            <p className={styles.categories_models}>{count}models</p>
           </div>
         </div>
       </div>

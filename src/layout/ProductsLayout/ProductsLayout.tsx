@@ -29,16 +29,9 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
     () => getAllProductsByCategory(category, sortBy, offset, limit, query),
   );
 
-  // if (isLoading) {
-  //   return <CircularProgress />;
-  // }
-
-  // if (error) {
-  //   return <div>Error: {error.toString()}</div>;
-  // }
-
   const products = data?.rows || [];
   const productsCount = data?.count || 0;
+  const isProductsEmpty = productsCount > 0;
 
   const updateSearchParams = (params: Record<string, string>) => {
     const newSearchParams = new URLSearchParams(searchParams);
@@ -72,7 +65,9 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
 
       <h1 className="products__title">{title || category}</h1>
 
-      <h6 className="products__count">{productsCount} models</h6>
+      <h6 className="products__count">
+        {isProductsEmpty ? `${productsCount} models` : ''}
+      </h6>
 
       <div className="products__filter-fields">
         <Sort
@@ -85,12 +80,19 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
         />
       </div>
 
-      {isLoading ? <Loader /> : <ProductList products={products} />}
-      <Pagination
-        productsOnPage={+limit}
-        productsNumber={productsCount}
-        changeOffset={changeOffset}
-      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <ProductList products={products} />
+
+          <Pagination
+            productsOnPage={+limit}
+            productsNumber={productsCount}
+            changeOffset={changeOffset}
+          />
+        </>
+      )}
     </div>
   );
 };

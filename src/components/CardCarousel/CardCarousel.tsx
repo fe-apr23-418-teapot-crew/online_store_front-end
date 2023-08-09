@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { CarouselButtons } from './CarouselButtons/CarouselButtons';
 import Carousel from 'react-multi-carousel';
-
-import { Product } from '../../types/Product';
-import { API_URL } from '../../consts/api';
-
 import 'react-multi-carousel/lib/styles.css';
 import style from './CardCarousel.module.scss';
 import { ProductCard } from '../Product/ProductCard';
+import { Loader } from '../Loader';
+import { useQuery } from 'react-query';
+import { getSelectedProducts } from '../../api/products';
 
 const responsiveSettings = {
   desktop: {
@@ -41,41 +40,38 @@ const responsiveSettings = {
 
 interface Props {
   title: string;
-  endpoint: string;
+  category: string;
 }
 
-export const CardCarousel: React.FC<Props> = ({ title, endpoint }) => {
-  const [products, setProducts] = useState<Product[]>([]);
+export const CardCarousel: React.FC<Props> = ({ title, category }) => {
+  const { data, isLoading } = useQuery(['selectedModels', category], () =>
+    getSelectedProducts(category),
+  );
 
-  const fetchHotPricedProducts = () => {
-    fetch(`${API_URL}products/${endpoint}`)
-      .then((response) => response.json())
-      .then((data) => setProducts(data.rows.slice(0, 8)));
-  };
-
-  useEffect(() => {
-    fetchHotPricedProducts();
-  }, []);
+  const products = data?.rows.slice(0, 8) || [];
 
   return (
     <div className={style.carousel__container}>
       <div className={style.HeaderContainer}>
         <h2 className={style.carousel__header}>{title}</h2>
       </div>
-
-      <Carousel
-        itemClass={style.Cards}
-        responsive={responsiveSettings}
-        customButtonGroup={<CarouselButtons />}
-        arrows={false}
-        infinite
-        renderButtonGroupOutside={true}
-        partialVisible={true}
-      >
-        {products.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
-      </Carousel>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Carousel
+          itemClass={style.Cards}
+          responsive={responsiveSettings}
+          customButtonGroup={<CarouselButtons />}
+          arrows={false}
+          infinite
+          renderButtonGroupOutside={true}
+          partialVisible={true}
+        >
+          {products.map((product) => (
+            <ProductCard product={product} key={product.id} />
+          ))}
+        </Carousel>
+      )}
     </div>
   );
 };
