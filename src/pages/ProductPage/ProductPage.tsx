@@ -4,14 +4,14 @@ import { API_URL } from '../../consts/api';
 import { DetailedProduct } from '../../types/DetailedProduct';
 import { About } from '../../components/About';
 import { ProductImageCarousel } from '../../components/Product/ProductImageCarousel/ProductImageCarousel';
-import { RecommendedGoods } from '../../components/RecommendedGoods/RecommendedGoods';
 import { TechSpecs } from '../../components/TechSpecs';
 import { ProductActions } from '../../components/Product/ProductActions';
 import { ProductVarieties } from '../../components/Product/ProductVarieties';
 import { MenuLink } from '../../components/MenuLink';
 import chevron from '../../icons/Chevron (Arrow Right).svg';
-import { LocationHistory } from '../LocationHistory';
-import { CardCarousel } from '../CardCarousel/CardCarousel';
+import styles from './ProductPage.module.scss';
+import { CardCarousel } from '../../components/CardCarousel/CardCarousel';
+import { Breadcrumbs } from '../../components/Breadcrumbs';
 
 interface FetchProductProps<T> {
   url: string;

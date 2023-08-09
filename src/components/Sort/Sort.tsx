@@ -12,6 +12,7 @@ type Props = {
 };
 
 export const Sort: React.FC<Props> = ({
+  query,
   sortBy,
   limit,
   changeSortBy,
@@ -77,7 +78,7 @@ export const Sort: React.FC<Props> = ({
       </div>
       <div className="search__filter">
         <div className="sort__title">Search products</div>
-        <Search changeQuery={changeQuery} />
+        <Search query={query} changeQuery={changeQuery} />
       </div>
     </div>
   );

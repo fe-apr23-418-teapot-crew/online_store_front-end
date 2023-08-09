@@ -1,5 +1,4 @@
 import React from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
 import { ProductList } from '../../components/Product/ProductList/ProductList';
 import { Sort } from '../../components/Sort/Sort';
 import { useSearchParams } from 'react-router-dom';
@@ -7,6 +6,7 @@ import { Pagination } from '../../components/Pagination/Pagination';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { getAllProductsByCategory } from '../../api/products';
 import { useQuery } from 'react-query';
+import { Loader } from '../../components/Loader';
 
 interface ProductsLayoutProps {
   category: string;
@@ -24,18 +24,18 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
   const offset = searchParams.get('offset') || '0';
   const query = searchParams.get('query') || '';
 
-  const { data, isLoading, error } = useQuery(
-    ['products', category, sortBy, offset, limit, query], // Unique key for caching
-    () => getAllProductsByCategory(category, sortBy, offset, limit, query), // Fetch function
+  const { data, isLoading } = useQuery(
+    ['products', category, sortBy, offset, limit, query],
+    () => getAllProductsByCategory(category, sortBy, offset, limit, query),
   );
 
-  if (isLoading) {
-    return <CircularProgress />;
-  }
+  // if (isLoading) {
+  //   return <CircularProgress />;
+  // }
 
-  if (error) {
-    return <div>Error: {error.toString()}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error.toString()}</div>;
+  // }
 
   const products = data?.rows || [];
   const productsCount = data?.count || 0;
@@ -76,6 +76,7 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
 
       <div className="products__filter-fields">
         <Sort
+          query={query}
           sortBy={sortBy}
           limit={limit}
           changeSortBy={changeSortBy}
@@ -84,7 +85,7 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
         />
       </div>
 
-      {products.length > 0 && <ProductList products={products} />}
+      {isLoading ? <Loader /> : <ProductList products={products} />}
       <Pagination
         productsOnPage={+limit}
         productsNumber={productsCount}

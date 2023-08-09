@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Categories } from '../../components/Categories';
-import styles from './Home.module.scss';
+import styles from './HomePage.module.scss';
 import { CardCarousel } from '../../components/CardCarousel/CardCarousel';
+import { HotPriceModels } from '../../components/HotPriceModels';
 
 export const HomePage: React.FC = () => {
   return (
