@@ -1,0 +1,24 @@
+.carousel__button {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  background-color: #fff;
+  border: 1px solid rgba(180, 189, 195, 1);
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.carousel__buttons {
+  display: flex;
+  position: absolute;
+  top: 20px;
+  right: 32px;
+  gap: 16px;
+}

@@ -4,7 +4,6 @@ import { API_URL } from '../../consts/api';
 import { DetailedProduct } from '../../types/DetailedProduct';
 import { About } from '../About';
 import { ProductImageCarousel } from '../ProductImageCarousel/ProductImageCarousel';
-import { RecommendedGoods } from '../RecommendedGoods/RecommendedGoods';
 import { TechSpecs } from '../TechSpecs';
 import styles from './ProductPage.module.scss';
 import { ProductActions } from '../ProductActions';
@@ -12,6 +11,7 @@ import { ProductVarieties } from '../ProductVarieties';
 import { MenuLink } from '../MenuLink';
 import chevron from '../../icons/Chevron (Arrow Right).svg';
 import { LocationHistory } from '../LocationHistory';
+import { CardCarousel } from '../CardCarousel/CardCarousel';
 
 interface FetchProductProps<T> {
   url: string;
@@ -99,7 +99,7 @@ export const ProductPage = () => {
             </div>
 
             <div className={styles.product__recommended}>
-              <RecommendedGoods />
+              <CardCarousel title='You may also like' endpoint='1/recommended' />
             </div>
           </>
         ) : null}
