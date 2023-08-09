@@ -10,22 +10,16 @@ import closeMenu from '../../images/Close.svg';
 import menu from '../../images/Menu.svg';
 import { MenuLink } from '../MenuLink';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { AuthScreens, RegScreens } from '../AuthScreens/AuthScreens';
+import { AuthScreens, User } from '../AuthScreens/AuthScreens';
 
 export const Header = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [isLogging, setIsLogging] = useState(false);
   const [isRegistration, setIsRegistration] = useState(false);
-  const [loggedUser, setLoggedUser] = useState<{
-    userEmail: string;
-    password: string;
-    userName: string;
-    // photo: string | null;
-  } | null>(
+  const [loggedUser, setLoggedUser] = useState<User | null>(
     null
   );
   const { pathname } = useLocation();
-  
 
   return (
     <>
@@ -46,7 +40,7 @@ export const Header = () => {
         <div className={styles.header_buttons}>
           {loggedUser
             ? <div className={styles.header__authUserData}>
-              <p className={styles.header__authUserName}>{loggedUser.userName}</p>
+              <p className={styles.header__authUserName}>{loggedUser.username}</p>
               <Link 
                 to={'/'}
                 className={styles.header__authButton}
@@ -146,12 +140,8 @@ export const Header = () => {
           </div>
         )}
         {isLogging && <AuthScreens
+          isRegistration={isRegistration}
           setIsLogging={setIsLogging}
-          setLoggedUser={setLoggedUser}
-          setIsRegistration={setIsRegistration}
-        />}
-        {isRegistration && <RegScreens
-          // setIsLogging={setIsLogging}
           setLoggedUser={setLoggedUser}
           setIsRegistration={setIsRegistration}
         />}
