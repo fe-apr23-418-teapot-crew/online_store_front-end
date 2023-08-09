@@ -35,6 +35,8 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &__arrow {

@@ -28,6 +28,10 @@ export const CartPage: React.FC = () => {
     setIsModal(true);
   };
 
+  const goBack = () => {
+    window.history.back();
+  };
+
   return (
     <section className={styles.cart}>
       <div className={styles.container}>
@@ -38,7 +42,10 @@ export const CartPage: React.FC = () => {
               alt="Chevron"
               className={styles['cart__navigation--chevronButton']}
             />
-            <div className={styles['cart__navigation--backButton']}>
+            <div 
+              onClick={goBack}
+              className={styles['cart__navigation--backButton']}
+            >
               {'Back'}
             </div>
           </MenuLink>
