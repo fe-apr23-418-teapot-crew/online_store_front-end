@@ -9,10 +9,14 @@ import menu from '../../icons/Menu.svg';
 import { MenuLink } from '../MenuLink';
 import { StorageContext } from '../../contexts/StorageContext';
 import { ThemeSwitcher } from '../ThemeSwitcher';
+import { Link, useLocation } from 'react-router-dom';
 
 export const Header = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const { favsProducts, cartProducts } = useContext(StorageContext);
+  const location = useLocation();
+
+  const { pathname, search } = location;
 
   const favsProductsCount = favsProducts.length;
   const cartProductsCount = cartProducts.length;
@@ -66,9 +70,9 @@ export const Header = () => {
         className={styles.header__buttonBurgerMenu}
         onClick={() => setIsBurgerMenuOpen((prevState) => !prevState)}
       >
-        <a href="#" className={styles.header__buttonMenu}>
+        <Link to={`${pathname}${search}`} className={styles.header__buttonMenu}>
           <img src={menu} alt="MENU" />
-        </a>
+        </Link>
       </div>
 
       {isBurgerMenuOpen && (
@@ -86,9 +90,9 @@ export const Header = () => {
               className={styles.header__buttonBurgerMenu}
               onClick={() => setIsBurgerMenuOpen((prevState) => !prevState)}
             >
-              <a href="#" className={styles.header__buttonMenu}>
+              <Link to={`${pathname}${search}`} className={styles.header__buttonMenu}>
                 <img src={closeMenu} alt="CLOSE MENU" />
-              </a>
+              </Link>
             </div>
           </div>
 

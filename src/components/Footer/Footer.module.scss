@@ -114,9 +114,10 @@
     width: 10px;
     height: 10px;
     margin: 10px;
+    transition: transform 0.5s;
   }
 
   &__pic:hover {
-    transform: rotate(-90deg);
+    transform: rotate(-360deg);
   }
 }
