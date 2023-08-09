@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 const isDarkTheme = window?.matchMedia('(prefers-color-scheme: dark').matches;
 
-const defaultTheme = isDarkTheme ? 'dark' : 'light';
+const defaultTheme = isDarkTheme ? 'light' : 'dark';
 
 export const useTheme = () => {
   const [theme, setTheme] = useState(

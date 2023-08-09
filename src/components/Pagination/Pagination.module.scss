@@ -1,7 +1,7 @@
 .pagination {
   min-width: 320px;
   display: flex;
-  margin: 40px 0 64px;
+  margin: 40px 0 0;
   justify-content: center;
   &__pagesListContainer {
     max-width: 160px;
@@ -14,7 +14,7 @@
   &__button {
     background-color: transparent;
     color: var(--dark);
-    border: 1px solidvar(--elements);
+    border: 1px solid var(--elements);
     border-radius: 25px;
     margin-right: 8px;
     width: 32px;
@@ -36,11 +36,5 @@
     &--arrow {
       border-color: var(--icons);
     }
-  }
-}
-
-@media (min-width: 1200px) {
-  .pagination {
-    margin-bottom: 80px;
   }
 }
