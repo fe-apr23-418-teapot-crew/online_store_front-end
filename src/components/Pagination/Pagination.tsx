@@ -24,7 +24,17 @@ export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, ch
     searchParams.set('offset', `${productsOnPage * (activePage - 1)}`);
     setSearchParams(searchParams);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [productsOnPage, activePage]);
+  }, [activePage]);
+  
+  useEffect(() => {
+    searchParams.set('offset', '0');
+    setActivePage(1)
+    // setSearchParams(searchParams);
+    // window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [productsOnPage]);
+
+  console.log('activePage -', activePage);
+  console.log('productsOnPage -', productsOnPage);
 
   const handleMoveLeft = () => {
     if (activePage === 1) {
