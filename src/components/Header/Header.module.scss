@@ -86,7 +86,7 @@
 }
 
 .burger {
-  position: absolute;
+  position: fixed;
 
   top: 0;
   right: 0;
@@ -94,6 +94,7 @@
   left: 0;
 
   background-color: var(--light);
+  z-index: 1;
 
   .container {
     display: flex;
