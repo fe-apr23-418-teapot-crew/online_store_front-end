@@ -29,7 +29,7 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
   const sortBy = searchParams.get('sortBy') || 'discount';
   const limit = searchParams.get('limit') || '16';
   const offset = searchParams.get('offset') || '0';
-  const query = searchParams.getAll('query') || '';
+  const query = searchParams.get('query') || '';
 
   // const { data, isLoading, error } = useQuery<ApiResponse>(
   //   pathAPI,
@@ -49,7 +49,7 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
     sortVal: string,
     offsetVal: string,
     limitVal: string,
-    query: string[],
+    query: string,
   ) => {
     fetch(
       `${API_URL}${endpoint}?limit=${limitVal}&offset=${offsetVal}&sortBy=${sortVal}&name=${query}`,
@@ -120,7 +120,6 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
         <Sort
           sortBy={sortBy}
           limit={limit}
-          query={query}
           changeSortBy={changeSortBy}
           changeLimit={changeLimit}
           changeQuery={changeQuery}
