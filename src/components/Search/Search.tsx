@@ -2,12 +2,13 @@ import React, { useCallback, useState } from 'react';
 import styles from './Search.module.scss';
 
 type Props = {
-  query?: string,
-  changeQuery: (query: string) => void,
-}
+  query?: string;
+  changeQuery: (query: string) => void;
+};
 
-export const Search: React.FC<Props> = ({ changeQuery }) => {
-  const [inputValue, setInputValue] = useState('');
+export const Search: React.FC<Props> = ({ query, changeQuery }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [inputValue, setInputValue] = useState(query);
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   const debounce = (func: Function, delay: number) => {
@@ -21,8 +22,8 @@ export const Search: React.FC<Props> = ({ changeQuery }) => {
   const debouncedChangeQuery = useCallback(
     debounce((value: string) => {
       changeQuery(value);
-    }, 500),
-    []
+    }, 1000),
+    [],
   );
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -36,11 +37,10 @@ export const Search: React.FC<Props> = ({ changeQuery }) => {
       <input
         className={styles.search__input}
         type="text"
-        placeholder='Search'
+        placeholder="Search"
         value={inputValue}
         onChange={handleInputChange}
-      >
-      </input>
+      ></input>
     </div>
   );
 };

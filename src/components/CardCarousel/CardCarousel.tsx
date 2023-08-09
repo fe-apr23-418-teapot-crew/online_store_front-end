@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { ProductCard } from '../ProductCard';
 import { CarouselButtons } from './CarouselButtons/CarouselButtons';
 import Carousel from 'react-multi-carousel';
 
@@ -8,7 +7,7 @@ import { API_URL } from '../../consts/api';
 
 import 'react-multi-carousel/lib/styles.css';
 import style from './CardCarousel.module.scss';
-
+import { ProductCard } from '../Product/ProductCard';
 
 const responsiveSettings = {
   desktop: {
@@ -37,12 +36,12 @@ const responsiveSettings = {
     breakpoint: { max: 400, min: 320 },
     items: 1.1,
     slidesToSlide: 1,
-  }
+  },
 };
 
 interface Props {
-  title: string,
-  endpoint: string,
+  title: string;
+  endpoint: string;
 }
 
 export const CardCarousel: React.FC<Props> = ({ title, endpoint }) => {
@@ -50,8 +49,8 @@ export const CardCarousel: React.FC<Props> = ({ title, endpoint }) => {
 
   const fetchHotPricedProducts = () => {
     fetch(`${API_URL}products/${endpoint}`)
-      .then(response => response.json())
-      .then(data => setProducts(data.rows.slice(0, 8)));
+      .then((response) => response.json())
+      .then((data) => setProducts(data.rows.slice(0, 8)));
   };
 
   useEffect(() => {
@@ -62,7 +61,6 @@ export const CardCarousel: React.FC<Props> = ({ title, endpoint }) => {
     <div className={style.carousel__container}>
       <div className={style.HeaderContainer}>
         <h2 className={style.carousel__header}>{title}</h2>
-
       </div>
 
       <Carousel
@@ -73,12 +71,11 @@ export const CardCarousel: React.FC<Props> = ({ title, endpoint }) => {
         infinite
         renderButtonGroupOutside={true}
         partialVisible={true}
-        
       >
-        {products.map(product => (
+        {products.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}
       </Carousel>
-    </div >
+    </div>
   );
 };

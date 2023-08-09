@@ -25,14 +25,16 @@
   top: 0;
   bottom: 0;
   transform: translateY(0);
-  border: 1px solid #B4BDC3;
+  border: 1px solid var(--icons);
   border-radius: 48px;
-  background-color: #fff;
+  background-color: var(--light);
   transition: 0.5s;
 }
 
 .slick-arrow:hover {
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  box-shadow:
+    rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
 .slick-arrow::before {
@@ -100,11 +102,11 @@
   content: '';
   width: 14px;
   height: 4px;
-  background-color: #B4BDC3;
+  background-color: var(--icons);
   opacity: 0.25;
 }
 
 .slick-dots li.slick-active button:before {
-  background-color: #000;
+  background-color: var(--dark);
   opacity: 0.75;
 }

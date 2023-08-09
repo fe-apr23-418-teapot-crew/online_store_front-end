@@ -1,7 +1,7 @@
-import { LiteProduct } from '../../types/LiteProduct';
+import { Product } from '../../types/Product';
 import { getStoredItems } from './getStoredItems';
 
-export const setStoredItem = (key: string, newItem: LiteProduct | number) => {
+export const setStoredItem = (key: string, newItem: Product | number) => {
   const storedItems = getStoredItems(key);
   const updatedItems = [...storedItems, newItem];
 

@@ -13,67 +13,51 @@ export const Categories = () => {
   };
 
   return (
-    <> 
-      <section className={styles.categories}>
-        <div className={styles.container}>
-          <h2 className={styles.categories_title}>
-            Shop by category
-          </h2>
+    <section className={styles.categories}>
+      <div className={styles.container}>
+        <h2 className={styles.categories_title}>Shop by category</h2>
 
-          <div className={styles.categories_container}>
-            <div className={styles.categories_product}>
-              <img 
-                src={phones} 
-                alt="PHONES" 
-                className={styles.categories_imgFirst}
-                onClick={() => handleNavigate('phones')}
-              />
+        <div className={styles.categories_container}>
+          <div className={styles.categories_product}>
+            <img
+              src={phones}
+              alt="PHONES"
+              className={styles.categories_imgFirst}
+              onClick={() => handleNavigate('phones')}
+            />
 
-              <h4 className={styles.categories_type}>
-                Mobile Phones
-              </h4>
+            <h4 className={styles.categories_type}>Mobile Phones</h4>
 
-              <p className={styles.categories_models}>
-                100 models
-              </p>
-            </div>
+            <p className={styles.categories_models}>100 models</p>
+          </div>
 
-            <div className={styles.categories_product}>
-              <img 
-                src={tablets} 
-                alt="TABLETS" 
-                className={styles.categories_imgSecond}
-                onClick={() => handleNavigate('tablets')}
-              />
+          <div className={styles.categories_product}>
+            <img
+              src={tablets}
+              alt="TABLETS"
+              className={styles.categories_imgSecond}
+              onClick={() => handleNavigate('tablets')}
+            />
 
-              <h4 className={styles.categories_type}>
-                Tablets
-              </h4>
+            <h4 className={styles.categories_type}>Tablets</h4>
 
-              <p className={styles.categories_models}>
-                100 models
-              </p>
-            </div>
+            <p className={styles.categories_models}>100 models</p>
+          </div>
 
-            <div className={styles.categories_product}>
-              <img 
-                src={accessories} 
-                alt="ACCESSORIES" 
-                className={styles.categories_imgThird}
-                onClick={() => handleNavigate('accessories')}
-              />
+          <div className={styles.categories_product}>
+            <img
+              src={accessories}
+              alt="ACCESSORIES"
+              className={styles.categories_imgThird}
+              onClick={() => handleNavigate('accessories')}
+            />
 
-              <h4 className={styles.categories_type}>
-                Accessories
-              </h4>
+            <h4 className={styles.categories_type}>Accessories</h4>
 
-              <p className={styles.categories_models}>
-                100 models
-              </p>
-            </div>
+            <p className={styles.categories_models}>100 models</p>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };

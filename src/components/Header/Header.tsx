@@ -1,17 +1,18 @@
 import React, { useContext, useState } from 'react';
 import styles from './Header.module.scss';
-import logo from '../../images/Logo.svg';
-import logoBurger from '../../images/LogoForBurger.svg';
-import likes from '../../images/Favourites (Heart Like).svg';
-import shopBag from '../../images/Shopping bag (Cart).svg';
-import closeMenu from '../../images/Close.svg';
-import menu from '../../images/Menu.svg';
+import logo from '../../icons/Logo.svg';
+import logoBurger from '../../icons/LogoForBurger.svg';
+import likes from '../../icons/Favourites (Heart Like).svg';
+import shopBag from '../../icons/Shopping bag (Cart).svg';
+import closeMenu from '../../icons/Close.svg';
+import menu from '../../icons/Menu.svg';
 import { MenuLink } from '../MenuLink';
-import { FavsContext } from '../../contexts/FavsContext';
+import { StorageContext } from '../../contexts/StorageContext';
+import { ThemeSwitcher } from '../ThemeSwitcher';
 
 export const Header = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
-  const { favsProducts, cartProducts } = useContext(FavsContext);
+  const { favsProducts, cartProducts } = useContext(StorageContext);
 
   const favsProductsCount = favsProducts.length;
   const cartProductsCount = cartProducts.length;
@@ -34,6 +35,8 @@ export const Header = () => {
       </div>
 
       <div className={styles.header__buttons}>
+        <ThemeSwitcher />
+
         <div className={styles.header__button}>
           <MenuLink isBurgerItem={true} to="/favourites" path="Favourites">
             <img src={likes} alt="LIKES" />

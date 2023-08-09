@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './HotPricedProducts.module.scss';
-import { ProductCard } from '../ProductCard';
+import { ProductCard } from '../Product/ProductCard';
 import leftButton from '../../icons/ArrowLeft.svg';
 import rightButton from '../../icons/ArrowRight.svg';
 import { Product } from '../../types/Product';
@@ -9,16 +9,16 @@ import { API_URL } from '../../consts/api';
 export const HotPricedProducts: React.FC = () => {
   const [hotPricedProducts, setHotPricedProducts] = useState<Product[]>([]);
   const [position, setPosition] = useState(0);
-  
+
   const fetchHotPricedProducts = () => {
     fetch(`${API_URL}products/discount`)
-      .then(response => response.json())
-      .then(data => setHotPricedProducts(data.rows.slice(0, 8)));
+      .then((response) => response.json())
+      .then((data) => setHotPricedProducts(data.rows.slice(0, 8)));
   };
 
   useEffect(() => {
     fetchHotPricedProducts();
-  },[]);
+  }, []);
 
   const cardInfo = document.getElementById('ProductCard');
   const cardWidth = cardInfo?.offsetWidth;
@@ -37,7 +37,11 @@ export const HotPricedProducts: React.FC = () => {
             }}
             disabled={position === 0}
           >
-            <img src={leftButton} alt="previous button" className={styles.button__image} />
+            <img
+              src={leftButton}
+              alt="previous button"
+              className={styles.button__image}
+            />
           </button>
           <button
             className={styles.hotPricedProuctsSwiper__button}
@@ -46,14 +50,22 @@ export const HotPricedProducts: React.FC = () => {
             }}
             disabled={position === hotPricedProducts.length - 1}
           >
-            <img src={rightButton} alt="next button" className={styles.button__image} />
+            <img
+              src={rightButton}
+              alt="next button"
+              className={styles.button__image}
+            />
           </button>
         </div>
       </div>
 
       <div className={styles.hotPricedProuctsSwiper__cards}>
         {hotPricedProducts.map((product) => (
-          <div style={{ transform: `translateX(-${moveCard}px)` }} key={product.id} className={styles.hotPricedProuctsSwiper__card}>
+          <div
+            style={{ transform: `translateX(-${moveCard}px)` }}
+            key={product.id}
+            className={styles.hotPricedProuctsSwiper__card}
+          >
             <ProductCard product={product} />
           </div>
         ))}

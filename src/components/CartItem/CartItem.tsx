@@ -7,7 +7,7 @@ import plusButton from '../../icons/Plus.svg';
 import { getStoredItemCount } from '../../helpers/localStorage/getStoredItemCount';
 import { Product } from '../../types/Product';
 import { updateStoredCount } from '../../helpers/localStorage/updateStoredCount';
-import { FavsContext } from '../../contexts/FavsContext';
+import { StorageContext } from '../../contexts/StorageContext';
 
 interface CartItemProps {
   product: Product;
@@ -21,7 +21,7 @@ export const CartItem: React.FC<CartItemProps> = ({
   const { id, name, image, price } = product;
   const storedCartItemCount = getStoredItemCount('cart', id);
   const [count, setCount] = useState<number>(storedCartItemCount);
-  const { removeFromStorage } = useContext(FavsContext);
+  const { removeFromStorage } = useContext(StorageContext);
 
   const imageURL = API_URL + image;
   const isReduceCountDisabled = count === 1;
@@ -63,11 +63,7 @@ export const CartItem: React.FC<CartItemProps> = ({
           />
         </button>
 
-        <img
-          className={styles.cartItem__img}
-          alt={name}
-          src={imageURL}
-        />
+        <img className={styles.cartItem__img} alt={name} src={imageURL} />
 
         <h3 className={styles.cartItem__name}>{name}</h3>
       </div>

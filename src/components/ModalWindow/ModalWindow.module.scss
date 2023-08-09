@@ -2,7 +2,7 @@
   display: none;
 
   &__content {
-    display:  flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -18,15 +18,14 @@
     height: 210px;
     width: 300px;
     z-index: 333;
-    background-color: #fff;
-    border: solid 1px #216CFF;
+    background-color: var(--light);
+    border: solid 1px var(--accent);
     border-radius: 24px;
 
     @media (min-width: 640px) {
       width: 592px;
       height: 300px;
     }
-
   }
 
   &__header {
@@ -58,7 +57,7 @@
     font-size: 14px;
     font-weight: 700;
     line-height: 15px;
-    color: #F447AF;
+    color: var(--secondary-accent);
   }
 
   &__img {
@@ -88,10 +87,9 @@
     border: none;
     font-size: 14px;
     font-weight: 500;
-    color: #216CFF;
+    color: var(--accent);
   }
 }
-
 
 .modal.is-active {
   display: block;
@@ -109,5 +107,5 @@
   width: 100vw;
   height: 100vh;
 
-  background-color: rgba(#000000, 0.3);
+  background-color: rgba(var(--black), 0.3);
 }

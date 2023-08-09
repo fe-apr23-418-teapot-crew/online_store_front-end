@@ -1,0 +1,20 @@
+.section {
+  text-align: center;
+
+  &__title {
+    padding-bottom: 24px;
+    color: var(--accent);
+  }
+
+  &__img {
+    width: 50%;
+    padding-bottom: 24px;
+  }
+
+  &__link {
+    display: block;
+    padding-bottom: 24px;
+    padding-top: 24px;
+    color: var(--accent);
+  }
+}

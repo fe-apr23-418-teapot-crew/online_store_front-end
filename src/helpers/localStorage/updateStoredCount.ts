@@ -1,4 +1,4 @@
-import { LiteProduct } from '../../types/LiteProduct';
+import { Product } from '../../types/Product';
 import { getStoredItems } from './getStoredItems';
 
 export const updateStoredCount = (
@@ -8,7 +8,7 @@ export const updateStoredCount = (
 ) => {
   const storedCartItems = getStoredItems(key);
   const itemIndex = storedCartItems.findIndex(
-    (item: LiteProduct) => item.id === id,
+    (item: Product) => item.id === id,
   );
 
   if (itemIndex !== -1) {
