@@ -27,7 +27,7 @@
   transform: translateY(0);
   border: 1px solid var(--icons);
   border-radius: 48px;
-  background-color: var(--light);
+  background-color: var(--background);
   transition: 0.5s;
 }
 
@@ -113,6 +113,6 @@
 }
 
 .slick-dots li.slick-active button:before {
-  background-color: var(--dark);
+  background-color: var(--highlight);
   opacity: 0.75;
 }

@@ -27,14 +27,14 @@
   }
   &__colorsItem {
     outline: max(1px, 1px) solidvar(--elements);
-    border: var(--light) 2px solid;
+    border: var(--background) 2px solid;
     margin-right: 8px;
     width: 32px;
     height: 32px;
     border-radius: 100%;
     transition: box-shadow 0.3s ease;
     &--active {
-      outline-color: var(--dark);
+      outline-color: var(--highlight);
     }
     &:hover {
       box-shadow: 0 0 10px 1px var(--shadow);
@@ -59,8 +59,8 @@
       box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
     }
     &--active {
-      background-color: var(--dark);
-      border-color: var(--dark);
+      background-color: var(--highlight);
+      border-color: var(--highlight);
       color: white;
     }
   }

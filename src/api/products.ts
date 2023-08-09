@@ -12,7 +12,7 @@ export const getAllProducts = async () => {
 
 export const getSelectedProducts = async (category: string) => {
   const response = await axios.get<ProductsData>(
-    `${API_URL}products/${category}/55`,
+    `${API_URL}products/${category}`,
   );
 
   return response.data;

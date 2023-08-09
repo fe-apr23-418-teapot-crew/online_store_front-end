@@ -9,7 +9,7 @@
   align-items: center;
   gap: 15px;
 
-  background-color: var(--light);
+  background-color: var(--background);
   box-shadow: 0px 1px 0px 0px var(--elements);
 
   &__logo {
@@ -36,6 +36,7 @@
   &__button,
   &__burgerButton {
     display: flex;
+    align-items: center;
     justify-content: center;
     position: relative;
     box-shadow: none;
@@ -70,7 +71,7 @@
 
     font-weight: 700;
     font-size: 9px;
-    color: var(--light);
+    color: var(--background);
 
     box-shadow: none;
 
@@ -83,6 +84,13 @@
       left: 50%;
     }
   }
+
+  &__themeSwitcherWrapper {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    line-height: 48px;
+  }
 }
 
 .burger {
@@ -93,7 +101,7 @@
   bottom: 0;
   left: 0;
 
-  background-color: var(--light);
+  background-color: var(--background);
 
   .container {
     display: flex;
@@ -104,7 +112,7 @@
     align-items: center;
     gap: 15px;
 
-    background-color: var(--light);
+    background-color: var(--background);
     box-shadow: 0px 1px 0px 0px var(--elements);
   }
 
@@ -147,7 +155,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: var(--light);
+    background-color: var(--background);
     box-shadow: -1px 0px 0px 0px var(--secondary);
   }
 }

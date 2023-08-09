@@ -2,13 +2,13 @@ import React, { useContext, useState } from 'react';
 import styles from './Header.module.scss';
 import logo from '../../icons/Logo.svg';
 import logoBurger from '../../icons/LogoForBurger.svg';
-import likes from '../../icons/Favourites (Heart Like).svg';
-import shopBag from '../../icons/Shopping bag (Cart).svg';
 import closeMenu from '../../icons/Close.svg';
 import menu from '../../icons/Menu.svg';
 import { MenuLink } from '../MenuLink';
 import { StorageContext } from '../../contexts/StorageContext';
 import { ThemeSwitcher } from '../ThemeSwitcher';
+import { CartIcon } from '../../icons2/CartIcon';
+import { FavIcon } from '../../icons2/FavIcon';
 
 export const Header = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -34,12 +34,14 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className={styles.header__buttons}>
+      <div className={styles.header__themeSwitcherWrapper}>
         <ThemeSwitcher />
+      </div>
 
+      <div className={styles.header__buttons}>
         <div className={styles.header__button}>
           <MenuLink isBurgerItem={true} to="/favourites" path="Favourites">
-            <img src={likes} alt="LIKES" />
+            <FavIcon />
           </MenuLink>
 
           {!isFavsEmpty && (
@@ -51,7 +53,7 @@ export const Header = () => {
 
         <div className={styles.header__button}>
           <MenuLink isBurgerItem={true} to="/cart" path="Cart">
-            <img src={shopBag} alt="SHOPING BAG" />
+            <CartIcon />
           </MenuLink>
 
           {!isCartEmpty && (
@@ -119,7 +121,7 @@ export const Header = () => {
                 path="Favourites"
                 onClick={() => setIsBurgerMenuOpen(false)}
               >
-                <img src={likes} alt="LIKES" />
+                <FavIcon />
               </MenuLink>
 
               {!isFavsEmpty && (
@@ -138,7 +140,7 @@ export const Header = () => {
                 path="Cart"
                 onClick={() => setIsBurgerMenuOpen(false)}
               >
-                <img src={shopBag} alt="SHOPING BAG" />
+                <CartIcon />
               </MenuLink>
 
               {!isCartEmpty && (

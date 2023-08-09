@@ -108,7 +108,7 @@ $card-padding: 32px;
     display: inline-block;
     margin-right: 8px;
     flex-grow: 1;
-    color: var(--light);
+    color: var(--background);
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
@@ -139,7 +139,7 @@ $card-padding: 32px;
 
     &:active {
       color: var(--accent);
-      background-color: var(--light);
+      background-color: var(--background);
       border: 1px solid var(--elements);
     }
   }
@@ -149,7 +149,7 @@ $card-padding: 32px;
     height: 40px;
     border-radius: 100px;
     border: 1px solid var(--icons);
-    background-color: var(--light);
+    background-color: var(--background);
     background-image: url('../../../icons/FavouriteBtn.svg');
     background-repeat: no-repeat;
     background-position: center;
