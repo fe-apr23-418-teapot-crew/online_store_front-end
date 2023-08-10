@@ -19,7 +19,7 @@ const Footer = () => {
       <nav className={s.footer__menuLinks}>
         <ul className={s.list}>
           <li className={s.list__item}>
-            <a href="#" className={s.list__link}>
+            <a href="https://github.com/fe-apr23-418-teapot-crew" className={s.list__link}>
               Github
             </a>
           </li>
