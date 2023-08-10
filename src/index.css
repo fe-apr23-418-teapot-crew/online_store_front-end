@@ -15,6 +15,12 @@ html[data-theme='light'] {
   --surface1: #ffffff;
   --card-border: #e2e6e9;
   --button-bg: #ffffff;
+  --footer-link: #89939a;
+  --button-active: #ffffff;
+  --select-outline: #e2e6e9;
+  --select-active: #110f0f;
+  --pag-border: #110f0f;
+  --var-active: #fff;
 }
 
 html[data-theme='dark'] {
@@ -24,7 +30,7 @@ html[data-theme='dark'] {
   --secondary: #75767f;
   --icons: #4a4d58;
   --elements: #3b3e4a;
-  --hoverAndBg: #fafbfc;
+  --hoverAndBg: #161827;
   --green: #27ae60;
   --red: #eb5757;
   --background: #0f1121;
@@ -34,4 +40,10 @@ html[data-theme='dark'] {
   --surface1: #161827;
   --card-border: transparent;
   --button-bg: #323542;
+  --footer-link: #ffffff;
+  --button-active: #323542;
+  --select-outline: #323542;
+  --select-active: #905bff;
+  --pag-border: transparent;
+  --var-active: #000;
 }

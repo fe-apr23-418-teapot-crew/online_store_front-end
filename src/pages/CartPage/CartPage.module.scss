@@ -5,6 +5,7 @@
     justify-content: center;
   }
 
+
   &__empty {
     display: flex;
     align-items: center;
@@ -51,6 +52,7 @@
     text-transform: capitalize;
     font-size: 32px;
     text-align: left;
+    color: var(--primary);
 
     @media (min-width: 640px) {
       margin: 8px 0px 32px 0px;
@@ -67,6 +69,7 @@
     @media (min-width: 1200px) {
       flex-direction: row;
       align-items: flex-start;
+      justify-content: center;
     }
   }
 
@@ -94,6 +97,9 @@
       width: 368px;
       margin: 0 0 0 16px;
     }
+  }
+  &__empty {
+    color: var(--primary);
   }
 
   &__total {
@@ -127,7 +133,7 @@
     background-color: var(--accent);
     height: 40px;
     border-radius: 8px;
-    color: var(--background);
+    color: #fff;
     border: 0;
     cursor: pointer;
     font-size: 14px;

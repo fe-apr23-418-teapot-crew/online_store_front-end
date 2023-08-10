@@ -32,10 +32,12 @@ export const ModalWindow = () => {
           Thank you for shopping in our store!
         </div>
 
-        <img
-          className={styles.modal__img}
-          src="https://nebo-trk.com/wp-content/uploads/2018/12/logo-Be-Happy-chernyjj-na-prozrachnom.png"
-        />
+        <h1
+          className={styles.modal__text}
+        >
+          Be Happy
+        </h1>
+
         <NavLink onClick={closeModal} to="/">
           <button className={styles.modal__button}>OK</button>
         </NavLink>

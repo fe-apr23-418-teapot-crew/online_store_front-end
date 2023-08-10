@@ -13,7 +13,7 @@
     backdrop-filter: blur(10px);
     &__container {
         border-radius: 8px;
-        padding: 10px;
+        padding: 10px 24px 24px;
         background-color: #ffffff;
         position: fixed;
         top: 50%;
@@ -34,6 +34,7 @@
     }
     &__icon {
         cursor: pointer;
+        margin-left: 8px;
     }
     &__form {
         display: flex;
@@ -41,7 +42,7 @@
         flex-direction: column;
     }
     &__formSection {
-        margin-bottom: 16px;
+        margin-top: 16px;
     }
     &__formLabel {
         display: block;
@@ -50,6 +51,14 @@
         font-weight: 600;
         line-height: normal;
         margin-bottom: 8px;
+    }
+    &__formCall {
+        display: block;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-top: 16px;
     }
     &__formInput {
         width: 100%;
@@ -72,7 +81,7 @@
         line-height: normal;
     }
     &__formButton {
-        margin-bottom: 16px;
+        margin-top: 16px;
         color: white;
         background: #216CFF;
         border: 0 solid;
@@ -118,5 +127,12 @@
         background-color: #fff;
         border: 1px solid #e2e6e9;
         }
+    }
+    .auth__error {
+        height: 15px;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 550;
+        line-height: normal;
     }
 }
