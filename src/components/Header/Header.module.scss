@@ -87,7 +87,10 @@
 
   &__button,
   &__burgerButton {
+    // box-sizing: border-box;
     display: flex;
+    height: 48px;
+    width: 48px;
     align-items: center;
     justify-content: center;
     position: relative;
