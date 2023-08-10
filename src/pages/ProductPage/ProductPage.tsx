@@ -49,8 +49,8 @@ export const ProductPage = () => {
               alt="Chevron"
               className={styles['product__navigation--chevronButton']}
             />
-            <div 
-              onClick={goBack} 
+            <div
+              onClick={goBack}
               className={styles['product__navigation--backButton']}
             >
               {'Back'}

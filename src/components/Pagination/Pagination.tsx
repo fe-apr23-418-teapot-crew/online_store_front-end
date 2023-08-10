@@ -9,7 +9,11 @@ interface Props {
   changeOffset: (serverData: string) => void;
 }
 
-export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, changeOffset }) => {
+export const Pagination: React.FC<Props> = ({
+  productsOnPage,
+  productsNumber,
+  changeOffset,
+}) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activePage, setActivePage] = useState<number>(1);
   const [translateX, setTranslateX] = useState(0);
@@ -25,7 +29,7 @@ export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, ch
     setSearchParams(searchParams);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activePage]);
-  
+
   useEffect(() => {
     searchParams.set('offset', '0');
     setActivePage(1);
@@ -33,8 +37,8 @@ export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, ch
     // window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [productsOnPage]);
 
-  console.log('activePage -', activePage);
-  console.log('productsOnPage -', productsOnPage);
+  // console.log('activePage -', activePage);
+  // console.log('productsOnPage -', productsOnPage);
 
   const handleMoveLeft = () => {
     if (activePage === 1) {

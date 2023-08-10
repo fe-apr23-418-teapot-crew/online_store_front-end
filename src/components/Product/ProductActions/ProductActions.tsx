@@ -1,22 +1,31 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './ProductActions.module.scss';
 import { DetailedProduct } from '../../../types/DetailedProduct';
 import cn from 'classnames';
 import { StorageContext } from '../../../contexts/StorageContext';
 import { isProductInStorage } from '../../../helpers/localStorage/isProductInStorage';
 import { useQuery } from 'react-query';
-import { getProductById } from '../../../api/products';
+import { getProductByItemId } from '../../../api/products';
 import { useErrorHandling } from '../../../hooks/useErrorHandling';
+import { Loader } from '../../Loader';
 
 interface Props {
   product: DetailedProduct;
 }
 
 export const ProductActions: React.FC<Props> = ({ product }) => {
-  const { selectedProductId } = useContext(StorageContext);
+  const {
+    id: itemId,
+    priceDiscount,
+    priceRegular,
+    screen,
+    resolution,
+    processor,
+    ram,
+  } = product;
 
-  const { data, error } = useQuery(['productById'], () =>
-    getProductById(selectedProductId),
+  const { data, error, isLoading } = useQuery(['productByItemId', itemId], () =>
+    getProductByItemId(itemId),
   );
 
   const { handleError } = useErrorHandling();
@@ -25,21 +34,24 @@ export const ProductActions: React.FC<Props> = ({ product }) => {
     handleError(error);
   }
 
-  const { priceDiscount, priceRegular, screen, resolution, processor, ram } =
-    product;
+  const id = data?.id || 0;
 
   const { addToStorage, removeFromStorage } = useContext(StorageContext);
-  const isProductInCart = isProductInStorage('cart', selectedProductId);
-  const isProductInFavs = isProductInStorage('favs', selectedProductId);
-  const [isAddToCartDisabled, setIsAddToCartDisabled] =
-    useState(isProductInCart);
-  const [isFavIconActive, setIsFavIconActive] = useState(isProductInFavs);
+  const isProductInCart = isProductInStorage('cart', id);
+  const isProductInFavs = isProductInStorage('favs', id);
+  const [isAddToCartDisabled, setIsAddToCartDisabled] = useState(true);
+  const [isFavIconActive, setIsFavIconActive] = useState(true);
   const infoData = [
     { label: 'Screen', value: screen },
     { label: 'Resolution', value: resolution },
     { label: 'Processor', value: processor },
     { label: 'RAM', value: ram },
   ];
+
+  useEffect(() => {
+    setIsAddToCartDisabled(isProductInCart);
+    setIsFavIconActive(isProductInFavs);
+  }, [id]);
 
   const handleAddToCart = () => {
     if (data) {
@@ -51,12 +63,13 @@ export const ProductActions: React.FC<Props> = ({ product }) => {
       addToStorage('cart', newCartItem);
 
       setIsAddToCartDisabled(true);
+      console.log('newCartItem', newCartItem);
     }
   };
 
   const handleFavClick = () => {
-    if (isProductInFavs) {
-      removeFromStorage('favs', selectedProductId);
+    if (isFavIconActive) {
+      removeFromStorage('favs', id);
       setIsFavIconActive(false);
 
       return;
@@ -76,21 +89,26 @@ export const ProductActions: React.FC<Props> = ({ product }) => {
         <p className={styles.actions__priceDiscount}>{`$${priceDiscount}`}</p>
         <p className={styles.actions__priceRegular}>{`$${priceRegular}`}</p>
       </div>
-      <div className={styles.actions__buttons}>
-        <button
-          className={styles.actions__buttonToCart}
-          disabled={isAddToCartDisabled}
-          onClick={handleAddToCart}
-        >
-          Add to cart
-        </button>
-        <button
-          className={cn(styles.actions__buttonToFavourites, {
-            [styles['actions__buttonToFavourites--active']]: isFavIconActive,
-          })}
-          onClick={handleFavClick}
-        ></button>
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={styles.actions__buttons}>
+          <button
+            className={styles.actions__buttonToCart}
+            disabled={isAddToCartDisabled}
+            onClick={handleAddToCart}
+          >
+            Add to cart
+          </button>
+          <button
+            className={cn(styles.actions__buttonToFavourites, {
+              [styles['actions__buttonToFavourites--active']]: isFavIconActive,
+            })}
+            onClick={handleFavClick}
+          ></button>
+        </div>
+      )}
+
       <div className={styles.actions__infoContainer}>
         {infoData.map((item) => (
           <div className={styles.actions__info} key={item.label}>

@@ -19,12 +19,8 @@ export const getSelectedProducts = async (category: string) => {
   return response.data;
 };
 
-export const getProductById = async (productId: number) => {
-  if (productId === 0) {
-    return;
-  }
-
-  const response = await axios.get<Product>(`${API_URL}products/${productId}`);
+export const getProductByItemId = async (itemId: string) => {
+  const response = await axios.get<Product>(`${API_URL}products/${itemId}`);
 
   return response.data;
 };

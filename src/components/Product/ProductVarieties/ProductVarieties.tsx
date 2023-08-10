@@ -87,7 +87,7 @@ export const ProductVarieties: React.FC<Props> = ({ product }) => {
               [styles['varieties__colorsItem--active']]:
                 color === product.color.replace(/-/g, ' '),
             })}
-            // onClick={handleChangeProduct}
+            //onClick={handleChangeProduct}
           ></Link>
         ))}
       </div>
@@ -101,7 +101,7 @@ export const ProductVarieties: React.FC<Props> = ({ product }) => {
               [styles['varieties__capacityItem--active']]:
                 capacity === product.capacity,
             })}
-            // onClick={handleChangeProduct}
+            //onClick={handleChangeProduct}
           >
             {capacity}
           </Link>
