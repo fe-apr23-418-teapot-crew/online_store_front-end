@@ -9,7 +9,7 @@ export const HomePage: React.FC = () => {
     <>
       <section className={styles.homePage}>
         <h1 className={styles.homePage__title}>
-          Welcome to Nice Gargets store!
+          Welcome to Nice Gadgets store!
         </h1>
         <BannerSlider />
         <CardCarousel title="Brand new models" category="new" />
