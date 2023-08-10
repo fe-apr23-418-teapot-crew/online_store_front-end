@@ -28,6 +28,22 @@
     }
   }
 
+  &__text {
+    background: linear-gradient(
+        to right,
+        #A153CF 20%,
+        #FF36D0 30%,
+        #5FCFCF 50%,
+        #FF36D0 70%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: 500% auto;
+    animation: textShine 5s ease-in-out infinite alternate;
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -108,4 +124,13 @@
   height: 100vh;
 
   background-color: rgba(var(--black), 0.3);
+}
+
+@keyframes textShine {
+  0% {
+      background-position: 0% 50%;
+  }
+  100% {
+      background-position: 100% 50%;
+  }
 }

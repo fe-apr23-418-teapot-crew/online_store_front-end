@@ -85,6 +85,9 @@
       margin: 0 0 0 16px;
     }
   }
+  &__empty {
+    color: var(--primary);
+  }
 
   &__total {
     display: flex;
@@ -117,7 +120,7 @@
     background-color: var(--accent);
     height: 40px;
     border-radius: 8px;
-    color: var(--background);
+    color: #fff;
     border: 0;
     cursor: pointer;
     font-size: 14px;

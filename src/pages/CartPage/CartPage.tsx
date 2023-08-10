@@ -85,7 +85,7 @@ export const CartPage: React.FC = () => {
             </form>
           </div>
         ) : (
-          <h2>Empty cart! Lets make the first purchase!</h2>
+          <h2 className={styles.cart__empty}>Empty cart! Lets make the first purchase!</h2>
         )}
       </div>
       {isModal && <ModalWindow />}

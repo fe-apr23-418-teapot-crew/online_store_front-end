@@ -61,7 +61,7 @@
     &--active {
       background-color: var(--highlight);
       border-color: var(--highlight);
-      color: white;
+      color: var(--var-active);
     }
   }
 }
