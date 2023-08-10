@@ -21,7 +21,8 @@ $card-padding: 32px;
   max-width: $card-width-mobile;
   height: $card-height-mobile;
   border-radius: 8px;
-  border: 1px solid var(--elements);
+  background-color: var(--surface1);
+  border: 1px solid var(--card-border);
 
   &__image {
     min-height: $image-min-height;
@@ -36,6 +37,7 @@ $card-padding: 32px;
 
   &__name {
     margin-bottom: 8px;
+    color: var(--primary);
 
     font-size: 14px;
     font-style: normal;
@@ -114,7 +116,7 @@ $card-padding: 32px;
     display: inline-block;
     margin-right: 8px;
     flex-grow: 1;
-    color: var(--background);
+    color: #fff;
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
