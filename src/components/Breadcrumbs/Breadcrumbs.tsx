@@ -1,9 +1,10 @@
 import React from 'react';
-import home from '../../icons/Home.svg';
+// import home from '../../icons/Home.svg';
 import styles from './Breadcrumbs.module.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { DetailedProduct } from '../../types/DetailedProduct';
 import rightArrow from '../../icons/ArrowRightSecondary.svg';
+import { HomeIcon } from '../../icons2/HomeIcon';
 
 interface BreadcrumbsProps {
   path: string;
@@ -20,11 +21,13 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productDetails }) => {
   return (
     <div className={styles.locationHistory}>
       <Link className={styles.locationHistory__icon} to="/">
-        <img
-          src={home}
+        <div
+          // src={home}
           className={styles.locationHistory__homeIcon}
-          alt="Home"
-        />
+          // alt="Home"
+        > 
+          <HomeIcon />
+        </div>
       </Link>
 
       {pathParts.length > 1 && productDetails ? (

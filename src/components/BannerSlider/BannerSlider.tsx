@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import './BannerSlider.scss';
 
+import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
+import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
+
 import slider_1_desk from './desktop-images/desktop-image-1.png';
 import slider_2_desk from './desktop-images/desktop-image-2.png';
 import slider_3_desk from './desktop-images/desktop-image-3.png';
@@ -11,16 +14,16 @@ import slider_2_mob from './mobile-images/mobile-image-2.png';
 import slider_3_mob from './mobile-images/mobile-image-3.png';
 
 
-type Props = {
-  className: string;
-  onClick?: React.MouseEventHandler<HTMLElement>;
-};
+// type Props = {
+//   className: string;
+//   onClick?: React.MouseEventHandler<HTMLElement>;
+// };
 
-function Arrow(props: Props): JSX.Element {
-  const { className, onClick } = props;
+// function Arrow(props: Props): JSX.Element {
+//   const { className, onClick } = props;
 
-  return <div className={className} onClick={onClick} />;
-}
+//   return <div className='slick-prev slick-arrow' onClick={onClick} />;
+// }
 
 export const BannerSlider: React.FC = () => {
   const settings = {
@@ -35,8 +38,8 @@ export const BannerSlider: React.FC = () => {
     autoplay: true,
     draggable: true,
     autoplaySpeed: 3000,
-    prevArrow: <Arrow className="slick-prev slick-arrow" />,
-    nextArrow: <Arrow className="slick-next slick-arrow" />,
+    prevArrow: <div className='slick-prev slick-arrow'> <KeyboardArrowLeftRoundedIcon sx={{height: '100%'}} /></div>,
+    nextArrow: <div className='slick-next slick-arrow'> <KeyboardArrowRightRoundedIcon sx={{height: '100%'}} /></div>,
   };
   return (
     <div className="slider">

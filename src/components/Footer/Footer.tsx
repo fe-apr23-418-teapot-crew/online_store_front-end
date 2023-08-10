@@ -1,7 +1,8 @@
 import React from 'react';
 import s from './Footer.module.scss';
 import logo from '../../icons/Logo.svg';
-import slider from '../../icons/Vector (Stroke).svg';
+// import slider from '../../icons/Vector (Stroke).svg';
+import { ArrowDown } from '../../icons2/ArrowDown';
 
 const Footer = () => {
   return (
@@ -49,10 +50,11 @@ const Footer = () => {
               });
             }}
           >
-            <img
-              src={slider}
-              alt="BACK TO TOP" className={s.backToTop__pic}
-            />
+            <div
+              className={s.backToTop__pic}
+            > 
+              <ArrowDown />
+            </div>
           </button>
         </div>
       </div>

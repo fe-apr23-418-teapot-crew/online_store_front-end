@@ -4,7 +4,7 @@
     justify-content: center;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 1111;
 
     width: 100vw;
     height: 110vh;
@@ -13,8 +13,8 @@
     backdrop-filter: blur(10px);
     &__container {
         border-radius: 8px;
-        padding: 10px;
-        background-color: #ffffff;
+        padding: 28px;
+        background-color: var(--background);
         position: fixed;
         top: 50%;
         left: 50%;
@@ -27,6 +27,7 @@
     &__header {
         display: flex;
         justify-content: space-between;
+        color: var(--primary);
     }
     &__navButtons {
         display: flex;
@@ -41,7 +42,7 @@
         flex-direction: column;
     }
     &__formSection {
-        margin-bottom: 16px;
+        margin-bottom: 20px;
     }
     &__formLabel {
         display: block;
@@ -50,14 +51,17 @@
         font-weight: 600;
         line-height: normal;
         margin-bottom: 8px;
+        color: var(--primary)
     }
     &__formInput {
         width: 100%;
         border-radius: 4px;
         height: 30px;
         outline: 1px solid black;
-        border: none
-    }
+        border: none;
+        background-color: #fff;
+        padding: 8px; 
+      }
     &__formInputFile {
         font-size: 12px;
         font-style: normal;
@@ -74,7 +78,7 @@
     &__formButton {
         margin-bottom: 16px;
         color: white;
-        background: #216CFF;
+        background: var(--accent);
         border: 0 solid;
         border-radius: 8px;
         display: flex;
@@ -88,12 +92,12 @@
         line-height: 21px;
         transition: 0.3s;
         &--light {
-            color: #216CFF;
-            border: 1px solid #216CFF;
+            color: var(--accent);
+            border: 1px solid var(--accent);
             background: white;
             &:hover {
                 color: white;
-                background: #216CFF;
+                background: var(--accent);
                 box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
             }
         }
@@ -114,7 +118,7 @@
             box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
         }
         &:active {
-        color: #216cff;
+        color: var(--accent);
         background-color: #fff;
         border: 1px solid #e2e6e9;
         }

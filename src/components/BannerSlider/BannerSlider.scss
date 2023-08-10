@@ -19,7 +19,6 @@
 .slick-arrow {
   position: relative;
   width: 32px;
-  display: none;
   height: inherit;
   left: 0;
   top: 0;
@@ -29,6 +28,10 @@
   border-radius: 48px;
   background-color: var(--button-bg);
   transition: 0.5s;
+  
+  @media (max-width: 639px) {
+    display: none !important;
+  }
 }
 
 .slick-arrow:hover {
@@ -50,16 +53,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.slick-prev::before {
-  content: '';
-  background-image: url('../../icons/ArrowLeft.svg');
-}
-
-.slick-next::before {
-  content: '';
-  background-image: url('../../icons/ArrowRight.svg');
 }
 
 #slick-slide__img-desk {

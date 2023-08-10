@@ -17,8 +17,9 @@
   }
 
   &__homeIcon {
+    display: flex;
+    align-items: center;
     margin-right: 10px;
-    transform: translateY(-10%);
   }
 
   &__list {

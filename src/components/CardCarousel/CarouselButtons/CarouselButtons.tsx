@@ -2,10 +2,8 @@ import React from 'react';
 import { ButtonGroupProps } from 'react-multi-carousel';
 import style from './CarouselButtons.module.scss';
 import classnames from 'classnames/bind';
-
-import leftArrow from '../../../icons/ArrowLeft.svg';
-import rightArrow from '../../../icons/ArrowRight.svg';
-
+import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
+import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 
 const cn = classnames.bind(style);
 
@@ -35,14 +33,14 @@ export const CarouselButtons: React.FC = (
         })}
         onClick={handlePrevClick}
       >
-        <img src={leftArrow} />
+        <KeyboardArrowLeftRoundedIcon />
       </button>
 
       <button
         className={cn('carousel__button')}
         onClick={handleNextClick}
       >
-        <img src={rightArrow} />
+        <KeyboardArrowRightRoundedIcon />
       </button>
     </div>
   );

@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { API_URL } from '../../consts/api';
 import styles from './CartItem.module.scss';
-import closeButton from '../../icons/Close.svg';
-import minusButton from '../../icons/Minus.svg';
-import plusButton from '../../icons/Plus.svg';
 import { getStoredItemCount } from '../../helpers/localStorage/getStoredItemCount';
 import { Product } from '../../types/Product';
 import { updateStoredCount } from '../../helpers/localStorage/updateStoredCount';
 import { StorageContext } from '../../contexts/StorageContext';
+import { MinusIcon } from '../../icons2/MinusIcon';
+import { PlusIcon } from '../../icons2/PlusIcon';
+
+import classNames from 'classnames';
+import { CloseIcon } from '../../icons2/CloseIcon';
 
 interface CartItemProps {
   isLimit: boolean;
@@ -60,11 +62,11 @@ export const CartItem: React.FC<CartItemProps> = ({
           className={styles.cartItem__removeButton}
           onClick={handleRemoveItem}
         >
-          <img
-            src={closeButton}
-            alt="Close Button"
+          <div
             className={styles.closeButton}
-          />
+          >
+            <CloseIcon />
+          </div>
         </button>
 
         <img className={styles.cartItem__img} alt={name} src={imageURL} />
@@ -75,29 +77,35 @@ export const CartItem: React.FC<CartItemProps> = ({
       <div className={styles.cartItem__counter}>
         <div className={styles.cartItem__counter__buttons}>
           <button
-            className={styles.cartItem__counterButton}
+            className={classNames(styles.cartItem__counterButton, {
+              [styles['cartItem__counterButton--disabled']]: count === 1
+            })}
             onClick={() => handleCountChange('-')}
             disabled={isReduceCountDisabled}
           >
-            <img
-              src={minusButton}
-              alt="Minus Button"
+            <div
+              // src={minusButton}
+              // alt="Minus Button"
               className={styles.minusButton}
-            />
+            >
+              <MinusIcon />
+            </div>
           </button>
 
           <div className={styles.cartItem__count}>{count}</div>
 
           <button
-            className={styles.cartItem__counterButton}
+            className={classNames(styles.cartItem__counterButton, {
+              [styles['cartItem__counterButton--disabled']]: count === 101
+            })}
             onClick={() => handleCountChange('+')}
             disabled={isLimitOfCount}
           >
-            <img
-              src={plusButton}
-              alt="Plus button"
+            <div
               className={styles.plusButton}
-            />
+            >
+              <PlusIcon />
+            </div>
           </button>
         </div>
 

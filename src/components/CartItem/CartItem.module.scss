@@ -1,3 +1,7 @@
+svg path {
+  fill: var(--primary);
+}
+
 .cartItem {
   display: flex;
   flex-direction: column;
@@ -106,7 +110,7 @@
   &__removeButton {
     // background-color: green;
     background: none;
-    color: inherit;
+    color: var(--primary);
     border: none;
     padding: 0;
     font: inherit;
@@ -115,17 +119,24 @@
   }
 
   &__counterButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0 10px;
     height: 32px;
     width: 32px;
     border-radius: 48px;
-    background-color: var(--background);
-    // background-color: yellow;
+    background-color: var(--button-bg);
     border: 1px solid var(--icons);
     padding: 0;
 
     @media (min-width: 640px) {
       margin-right: 14px;
+    }
+
+    &--disabled {
+      background-color: var(--not-allowed);
+      cursor: not-allowed;
     }
   }
 }

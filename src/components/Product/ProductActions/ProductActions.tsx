@@ -8,6 +8,7 @@ import { useQuery } from 'react-query';
 import { getProductByItemId } from '../../../api/products';
 import { useErrorHandling } from '../../../hooks/useErrorHandling';
 import { Loader } from '../../Loader';
+import { FavoriteIcon } from '../../../icons2/FavoriteIcon';
 
 interface Props {
   product: DetailedProduct;
@@ -104,7 +105,10 @@ export const ProductActions: React.FC<Props> = ({ product }) => {
               [styles['actions__buttonToFavourites--active']]: isFavIconActive,
             })}
             onClick={handleFavClick}
-          ></button>
+          >
+            {!isFavIconActive &&
+              <FavoriteIcon />}
+          </button>
         </div>
       )}
 
