@@ -9,8 +9,9 @@ import { FavsPage } from './pages/FavsPage/FavsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { AccessoriesPage } from './pages/AccessoriesPage';
 import { CartPage } from './pages/CartPage/CartPage';
-import './styles/App.scss';
 import { ErrorPage } from './pages/ErrorPage';
+import { ActivationPage } from './pages/ActivationPage';
+import './styles/App.scss';
 
 export const App = () => (
   <Routes>
@@ -32,6 +33,8 @@ export const App = () => (
       <Route path="cart" element={<CartPage />} />
 
       <Route path="error" element={<ErrorPage />} />
+
+      <Route path="activation/:activationToken" element={<ActivationPage />} />
 
       <Route path="*" element={<NotFoundPage />} />
     </Route>
