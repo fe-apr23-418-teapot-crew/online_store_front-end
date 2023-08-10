@@ -7,6 +7,7 @@ import closeIcon from '../../icons/Close.svg';
 import arrowLeft from '../../icons/ArrowLeft.svg';
 import { User } from '../../types/User';
 import { CircularProgress } from '@mui/material';
+// import classNames from 'classnames';
 
 interface Props {
     loggedUser: User | null;
@@ -54,6 +55,7 @@ export const AuthScreens: React.FC<Props> = ({
       return responseData;
 
     } catch (error) {
+      console.log('error -', error);
       setErrorMessage('Server error!');
     }
   };
@@ -170,7 +172,7 @@ export const AuthScreens: React.FC<Props> = ({
               </div>
             </div>
             {isUserRegistered
-              ? <p>Please check your email</p>
+              ? <p>Please check your email in order to finish the registration of your account</p>
               : <form
                 className={styles.auth__form}
                 onSubmit={handleReg}
@@ -205,12 +207,18 @@ export const AuthScreens: React.FC<Props> = ({
                     onChange={handlePasswordChange}
                   />
                 </div>
-                {isDataLoaded &&
-            <div
-              className={styles.auth__error}
-            >
-              {errorMessage}
-            </div>}
+                {isDataLoaded
+                  ? <div
+                    className={styles.auth__error}
+                  >
+                    {errorMessage}
+                  </div>
+                  : <div
+                    className={styles.auth__error}
+                  >
+                    {/* {errorMessage} */}
+                  </div>
+                }
                 <button 
                   type="submit"
                   className={styles.auth__formButton}
@@ -265,23 +273,32 @@ export const AuthScreens: React.FC<Props> = ({
                   onChange={handlePasswordChange}
                 />
               </div>
-              {isDataLoaded &&
-          <div
-            className={styles.auth__error}
-          >
-            {errorMessage}
-          </div>}
+              {isDataLoaded
+                ? <div
+                  className={styles.auth__error}
+                >
+                  {errorMessage}
+                </div>
+                : <div
+                  className={styles.auth__error}
+                >
+                  {/* {errorMessage} */}
+                </div>
+              }
               <button 
                 type="submit"
                 className={styles.auth__formButton}
                 disabled={!userEmail || !password}
               >
                 {isLoading
-                  ? <CircularProgress style={{color: 'white'}} />
+                  ? <CircularProgress
+                    style={{color: 'white'}}
+                    size={30}
+                  />
                   :'Log in'
                 }
               </button>
-              <p className={styles.auth__formLabel}>
+              <p className={styles.auth__formCall}>
                 {'Don\'t have an account? Sign Up'}
               </p>
               <button 
