@@ -7,6 +7,7 @@ import cn from 'classnames';
 import chevron from '../../icons/Chevron (Arrow Right).svg';
 import lineCheckout from '../../icons/LineCheckout.svg';
 import { getTotalAmount } from '../../helpers/localStorage/getTotalAmount';
+import { setStoredItem } from '../../helpers/localStorage/setStoredItem';
 import { StorageContext } from '../../contexts/StorageContext';
 import { EmptyScreen } from '../../components/EmptyScreen';
 
@@ -35,6 +36,7 @@ export const CartPage: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    setStoredItem('orders', cartProducts);
     resetStorage('cart');
     setIsModal(true);
   };
@@ -98,7 +100,7 @@ export const CartPage: React.FC = () => {
               </form>
             </>
           ) : (
-            <EmptyScreen />
+            !isModal && <EmptyScreen />
           )}
         </div>
       </div>

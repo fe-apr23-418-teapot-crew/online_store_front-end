@@ -1,0 +1,39 @@
+.rightsPage {
+  background-color: var(--background);
+  padding: 40px 0;
+
+  @media (max-width: 768px) {
+    padding: 20px 0;
+  }
+}
+
+.rightsContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--background);
+  box-shadow: 0 0 10px var(--shadow);
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
+}
+
+.rightsTitle {
+  font-size: 24px;
+  margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+}
+
+.rightsDescription {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+}
