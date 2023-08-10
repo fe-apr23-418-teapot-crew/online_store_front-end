@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CartItem } from '../../components/CartItem/CartItem';
 import { MenuLink } from '../../components/MenuLink';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
@@ -8,15 +8,26 @@ import chevron from '../../icons/Chevron (Arrow Right).svg';
 import lineCheckout from '../../icons/LineCheckout.svg';
 import { getTotalAmount } from '../../helpers/localStorage/getTotalAmount';
 import { StorageContext } from '../../contexts/StorageContext';
+import { EmptyScreen } from '../../components/EmptyScreen';
 
 export const CartPage: React.FC = () => {
   const { cartProducts, resetStorage } = useContext(StorageContext);
   const storedTotalAmount = getTotalAmount(cartProducts);
   const [totalAmount, setTotalAmount] = useState(storedTotalAmount);
   const [isModal, setIsModal] = useState(false);
+  const [isLimit, setisLimit] = useState(false);
 
   const cartItemsCount = cartProducts.length;
   const isCartEmpty = cartItemsCount < 1;
+  console.log(totalAmount);
+
+  useEffect(() => {
+    if (totalAmount > 1000000) {
+      setisLimit(true);
+    } else {
+      setisLimit(false);
+    }
+  }, [totalAmount]);
 
   const changeTotalAmount = (newPrice: number) => {
     setTotalAmount((prevTotalAmount: number) => prevTotalAmount + newPrice);
@@ -34,7 +45,9 @@ export const CartPage: React.FC = () => {
   };
 
   return (
-    <section className={cn(styles.cart, { [styles['is-active']]: isCartEmpty })}>
+    <section
+      className={cn(styles.cart, { [styles['is-active']]: isCartEmpty })}
+    >
       <div className={styles.container}>
         <div className={styles.cart__navigation}>
           <MenuLink to="/" path="Back">
@@ -43,7 +56,7 @@ export const CartPage: React.FC = () => {
               alt="Chevron"
               className={styles['cart__navigation--chevronButton']}
             />
-            <div 
+            <div
               onClick={goBack}
               className={styles['cart__navigation--backButton']}
             >
@@ -53,40 +66,42 @@ export const CartPage: React.FC = () => {
         </div>
 
         <h1 className={styles.cart__title}>Cart</h1>
+        <div className={styles.cart__content}>
+          {!isCartEmpty ? (
+            <>
+              <ul className={styles.cart__products}>
+                {cartProducts?.map((product) => (
+                  <CartItem
+                    isLimit={isLimit}
+                    key={product.id}
+                    product={product}
+                    onChangeTotalAmount={changeTotalAmount}
+                  />
+                ))}
+              </ul>
 
-        {!isCartEmpty ? (
-          <div className={styles.cart__content}>
-            <ul className={styles.cart__products}>
-              {cartProducts?.map((product) => (
-                <CartItem
-                  key={product.id}
-                  product={product}
-                  onChangeTotalAmount={changeTotalAmount}
+              <form className={styles.cart__from} onSubmit={handleSubmit}>
+                <div className={styles.cart__total}>
+                  <span
+                    className={styles.cart__totalAmout}
+                  >{`$${totalAmount}`}</span>
+
+                  <span className={styles.cart__totalCount}>
+                    {`Total for ${cartItemsCount} items`}
+                  </span>
+                </div>
+                <img
+                  src={lineCheckout}
+                  alt="lineCheckout"
+                  className={styles.lineCheckout}
                 />
-              ))}
-            </ul>
-
-            <form className={styles.cart__from} onSubmit={handleSubmit}>
-              <div className={styles.cart__total}>
-                <span
-                  className={styles.cart__totalAmout}
-                >{`$${totalAmount}`}</span>
-
-                <span className={styles.cart__totalCount}>
-                  {`Total for ${cartItemsCount} items`}
-                </span>
-              </div>
-              <img
-                src={lineCheckout}
-                alt="lineCheckout"
-                className={styles.lineCheckout}
-              />
-              <button className={styles.cart__button}>Checkout</button>
-            </form>
-          </div>
-        ) : (
-          <h2>Empty cart! Lets make the first purchase!</h2>
-        )}
+                <button className={styles.cart__button}>Checkout</button>
+              </form>
+            </>
+          ) : (
+            <EmptyScreen />
+          )}
+        </div>
       </div>
       {isModal && <ModalWindow />}
     </section>

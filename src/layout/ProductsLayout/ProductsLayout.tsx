@@ -99,17 +99,18 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
           {isProductsEmpty ? (
             <EmptyScreen />
           ) : (
-            <ProductList products={products} />
+            <>
+              <ProductList products={products} />
+              <Pagination
+                activePage={activePage}
+                offset={offset}
+                productsOnPage={+limit}
+                productsNumber={productsCount}
+                changeOffset={changeOffset}
+                changePage={changePage}
+              />
+            </>
           )}
-
-          <Pagination
-            activePage={activePage}
-            offset={offset}
-            productsOnPage={+limit}
-            productsNumber={productsCount}
-            changeOffset={changeOffset}
-            changePage={changePage}
-          />
         </>
       )}
     </div>

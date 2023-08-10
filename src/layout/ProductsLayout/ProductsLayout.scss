@@ -6,6 +6,12 @@
     margin-bottom: 8px;
 
     text-transform: capitalize;
+    font-size: 32px;
+
+    @media (min-width: 640px) {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
   }
 
   &__count {
@@ -13,5 +19,8 @@
     margin: 0 auto;
     padding: 0 14px;
     margin-bottom: 40px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--secondary);
   }
 }
