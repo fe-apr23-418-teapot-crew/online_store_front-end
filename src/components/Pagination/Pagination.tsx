@@ -1,18 +1,19 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import cn from 'classnames';
 import styles from './Pagination.module.scss';
 import { useSearchParams } from 'react-router-dom';
 
 interface Props {
+  activePage: number,
+  offset: string,
   productsOnPage: number;
   productsNumber: number;
+  changePage: (page: number) => void;
   changeOffset: (serverData: string) => void;
 }
 
-export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, changeOffset }) => {
+export const Pagination: React.FC<Props> = ({ activePage, productsOnPage, productsNumber, changeOffset, changePage, offset }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [activePage, setActivePage] = useState<number>(1);
-  const [translateX, setTranslateX] = useState(0);
   const lastPage = Math.ceil(productsNumber / productsOnPage);
 
   const pageNumbers = useMemo(() => {
@@ -23,51 +24,50 @@ export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, ch
   useEffect(() => {
     searchParams.set('offset', `${productsOnPage * (activePage - 1)}`);
     setSearchParams(searchParams);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activePage]);
   
   useEffect(() => {
     searchParams.set('offset', '0');
-    setActivePage(1);
-    // setSearchParams(searchParams);
-    // window.scrollTo({ top: 0, behavior: 'smooth' });
+    changePage(activePage);
+    console.log('activePage -', activePage);
+    console.log('productsOnPage -', productsOnPage);
+    console.log('offset -', offset);
   }, [productsOnPage]);
 
-  console.log('activePage -', activePage);
-  console.log('productsOnPage -', productsOnPage);
 
   const handleMoveLeft = () => {
     if (activePage === 1) {
-      setActivePage(1);
+      changePage(1);
       changeOffset(`${productsOnPage * (activePage - 1)}`);
       return;
     }
-    setActivePage(activePage - 1);
-    if (activePage < 5 && translateX === 0) {
+    changePage(activePage - 1);
+    if (activePage) {
       changeOffset(`${productsOnPage * (activePage - 1)}`);
       return;
     }
-    setTranslateX(translateX + 40);
     changeOffset(`${productsOnPage * (activePage - 1)}`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleMoveRight = () => {
     if (activePage === lastPage) {
-      setActivePage(activePage);
+      changePage(activePage);
       changeOffset(`${productsOnPage * (activePage - 1)}`);
       return;
     }
     if (lastPage <= 4) {
-      setActivePage(activePage + 1);
+      changePage(activePage + 1);
       changeOffset(`${productsOnPage * (activePage - 1)}`);
       return;
     }
-    setActivePage(activePage + 1);
-    if (activePage >= lastPage - 3 && translateX === (lastPage - 4) * -40) {
+    changePage(activePage + 1);
+    if (activePage >= lastPage - 3) {
       return;
     }
-    setTranslateX(translateX - 40);
     changeOffset(`${productsOnPage * (activePage - 1)}`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -82,10 +82,6 @@ export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, ch
       <div className={styles.pagination__pagesListContainer}>
         <div
           className={styles.pagination__pagesList}
-          style={{
-            transform: `translateX(${translateX}px)`,
-            transition: 'transform 0.3s ease',
-          }}
         >
           {pageNumbers.map((num) => (
             <button
@@ -94,7 +90,7 @@ export const Pagination: React.FC<Props> = ({ productsOnPage, productsNumber, ch
               })}
               key={num}
               onClick={() => {
-                setActivePage(num);
+                changePage(num);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >

@@ -4,12 +4,11 @@
   margin: 40px 0 0;
   justify-content: center;
   &__pagesListContainer {
-    max-width: 160px;
+    // max-width: 160px;
     overflow-x: hidden;
   }
   &__pagesList {
     white-space: nowrap;
-    transform: translateX(-40px);
   }
   &__button {
     background-color: transparent;
@@ -19,6 +18,12 @@
     margin-right: 8px;
     width: 32px;
     height: 32px;
+    
+    @media(max-width: 639px) {
+      width: 28px;
+      height: 28px;
+    } 
+
     &:hover {
       border-color: var(--highlight);
     }
