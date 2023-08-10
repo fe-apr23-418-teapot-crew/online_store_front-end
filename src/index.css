@@ -11,11 +11,14 @@ html[data-theme='light'] {
   --background: #ffffff;
   --highlight: #000000;
   --shadow: rgba(23, 32, 49, 0.4);
-  --theme-switcher: rgb(182, 171, 8);
+  --theme-switcher: #0f0f11;
+  --surface1: #ffffff;
+  --card-border: #e2e6e9;
+  --button-bg: #ffffff;
 }
 
 html[data-theme='dark'] {
-  --accent: #e8e9ee;
+  --accent: #905bff;
   --secondary-accent: #eb5757;
   --primary: #fafbfc;
   --secondary: #75767f;
@@ -27,5 +30,8 @@ html[data-theme='dark'] {
   --background: #0f1121;
   --highlight: #ffffff;
   --shadow: rgba(23, 32, 49, 0.4);
-  --theme-switcher: rgb(205, 192, 7);
+  --theme-switcher: #fafbfc;
+  --surface1: #161827;
+  --card-border: transparent;
+  --button-bg: #323542;
 }

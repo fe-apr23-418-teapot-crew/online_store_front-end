@@ -33,6 +33,58 @@
     display: none;
   }
 
+  &__authButton {
+    text-align: center;
+    line-height: 48px;
+    width: 48px;
+  }
+  
+  &__authUserData {
+    display: flex;
+    align-items: center;
+  }
+  &__authUserPhoto {
+    // line-height: 51px;
+    border: #0f0f11 solid 1px;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+  }
+  &__authUserName {
+    // line-height: 48px;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.48px;
+  }
+
+  &__authButton {
+    text-align: center;
+    line-height: 48px;
+    width: 48px;
+  }
+  
+  &__authUserData {
+    display: flex;
+    align-items: center;
+  }
+  &__authUserPhoto {
+    // line-height: 51px;
+    border: #0f0f11 solid 1px;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+  }
+  &__authUserName {
+    // line-height: 48px;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.48px;
+  }
+
   &__button,
   &__burgerButton {
     // box-sizing: border-box;
@@ -237,6 +289,18 @@
     &__button {
       width: 64px;
       height: 64px;
+    }
+
+    &__authButton {
+      line-height: 64px;
+      width: 64px;
+    }
+    &__authUserPhoto {
+      width: 50px;
+      height: 50px;
+    }
+    &__authUserName {
+      line-height: 64px;
     }
   }
 }
