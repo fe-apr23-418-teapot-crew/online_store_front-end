@@ -1,0 +1,31 @@
+.search__input {
+  width: 288px;
+  border-radius: 8px;
+  height: 40px;
+  padding: 0 12px;
+
+  border: 1px solid var(--icons);
+  font-family: inherit;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+
+  &::placeholder {
+    color: var(--icons);
+  }
+
+  &:hover {
+    border-color: var(--secondary);
+  }
+
+  &:focus {
+    border-color: var(--primary);
+    outline: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .search__input {
+    width: 200px;
+  }
+}

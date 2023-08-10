@@ -1,28 +1,64 @@
 import axios from 'axios';
-import { APIResponse } from '../types/APIResponse';
+import { API_URL } from '../consts/api';
+import { ProductsData } from '../types/ProductsData';
+import { DetailedProduct } from '../types/DetailedProduct';
+import { Product } from '../types/Product';
+import { User } from '../types/User';
 
-export const fetchProducts = async () => {
-  const response = await axios.get<APIResponse>(
-    'https://four18-teapot-crew-dev.onrender.com/products',
+export const getAllProducts = async () => {
+  const response = await axios.get<ProductsData>(`${API_URL}products`);
+
+  return response.data;
+};
+
+export const getSelectedProducts = async (category: string) => {
+  const response = await axios.get<ProductsData>(
+    `${API_URL}products/${category}`,
   );
 
   return response.data;
 };
 
-// export const fetchProductById = async (productIds: number[]) => {
-//   try {
-//     const productPromises = productIds.map(async (id) => {
-//       const response = await axios.get<Product[]>(
-//         `https://four18-teapot-crew-dev.onrender.com/products/${id}`,
-//       );
-//       return response.data;
-//     });
+export const getProductByItemId = async (itemId: string) => {
+  const response = await axios.get<Product>(`${API_URL}products/${itemId}`);
 
-//     const products: APIResponse = await Promise.all(productPromises);
+  return response.data;
+};
 
-//     return products.rows;
-//   } catch (error) {
-//     console.error('Error fetching products:', error);
-//     return { count: 0, rows: [] };
-//   }
-// };
+export const getAllProductsByCategory = async (
+  category: string,
+  sort: string,
+  offset: string,
+  limit: string,
+  query: string,
+) => {
+  const response = await axios.get<ProductsData>(
+    `${API_URL}${category}?limit=${limit}&offset=${offset}&sortBy=${sort}&name=${query}`,
+  );
+  return response.data;
+};
+
+export const getDetailedProductByItemId = async (
+  category: string,
+  itemId: string,
+) => {
+  const response = await axios.get<DetailedProduct>(
+    `${API_URL}${category}/${itemId}`,
+  );
+
+  return response.data;
+};
+
+export const getCountOfCategory = async () => {
+  const response = await axios.get<ProductsData>(`${API_URL}products`);
+
+  return response.data;
+};
+
+export const getActivation = async (activationToken: string) => {
+  const response = await axios.get<User>(
+    `${API_URL}activation/${activationToken}`,
+  );
+
+  return response.data;
+};

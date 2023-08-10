@@ -8,7 +8,7 @@ interface MenuLinkProps {
   path: string;
   children?: React.ReactNode;
   isBurgerItem?: boolean;
-  onClick?: (value: boolean) => void; 
+  onClick?: (value: boolean) => void;
 }
 
 export const MenuLink: React.FC<MenuLinkProps> = ({
@@ -26,7 +26,7 @@ export const MenuLink: React.FC<MenuLinkProps> = ({
         [styles['menuLink--burger']]: isBurgerItem,
       })
     }
-    onClick={onClick ? () => onClick(false) : () => {}}
+    onClick={onClick ? () => setTimeout(() => onClick(false), 500) : () => {}}
   >
     {children ? children : path}
   </NavLink>

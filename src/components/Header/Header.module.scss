@@ -1,6 +1,4 @@
-$gray-white: #ffffff;
-$gray-secondary: #89939a;
-$gray-primary: #0f0f11;
+@import '../../styles/global.scss';
 
 .header {
   display: flex;
@@ -11,10 +9,10 @@ $gray-primary: #0f0f11;
   align-items: center;
   gap: 15px;
 
-  background-color: $gray-white;
-  box-shadow: 0px 1px 0px 0px #e2e6e9;
+  background-color: var(--background);
+  box-shadow: 0px 1px 0px 0px var(--elements);
 
-  &_logo {
+  &__logo {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,16 +20,16 @@ $gray-primary: #0f0f11;
     padding: 13px 16px;
   }
 
-  &_logoImage {
+  &__logoImage {
     height: 22px;
     width: 64px;
   }
 
-  &_menuItems {
+  &__menuItems {
     display: none;
   }
 
-  &_buttons {
+  &__buttons {
     display: none;
   }
 
@@ -61,26 +59,103 @@ $gray-primary: #0f0f11;
     letter-spacing: 0.48px;
   }
 
-  &_buttonMenu {
+  &__authButton {
+    text-align: center;
+    line-height: 48px;
+    width: 48px;
+  }
+  
+  &__authUserData {
+    display: flex;
+    align-items: center;
+  }
+  &__authUserPhoto {
+    // line-height: 51px;
+    border: #0f0f11 solid 1px;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+  }
+  &__authUserName {
+    // line-height: 48px;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.48px;
+  }
+
+  &__button,
+  &__burgerButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: none;
+
+    border-left: 1px solid var(--elements);
+  }
+
+  &__buttonMenu {
     display: flex;
     justify-content: center;
     align-items: center;
 
     padding: 16px;
 
-    box-shadow: -1px 0px 0px 0px #e2e6e9;
+    box-shadow: -1px 0px 0px 0px var(--elements);
+  }
+
+  &__productsCount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    bottom: 55%;
+    left: 50%;
+
+    width: 14px;
+    height: 14px;
+
+    background: var(--secondary-accent);
+    border-radius: 50%;
+
+    font-weight: 700;
+    font-size: 9px;
+    color: var(--background);
+
+    box-shadow: none;
+
+    &--burger {
+      position: relative;
+      transform: translateY(-300%);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 50%;
+    }
+  }
+
+  &__themeSwitcherWrapper {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    line-height: 48px;
   }
 }
 
 .burger {
-  position: absolute;
+  position: fixed;
 
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 
-  background-color: $gray-white;
+  background-color: var(--background);
+  z-index: 1;
+  overflow: hidden;
 
   .container {
     display: flex;
@@ -91,8 +166,8 @@ $gray-primary: #0f0f11;
     align-items: center;
     gap: 15px;
 
-    background-color: $gray-white;
-    box-shadow: 0px 1px 0px 0px #e2e6e9;
+    background-color: var(--background);
+    box-shadow: 0px 1px 0px 0px var(--elements);
   }
 
   .burgerMenuItems {
@@ -114,13 +189,13 @@ $gray-primary: #0f0f11;
     letter-spacing: 0.48px;
     text-transform: uppercase;
 
-    color: $gray-secondary;
+    color: var(--secondary);
 
     border-bottom: 2px solid transparent;
 
     &:focus {
-      color: $gray-primary;
-      border-bottom: 2px solid #0f0f11;
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
     }
   }
 
@@ -134,8 +209,8 @@ $gray-primary: #0f0f11;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: $gray-white;
-    box-shadow: -1px 0px 0px 0px $gray-secondary;
+    background-color: var(--background);
+    box-shadow: -1px 0px 0px 0px var(--secondary);
   }
 }
 
@@ -154,30 +229,30 @@ $gray-primary: #0f0f11;
       gap: 16px;
     }
 
-    &_menuItems {
+    &__menuItems {
       display: block;
     }
 
-    &_buttons {
+    &__buttons {
       display: flex;
       justify-content: center;
     }
 
-    &_buttons a {
+    &__buttons a {
       margin: 0;
     }
 
-    &_button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    // &__button {
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
 
-      padding: 16px;
+    //   padding: 16px;
 
-      box-shadow: -1px 0px 0px 0px #e2e6e9;
-    }
+    //   box-shadow: -1px 0px 0px 0px var(--elements);
+    // }
 
-    &_buttonBurgerMenu {
+    &__buttonBurgerMenu {
       display: none;
     }
   }
@@ -195,7 +270,7 @@ $gray-primary: #0f0f11;
       gap: 24px;
     }
 
-    &_logo {
+    &__logo {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -203,7 +278,7 @@ $gray-primary: #0f0f11;
       padding: 18px 24px;
     }
 
-    &_logoImage {
+    &__logoImage {
       height: 28px;
       width: 80px;
     }

@@ -1,18 +1,13 @@
-$gray-white: #ffffff;
-$gray-secondary: #89939a;
-$gray-primary: #0f0f11;
-
 .menuLink {
+  svg path {
+    fill: var(--primary);
+  }
   &--burger {
     line-height: 48px;
     width: 48px;
     text-align: center;
-    border-left: 1px solid #E2E6E9;
+    //border-left: 1px solid var(--elements);
     border-bottom: 3px solid transparent;
-
-    // &:focus {
-    //   // border-bottom: 3px solid $gray-primary;
-    // }
   }
 
   font-size: 12px;
@@ -21,10 +16,10 @@ $gray-primary: #0f0f11;
   letter-spacing: 0.48px;
   text-transform: uppercase;
 
-  color: $gray-secondary;
+  color: var(--secondary);
 
   &--active {
-    border-bottom: 3px solid $gray-primary;
+    border-bottom: 3px solid var(--primary);
   }
 
   @media (min-width: 640px) {
@@ -38,14 +33,14 @@ $gray-primary: #0f0f11;
     letter-spacing: 0.48px;
     text-transform: uppercase;
 
-    color: $gray-secondary;
+    color: var(--secondary);
     border-bottom: 3px solid transparent;
 
     transition: border-bottom 400ms;
 
     &--active {
-      color: $gray-primary;
-      border-bottom: 3px solid $gray-primary;
+      color: var(--highlight);
+      border-bottom: 3px solid var(--primary);
     }
 
     &--burger {

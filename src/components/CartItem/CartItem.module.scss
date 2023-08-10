@@ -1,13 +1,13 @@
 .cartItem {
   display: flex;
   flex-direction: column;
-  background-color:#FFFFFF;
+  background-color: var(--background);
   width: 288px;
   // height: 160px;
   padding: 16px;
   border-radius: 16px;
   gap: 16px;
-  border: 1px solid rgba(226, 230, 233, 1);
+  border: 1px solid var(--elements);
 
   &:not(:last-child) {
     margin-bottom: 16px;
@@ -21,7 +21,6 @@
     }
   }
 
-
   @media (min-width: 640px) {
     display: flex;
     flex-direction: row;
@@ -30,8 +29,6 @@
     justify-content: space-evenly;
     padding: 0;
     height: 128px;
-
-
   }
   @media (min-width: 1200px) {
     width: 752px;
@@ -42,8 +39,6 @@
     flex-direction: row;
     justify-content: space-between;
     // background-color: green;
-
-
 
     &__buttons {
       // background-color: blue;
@@ -66,7 +61,7 @@
     max-height: 80px;
 
     @media (min-width: 640px) {
-    margin-right: 24px;
+      margin-right: 24px;
     }
   }
 
@@ -84,14 +79,14 @@
     @media (min-width: 1200px) {
       width: 336px;
     }
-    }
+  }
 
   &__count {
     font-size: 14px;
     font-weight: 400;
     line-height: 21px;
     letter-spacing: 0em;
-    color: #0F0F11;
+    color: var(--primary);
   }
 
   &__price {
@@ -103,8 +98,8 @@
     margin: 0;
   }
 
- &__removeButton {
-  // background-color: green;
+  &__removeButton {
+    // background-color: green;
     background: none;
     color: inherit;
     border: none;
@@ -112,16 +107,16 @@
     font: inherit;
     cursor: pointer;
     outline: inherit;
- }
+  }
 
   &__counterButton {
     margin: 0 10px;
     height: 32px;
     width: 32px;
     border-radius: 48px;
-    background-color: #FFFFFF;
+    background-color: var(--background);
     // background-color: yellow;
-    border: 1px solid #B4BDC3;
+    border: 1px solid var(--icons);
     padding: 0;
 
     @media (min-width: 640px) {
@@ -136,7 +131,6 @@
   @media (min-width: 640px) {
     margin-right: 24px;
   }
-
 }
 .minusButton {
   width: 16px;
@@ -146,5 +140,4 @@
 .plusButton {
   width: 16px;
   height: 16px;
-
 }

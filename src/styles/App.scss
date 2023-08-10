@@ -1,5 +1,4 @@
-@import './fonts.scss';
+@import './global.scss';
+@import './utils/fonts.scss';
 @import './utils/normalize.scss';
-@import './utils/colors.scss';
-
 @import '../layout/ProductsLayout/ProductsLayout.scss';

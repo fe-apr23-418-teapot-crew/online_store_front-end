@@ -1,0 +1,39 @@
+.notFoundPage {
+  margin-top: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    margin-bottom: 20px;
+    color: var(--accent);
+  }
+
+  &__message {
+    margin-bottom: 20px;
+  }
+
+  &__img {
+    width: 50%;
+    margin-bottom: 20px;
+  }
+
+  &__link {
+    font-size: 24px;
+    margin-bottom: 20px;
+    padding: 3px;
+    border-radius: 5px;
+    color: var(--accent);
+    font-weight: 600;
+
+    &:hover {
+      box-shadow: 0 0 2px 1px var(--shadow);
+    }
+
+    &:hover {
+      font-weight: 600;
+    }
+  }
+}

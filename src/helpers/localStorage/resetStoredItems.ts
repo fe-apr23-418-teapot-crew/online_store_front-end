@@ -1,3 +1,3 @@
-export const resetStoredItems = (items: string) => {
-  localStorage.removeItem(items);
+export const resetStoredItems = (key: string) => {
+  localStorage.removeItem(key);
 };
