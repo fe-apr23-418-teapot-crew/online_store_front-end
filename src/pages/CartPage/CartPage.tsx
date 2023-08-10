@@ -3,6 +3,7 @@ import { CartItem } from '../../components/CartItem/CartItem';
 import { MenuLink } from '../../components/MenuLink';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
 import styles from './CartPage.module.scss';
+import cn from 'classnames';
 import chevron from '../../icons/Chevron (Arrow Right).svg';
 import lineCheckout from '../../icons/LineCheckout.svg';
 import { getTotalAmount } from '../../helpers/localStorage/getTotalAmount';
@@ -28,8 +29,12 @@ export const CartPage: React.FC = () => {
     setIsModal(true);
   };
 
+  const goBack = () => {
+    window.history.back();
+  };
+
   return (
-    <section className={styles.cart}>
+    <section className={cn(styles.cart, { [styles['is-active']]: isCartEmpty })}>
       <div className={styles.container}>
         <div className={styles.cart__navigation}>
           <MenuLink to="/" path="Back">
@@ -38,7 +43,10 @@ export const CartPage: React.FC = () => {
               alt="Chevron"
               className={styles['cart__navigation--chevronButton']}
             />
-            <div className={styles['cart__navigation--backButton']}>
+            <div 
+              onClick={goBack}
+              className={styles['cart__navigation--backButton']}
+            >
               {'Back'}
             </div>
           </MenuLink>
