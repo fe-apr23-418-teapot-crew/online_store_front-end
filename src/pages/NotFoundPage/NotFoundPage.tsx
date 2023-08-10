@@ -13,7 +13,7 @@ export const NotFoundPage: React.FC = () => {
         Home page
       </Link>
       <img
-        className={s.section__img}
+        className={styles.section__img}
         src="https://media.istockphoto.com/id/1266144552/vector/emoticon-with-sorry-sign.jpg?s=612x612&w=0&k=20&c=SxPesZy6zIYB2lbY3l8cQgpXaQdeBN_GcHrsOlsc4J8="
       />
     </div>

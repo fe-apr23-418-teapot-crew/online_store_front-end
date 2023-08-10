@@ -12,9 +12,9 @@ export const HomePage: React.FC = () => {
           Welcome to Nice Gargets store!
         </h1>
         <BannerSlider />
-        <CardCarousel title="Brand new models" endpoint="new" />
+        <CardCarousel title="Brand new models" category="new" />
         <Categories />
-        <CardCarousel title="Hot prices" endpoint="discount" />
+        <CardCarousel title="Hot prices" category="discount" />
       </section>
     </>
   );
