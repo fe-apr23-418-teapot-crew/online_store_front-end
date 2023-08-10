@@ -6,6 +6,8 @@ import styles from './AuthScreens.module.scss';
 import closeIcon from '../../icons/Close.svg';
 import arrowLeft from '../../icons/ArrowLeft.svg';
 import { User } from '../../types/User';
+import { addNewItem } from '../../helpers/localStorage/addNewItem';
+import { Loader } from '../Loader';
 
 interface Props {
     loggedUser: User | null;
@@ -27,12 +29,18 @@ export const AuthScreens: React.FC<Props> = ({
   const [errorMessage, setErrorMessage] = useState('');
   const [isUserRegistered, setIsUserRegistered] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  console.log(loggedUser);
 
   const fetchUser = async () => {
+    setIsLoading(true);
+
     const existingUser = {
       email: userEmail,
       password,
     };
+
     try {
       const response = await fetch('https://online-store-api-swbg.onrender.com/login', {
         method: 'POST',
@@ -46,12 +54,20 @@ export const AuthScreens: React.FC<Props> = ({
         throw new Error(`Server ${response.statusText}${response.status}`);
       }
       const responseData = await response.json();
-      setLoggedUser(responseData.user);
+      const newUser = responseData.user;
+      setLoggedUser(newUser);
+
+      setIsLogging(false);
+
+      addNewItem('user', newUser);
 
       return responseData;
 
     } catch (error) {
-      setErrorMessage('Server error!');
+      setErrorMessage('Wrong e-mail or password!');
+    } finally {
+      
+      setIsLoading(false);
     }
   };
   
@@ -67,12 +83,13 @@ export const AuthScreens: React.FC<Props> = ({
 
   const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setErrorMessage('');
+    fetchUser();
     setIsDataLoaded(true);
-    if (loggedUser) {
-      setIsLogging(false);
-      return;
-    }
-    setErrorMessage('Wrong e-mail or password');
+    
+   
+
+    // setErrorMessage('Wrong e-mail or password');
   };
 
   const handleReg = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -105,7 +122,9 @@ export const AuthScreens: React.FC<Props> = ({
       }
       console.log('New user created:', newUser);
     } catch (error) {
+
       console.log('New EEEEERRRR:');
+      
       setIsDataLoaded(true);
       setErrorMessage('User with this email already exists');
       return;
@@ -113,9 +132,9 @@ export const AuthScreens: React.FC<Props> = ({
     setIsUserRegistered(true);
   };
   useEffect(() => {
-    if (!isRegistration) {
-      fetchUser();
-    }
+    // if (!isRegistration) {
+    //   fetchUser();
+    // }
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = 'hidden';
   
@@ -127,46 +146,40 @@ export const AuthScreens: React.FC<Props> = ({
   return (
     <div>
       <section className={styles.auth}>
-        {isRegistration
-          ? <div className={styles.auth__container}>
+        {isRegistration ? (
+          <div className={styles.auth__container}>
             <div className={styles.auth__header}>
               <h4>Registration</h4>
               <div className={styles.auth__navButtons}>
-                {!isUserRegistered &&
-                <img
-                  className={styles.auth__icon}
-                  src={arrowLeft}
-                  onClick={() => {
-                    setIsRegistration(false);
-                    setIsDataLoaded(false);
-                  }}
-                  alt="BACK"
-                />
-                }
+                {!isUserRegistered && (
+                  <img
+                    className={styles.auth__icon}
+                    src={arrowLeft}
+                    onClick={() => {
+                      setIsRegistration(false);
+                      setIsDataLoaded(false);
+                    }}
+                    alt="BACK"
+                  />
+                )}
                 <img
                   className={styles.auth__icon}
                   src={closeIcon}
                   onClick={() => {
                     setIsRegistration(false);
                     setIsLogging(false);
-                    
                   }}
                   alt="CLOSE ICON"
                 />
               </div>
             </div>
-            {isUserRegistered
-              ? <p>Please check your email</p>
-              : <form
-                className={styles.auth__form}
-                onSubmit={handleReg}
-              >
+            {isUserRegistered ? (
+              <p>Please check your email</p>
+            ) : (
+              <form className={styles.auth__form} onSubmit={handleReg}>
                 <div className={styles.auth__formSection}>
-                  <label
-                    htmlFor="email"
-                    className={styles.auth__formLabel}
-                  >
-                E-mail:
+                  <label htmlFor="email" className={styles.auth__formLabel}>
+                    E-mail:
                   </label>
                   <input
                     type="email"
@@ -177,11 +190,8 @@ export const AuthScreens: React.FC<Props> = ({
                   />
                 </div>
                 <div className={styles.auth__formSection}>
-                  <label
-                    htmlFor="password"
-                    className={styles.auth__formLabel}
-                  >
-                Password:
+                  <label htmlFor="password" className={styles.auth__formLabel}>
+                    Password:
                   </label>
                   <input
                     type="password"
@@ -191,95 +201,90 @@ export const AuthScreens: React.FC<Props> = ({
                     onChange={handlePasswordChange}
                   />
                 </div>
-                {isDataLoaded &&
-            <div
-              className={styles.auth__error}
-            >
-              {errorMessage}
-            </div>}
-                <button 
+                {isDataLoaded && (
+                  <div className={styles.auth__error}>{errorMessage}</div>
+                )}
+                <button
                   type="submit"
                   className={styles.auth__formButton}
                   disabled={!userEmail || !password}
                 >
-            Sign in
+                  Sign in
                 </button>
               </form>
-            }
+            )}
           </div>
-          : <div className={styles.auth__container}>
-            <div className={styles.auth__header}>
-              <h4>Log in</h4>
-              <img
-                className={styles.auth__icon}
-                src={closeIcon}
-                onClick={() => setIsLogging(false)}
-                alt="CLOSE ICON"
-              />
-            </div>
-            <form
-              className={styles.auth__form}
-              onSubmit={handleLogin}
-            >
-              <div className={styles.auth__formSection}>
-                <label
-                  htmlFor="email"
-                  className={styles.auth__formLabel}
-                >
-              E-mail:
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className={styles.auth__formInput}
-                  value={userEmail}
-                  onChange={handleUserEmailChange}
-                />
+        ) : (
+          <>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <div className={styles.auth__container}>
+                <div className={styles.auth__header}>
+                  <h4>Log in</h4>
+                  <img
+                    className={styles.auth__icon}
+                    src={closeIcon}
+                    onClick={() => setIsLogging(false)}
+                    alt="CLOSE ICON"
+                  />
+                </div>
+                <form className={styles.auth__form} onSubmit={handleLogin}>
+                  <div className={styles.auth__formSection}>
+                    <label htmlFor="email" className={styles.auth__formLabel}>
+                      E-mail:
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      className={styles.auth__formInput}
+                      value={userEmail}
+                      onChange={handleUserEmailChange}
+                    />
+                  </div>
+                  <div className={styles.auth__formSection}>
+                    <label
+                      htmlFor="password"
+                      className={styles.auth__formLabel}
+                    >
+                      Password:
+                    </label>
+                    <input
+                      type="password"
+                      id="password"
+                      className={styles.auth__formInput}
+                      value={password}
+                      onChange={handlePasswordChange}
+                    />
+                  </div>
+                  {isDataLoaded && (
+                    <div className={styles.auth__error}>{errorMessage}</div>
+                  )}
+                  <button
+                    type="submit"
+                    className={styles.auth__formButton}
+                    disabled={!userEmail || !password}
+                  >
+                    Log in
+                  </button>
+                  <p className={styles.auth__formLabel}>
+                    {'Don\'t have an account? Sign Up'}
+                  </p>
+                  <button
+                    type="button"
+                    className={`${styles.auth__formButton} ${styles['auth__formButton--light']}`}
+                    onClick={() => {
+                      setIsRegistration(true);
+                      setIsDataLoaded(false);
+                    }}
+                  >
+                    Sign up
+                  </button>
+                </form>
               </div>
-              <div className={styles.auth__formSection}>
-                <label
-                  htmlFor="password"
-                  className={styles.auth__formLabel}
-                >
-              Password:
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  className={styles.auth__formInput}
-                  value={password}
-                  onChange={handlePasswordChange}
-                />
-              </div>
-              {isDataLoaded &&
-          <div
-            className={styles.auth__error}
-          >
-            {errorMessage}
-          </div>}
-              <button 
-                type="submit"
-                className={styles.auth__formButton}
-                disabled={!userEmail || !password}
-              >
-          Log in
-              </button>
-              <p className={styles.auth__formLabel}>
-                {'Don\'t have an account? Sign Up'}
-              </p>
-              <button 
-                type="button"
-                className={`${styles.auth__formButton} ${styles['auth__formButton--light']}`}
-                onClick={() => {
-                  setIsRegistration(true);
-                  setIsDataLoaded(false);
-                }} 
-              >
-          Sign up
-              </button>
-            </form>            
-          </div>
-        }
+            )}
+          </>
+        )}
       </section>
     </div>
   );
