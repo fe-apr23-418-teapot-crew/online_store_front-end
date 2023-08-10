@@ -5,7 +5,6 @@ import { ProductImageCarousel } from '../../components/Product/ProductImageCarou
 import { TechSpecs } from '../../components/TechSpecs';
 import { ProductActions } from '../../components/Product/ProductActions';
 import { ProductVarieties } from '../../components/Product/ProductVarieties';
-import { MenuLink } from '../../components/MenuLink';
 import chevron from '../../icons/Chevron (Arrow Right).svg';
 import styles from './ProductPage.module.scss';
 import { CardCarousel } from '../../components/CardCarousel/CardCarousel';
@@ -54,19 +53,18 @@ export const ProductPage = () => {
 
       <section className={styles.product}>
         <div className={styles.product__navigation}>
-          <MenuLink to="/" path="Back">
-            <img
-              src={chevron}
-              alt="Chevron"
-              className={styles['product__navigation--chevronButton']}
-            />
-            <div
-              onClick={goBack}
-              className={styles['product__navigation--backButton']}
-            >
-              {'Back'}
-            </div>
-          </MenuLink>
+          <img
+            src={chevron}
+            alt="Chevron"
+            className={styles['product__navigation--chevronButton']}
+          />
+          <div
+            onClick={goBack}
+            className={styles['product__navigation--backButton']}
+          >
+            {'Back'}
+          </div>
+  
         </div>
 
         {productDetails ? (

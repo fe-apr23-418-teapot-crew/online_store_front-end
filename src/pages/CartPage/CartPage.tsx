@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { CartItem } from '../../components/CartItem/CartItem';
-import { MenuLink } from '../../components/MenuLink';
 import { ModalWindow } from '../../components/ModalWindow/ModalWindow';
 import styles from './CartPage.module.scss';
 import cn from 'classnames';
@@ -37,19 +36,17 @@ export const CartPage: React.FC = () => {
     <section className={cn(styles.cart, { [styles['is-active']]: isCartEmpty })}>
       <div className={styles.container}>
         <div className={styles.cart__navigation}>
-          <MenuLink to="/" path="Back">
-            <img
-              src={chevron}
-              alt="Chevron"
-              className={styles['cart__navigation--chevronButton']}
-            />
-            <div 
-              onClick={goBack}
-              className={styles['cart__navigation--backButton']}
-            >
-              {'Back'}
-            </div>
-          </MenuLink>
+          <img
+            src={chevron}
+            alt="Chevron"
+            className={styles['cart__navigation--chevronButton']}
+          />
+          <div 
+            onClick={goBack}
+            className={styles['cart__navigation--backButton']}
+          >
+            {'Back'}
+          </div>
         </div>
 
         <h1 className={styles.cart__title}>Cart</h1>
