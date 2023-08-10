@@ -1,8 +1,10 @@
 @import '../../index.css';
 
 .themeSwitcher {
-  background-color: var(--second-color-light);
-  .icon {
-    color: var(--second-color-light);
+  line-height: 48px;
+
+  &__icon {
+    line-height: 28px;
+    color: var(--theme-switcher);
   }
 }

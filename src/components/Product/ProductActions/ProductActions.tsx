@@ -6,6 +6,7 @@ import { StorageContext } from '../../../contexts/StorageContext';
 import { isProductInStorage } from '../../../helpers/localStorage/isProductInStorage';
 import { useQuery } from 'react-query';
 import { getProductById } from '../../../api/products';
+import { useErrorHandling } from '../../../hooks/useErrorHandling';
 
 interface Props {
   product: DetailedProduct;
@@ -14,11 +15,15 @@ interface Props {
 export const ProductActions: React.FC<Props> = ({ product }) => {
   const { selectedProductId } = useContext(StorageContext);
 
-  const { data } = useQuery(['productById', selectedProductId], () =>
+  const { data, error } = useQuery(['productById'], () =>
     getProductById(selectedProductId),
   );
 
-  console.log(data);
+  const { handleError } = useErrorHandling();
+
+  if (error) {
+    handleError(error);
+  }
 
   const { priceDiscount, priceRegular, screen, resolution, processor, ram } =
     product;

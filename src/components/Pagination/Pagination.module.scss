@@ -13,14 +13,14 @@
   }
   &__button {
     background-color: transparent;
-    color: var(--dark);
+    color: var(--highlight);
     border: 1px solid var(--elements);
     border-radius: 25px;
     margin-right: 8px;
     width: 32px;
     height: 32px;
     &:hover {
-      border-color: var(--dark);
+      border-color: var(--highlight);
     }
     &:disabled {
       border-color: var(--elements);
@@ -30,7 +30,7 @@
       }
     }
     &--active {
-      background-color: var(--dark);
+      background-color: var(--highlight);
       color: white;
     }
     &--arrow {

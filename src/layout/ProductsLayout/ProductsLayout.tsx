@@ -7,6 +7,7 @@ import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { getAllProductsByCategory } from '../../api/products';
 import { useQuery } from 'react-query';
 import { Loader } from '../../components/Loader';
+import { useErrorHandling } from '../../hooks/useErrorHandling';
 
 interface ProductsLayoutProps {
   category: string;
@@ -24,21 +25,19 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
   const offset = searchParams.get('offset') || '0';
   const query = searchParams.get('query') || '';
 
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, error } = useQuery(
     ['products', category, sortBy, offset, limit, query],
     () => getAllProductsByCategory(category, sortBy, offset, limit, query),
   );
 
-  // if (isLoading) {
-  //   return <CircularProgress />;
-  // }
+  const { handleError } = useErrorHandling();
 
-  // if (error) {
-  //   return <div>Error: {error.toString()}</div>;
-  // }
-
+  if (error) {
+    handleError(error);
+  }
   const products = data?.rows || [];
   const productsCount = data?.count || 0;
+  const isProductsEmpty = productsCount === 0;
 
   const updateSearchParams = (params: Record<string, string>) => {
     const newSearchParams = new URLSearchParams(searchParams);
@@ -72,7 +71,9 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
 
       <h1 className="products__title">{title || category}</h1>
 
-      <h6 className="products__count">{productsCount} models</h6>
+      <h6 className="products__count">
+        {!isProductsEmpty ? `${productsCount} models` : ''}
+      </h6>
 
       <div className="products__filter-fields">
         <Sort
@@ -85,12 +86,19 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
         />
       </div>
 
-      {isLoading ? <Loader /> : <ProductList products={products} />}
-      <Pagination
-        productsOnPage={+limit}
-        productsNumber={productsCount}
-        changeOffset={changeOffset}
-      />
+      {isLoading || isProductsEmpty ? (
+        <Loader />
+      ) : (
+        <>
+          <ProductList products={products} />
+
+          <Pagination
+            productsOnPage={+limit}
+            productsNumber={productsCount}
+            changeOffset={changeOffset}
+          />
+        </>
+      )}
     </div>
   );
 };

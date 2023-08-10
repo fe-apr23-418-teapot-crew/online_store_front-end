@@ -1,6 +1,13 @@
 .loader {
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   width: 200px;
   height: 200px;
+
+  &__muiLoader {
+    color: var((--accent));
+  }
 }
