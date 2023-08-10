@@ -3,6 +3,7 @@ import { API_URL } from '../consts/api';
 import { ProductsData } from '../types/ProductsData';
 import { DetailedProduct } from '../types/DetailedProduct';
 import { Product } from '../types/Product';
+import { User } from '../types/User';
 
 export const getAllProducts = async () => {
   const response = await axios.get<ProductsData>(`${API_URL}products`);
@@ -54,6 +55,14 @@ export const getDetailedProductByItemId = async (
 
 export const getCountOfCategory = async () => {
   const response = await axios.get<ProductsData>(`${API_URL}products`);
+
+  return response.data;
+};
+
+export const getActivation = async (activationToken: string) => {
+  const response = await axios.get<User>(
+    `${API_URL}activation/${activationToken}`,
+  );
 
   return response.data;
 };
