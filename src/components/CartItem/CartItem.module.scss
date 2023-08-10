@@ -3,7 +3,7 @@
   flex-direction: column;
   background-color: var(--background);
   width: 288px;
-  // height: 160px;
+  justify-content: space-between;
   padding: 16px;
   border-radius: 16px;
   gap: 16px;
@@ -58,7 +58,10 @@
   }
 
   &__img {
-    max-height: 80px;
+    object-position: center;
+    object-fit: contain;
+    width: 80px;
+    height: 80px;
 
     @media (min-width: 640px) {
       margin-right: 24px;
@@ -132,6 +135,7 @@
     margin-right: 24px;
   }
 }
+
 .minusButton {
   width: 16px;
   height: 16px;

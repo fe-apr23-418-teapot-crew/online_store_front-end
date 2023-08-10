@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { ProductList } from '../../components/Product/ProductList/ProductList';
 import { Sort } from '../../components/Sort/Sort';
 import { useSearchParams } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { getAllProductsByCategory } from '../../api/products';
 import { useQuery } from 'react-query';
 import { Loader } from '../../components/Loader';
 import { useErrorHandling } from '../../hooks/useErrorHandling';
+import { EmptyScreen } from '../../components/EmptyScreen';
 
 interface ProductsLayoutProps {
   category: string;
@@ -91,20 +92,25 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
         />
       </div>
 
-      {isLoading || isProductsEmpty ? (
+      {isLoading ? (
         <Loader />
       ) : (
         <>
-          <ProductList products={products} />
-
-          <Pagination
-            activePage={activePage}
-            offset={offset}
-            productsOnPage={+limit}
-            productsNumber={productsCount}
-            changeOffset={changeOffset}
-            changePage={changePage}
-          />
+          {isProductsEmpty ? (
+            <EmptyScreen />
+          ) : (
+            <>
+              <ProductList products={products} />
+              <Pagination
+                activePage={activePage}
+                offset={offset}
+                productsOnPage={+limit}
+                productsNumber={productsCount}
+                changeOffset={changeOffset}
+                changePage={changePage}
+              />
+            </>
+          )}
         </>
       )}
     </div>

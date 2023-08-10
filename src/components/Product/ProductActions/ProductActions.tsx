@@ -63,7 +63,6 @@ export const ProductActions: React.FC<Props> = ({ product }) => {
       addToStorage('cart', newCartItem);
 
       setIsAddToCartDisabled(true);
-      console.log('newCartItem', newCartItem);
     }
   };
 
