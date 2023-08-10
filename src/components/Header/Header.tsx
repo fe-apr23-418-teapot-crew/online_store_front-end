@@ -10,7 +10,8 @@ import closeMenu from '../../images/Close.svg';
 import menu from '../../images/Menu.svg';
 import { MenuLink } from '../MenuLink';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { AuthScreens, User } from '../AuthScreens/AuthScreens';
+import { User } from '../../types/User';
+import { AuthScreens} from '../AuthScreens/AuthScreens';
 
 export const Header = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -40,7 +41,7 @@ export const Header = () => {
         <div className={styles.header_buttons}>
           {loggedUser
             ? <div className={styles.header__authUserData}>
-              <p className={styles.header__authUserName}>{loggedUser.username}</p>
+              <p className={styles.header__authUserName}>{loggedUser.email.split('@')[0]}</p>
               <Link 
                 to={'/'}
                 className={styles.header__authButton}
@@ -58,6 +59,13 @@ export const Header = () => {
             </Link>
           
           }
+          {isLogging && <AuthScreens
+            loggedUser={loggedUser}
+            isRegistration={isRegistration}
+            setIsLogging={setIsLogging}
+            setLoggedUser={setLoggedUser}
+            setIsRegistration={setIsRegistration}
+          />}
           <MenuLink isBurgerItem={true} to="/favourites" path="Favourites">
             <img src={likes} alt="LIKES" />
           </MenuLink>
@@ -139,12 +147,6 @@ export const Header = () => {
             </div>
           </div>
         )}
-        {isLogging && <AuthScreens
-          isRegistration={isRegistration}
-          setIsLogging={setIsLogging}
-          setLoggedUser={setLoggedUser}
-          setIsRegistration={setIsRegistration}
-        />}
       </header>
     </>
   );

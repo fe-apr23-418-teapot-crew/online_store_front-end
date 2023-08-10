@@ -1,25 +1,3 @@
-// #file-upload-button {
-//     background-color: #216CFF;
-// }
-
-// #AuthScreens_file-upload-button__9V0b4 {
-//   background-color: #216CFF;
-// }
-input[type=file]::file-selector-button {
-    background: #216CFF;
-    padding: 5px 20px;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    border: #216CFF 1px solid;
-    transition: color 0.3s ease, background 0.3s ease;
-  }
-  
-  input[type=file]::file-selector-button:hover {
-    background: #fff;
-    color: #216CFF;
-  }
-
 .auth {
     position: fixed;
     display: flex;
@@ -34,15 +12,16 @@ input[type=file]::file-selector-button {
     background-color: rgba(#000000, 0.3);
     backdrop-filter: blur(10px);
     &__container {
-        display: inline-block;
         border-radius: 8px;
         padding: 10px;
         background-color: #ffffff;
         position: fixed;
-        top: 20%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 85%;
         max-width: 350px;
-        height: 365px;
+        height: auto;
         transition: height 0.5s ease-in-out;
     }
     &__header {
@@ -60,9 +39,6 @@ input[type=file]::file-selector-button {
         display: flex;
         justify-content: center;
         flex-direction: column;
-        // &:nth-child(2) {
-        //     margin: 0;
-        // }
     }
     &__formSection {
         margin-bottom: 16px;
@@ -80,7 +56,6 @@ input[type=file]::file-selector-button {
         border-radius: 4px;
         height: 30px;
         outline: 1px solid black;
-        // outline-offset: 4px;
         border: none
     }
     &__formInputFile {
@@ -95,7 +70,6 @@ input[type=file]::file-selector-button {
         font-style: normal;
         font-weight: 600;
         line-height: normal;
-        // margin: 0;
     }
     &__formButton {
         margin-bottom: 16px;
