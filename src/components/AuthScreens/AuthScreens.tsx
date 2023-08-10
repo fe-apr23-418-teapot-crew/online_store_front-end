@@ -6,6 +6,7 @@ import styles from './AuthScreens.module.scss';
 import closeIcon from '../../icons/Close.svg';
 import arrowLeft from '../../icons/ArrowLeft.svg';
 import { User } from '../../types/User';
+import { CircularProgress } from '@mui/material';
 
 interface Props {
     loggedUser: User | null;
@@ -27,6 +28,7 @@ export const AuthScreens: React.FC<Props> = ({
   const [errorMessage, setErrorMessage] = useState('');
   const [isUserRegistered, setIsUserRegistered] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchUser = async () => {
     const existingUser = {
@@ -47,6 +49,7 @@ export const AuthScreens: React.FC<Props> = ({
       }
       const responseData = await response.json();
       setLoggedUser(responseData.user);
+      setIsLogging(false);
 
       return responseData;
 
@@ -67,14 +70,23 @@ export const AuthScreens: React.FC<Props> = ({
 
   const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsDataLoaded(true);
-    if (loggedUser) {
-      setIsLogging(false);
-      return;
-    }
-    setErrorMessage('Wrong e-mail or password');
+    setIsLoading(true);
+    fetchUser();
+    setTimeout(() => {
+      if (loggedUser) {
+        return;
+      }
+      setIsDataLoaded(true);
+      setErrorMessage('Wrong e-mail or password');
+      setIsLoading(false);
+    }, 2000);
+    // setIsDataLoaded(true);
+    // if (loggedUser) {
+    //   setIsLogging(false);
+    //   return;
+    // }
+    // setErrorMessage('Wrong e-mail or password');
   };
-
   const handleReg = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!userEmail || !password) {
@@ -113,16 +125,18 @@ export const AuthScreens: React.FC<Props> = ({
     setIsUserRegistered(true);
   };
   useEffect(() => {
-    if (!isRegistration) {
-      fetchUser();
-    }
+    // if (!isRegistration) {
+    //   fetchUser();
+    // }
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = 'hidden';
   
     return () => {
       document.body.style.overflow = originalStyle;
     };
-  }, [password]);
+  }, [
+    // password
+  ]);
 
   return (
     <div>
@@ -262,7 +276,10 @@ export const AuthScreens: React.FC<Props> = ({
                 className={styles.auth__formButton}
                 disabled={!userEmail || !password}
               >
-          Log in
+                {isLoading
+                  ? <CircularProgress style={{color: 'white'}} />
+                  :'Log in'
+                }
               </button>
               <p className={styles.auth__formLabel}>
                 {'Don\'t have an account? Sign Up'}
