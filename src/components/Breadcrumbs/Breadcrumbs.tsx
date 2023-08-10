@@ -3,6 +3,7 @@ import home from '../../icons/Home.svg';
 import styles from './Breadcrumbs.module.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { DetailedProduct } from '../../types/DetailedProduct';
+import rightArrow from '../../icons/ArrowRightSecondary.svg';
 
 interface BreadcrumbsProps {
   path: string;
@@ -18,7 +19,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productDetails }) => {
 
   return (
     <div className={styles.locationHistory}>
-      <Link to="/">
+      <Link className={styles.locationHistory__icon} to="/">
         <img
           src={home}
           className={styles.locationHistory__homeIcon}
@@ -30,16 +31,30 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productDetails }) => {
         <ul className={styles.locationHistory__list}>
           <li className={styles.locationHistory__item}>
             <Link className={styles.locationHistory__link} to={parentRoute}>
-              {`> ${pathParts[0]}`}
+              <div className={styles.locationHistory__path}>
+                <img className={styles.locationHistory__arrow} src={rightArrow} alt="" />
+                {`${pathParts[0]}`}
+              </div>
             </Link>
           </li>
           <li
             className={styles.locationHistory__item}
-          >{`> ${productDetails.name}`}</li>
+          >
+            <div className={styles.locationHistory__path}>
+              <img src={rightArrow} alt="" />
+              {`${productDetails.name}`}
+            </div>
+          </li>
         </ul>
       ) : (
-        <div className={styles.locationHistory__item}>{`> ${productUrl}`}</div>
-      )}
+        <div className={styles.locationHistory__item}>
+          <div className={styles.locationHistory__path}>
+            <img src={rightArrow} alt="" />
+            {`${productUrl}`}
+          </div>
+        </div>
+      )
+      }
     </div>
   );
 };

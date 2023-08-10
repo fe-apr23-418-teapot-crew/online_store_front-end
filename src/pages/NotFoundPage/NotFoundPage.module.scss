@@ -21,6 +21,7 @@
   }
 
   &__link {
+    font-size: 24px;
     margin-bottom: 20px;
     padding: 3px;
     border-radius: 5px;
@@ -29,6 +30,10 @@
 
     &:hover {
       box-shadow: 0 0 2px 1px var(--shadow);
+    }
+
+    &:hover {
+      font-weight: 600;
     }
   }
 }

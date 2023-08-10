@@ -12,7 +12,7 @@
 
 .slick-slider {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 19px;
 }
 
@@ -70,15 +70,11 @@
 }
 
 .slick-list {
-  max-width: 640px;
+  max-width: 1200px;
   width: 100vw;
 }
 
-@media (min-width: 640px) {
-  .slick-list {
-    max-width: 490px;
-  }
-
+@media(min-width: 640px){
   #slick-slide__img-mob {
     display: none;
   }
@@ -93,10 +89,8 @@
   }
 }
 
-@media (min-width: 1200px) {
-  .slick-list {
-    max-width: 1040px;
-  }
+@media(min-width: 1200px){
+
 }
 
 .slick-dots {

@@ -33,6 +33,10 @@ export const ProductPage = () => {
 
   const productDetails = data || null;
 
+  const goBack = () => {
+    window.history.back();
+  };
+
   return (
     <>
       <Breadcrumbs path={normalizedPathName} productDetails={productDetails} />
@@ -45,7 +49,10 @@ export const ProductPage = () => {
               alt="Chevron"
               className={styles['product__navigation--chevronButton']}
             />
-            <div className={styles['product__navigation--backButton']}>
+            <div 
+              onClick={goBack} 
+              className={styles['product__navigation--backButton']}
+            >
               {'Back'}
             </div>
           </MenuLink>

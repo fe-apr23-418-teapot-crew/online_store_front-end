@@ -39,9 +39,21 @@ const Footer = () => {
       <div className={s.footer__moveTop}>
         <div className={s.backToTop}>
           Back to top
-          <a href="#" className={s.backToTop__button}>
-            <img src={slider} alt="BACK TO TOP" className={s.backToTop__pic} />
-          </a>
+
+          <button
+            className={s.backToTop__button}
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth', // Use smooth scrolling behavior
+              });
+            }}
+          >
+            <img
+              src={slider}
+              alt="BACK TO TOP" className={s.backToTop__pic}
+            />
+          </button>
         </div>
       </div>
     </footer>
