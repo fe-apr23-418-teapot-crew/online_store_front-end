@@ -29,7 +29,7 @@ export const Search: React.FC<Props> = ({ query, changeQuery }) => {
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
     setInputValue(value);
-    debouncedChangeQuery(value);
+    debouncedChangeQuery(value.trim());
   }
 
   return (
