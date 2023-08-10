@@ -7,6 +7,7 @@
 
     text-transform: capitalize;
     font-size: 32px;
+    color: var(--primary);
 
     @media (min-width: 640px) {
       font-size: 48px;
@@ -21,6 +22,6 @@
     margin-bottom: 40px;
     font-weight: 600;
     font-size: 14px;
-    color: var(--secondary);
+    color: var(--primary);
   }
 }

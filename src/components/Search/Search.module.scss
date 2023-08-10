@@ -3,8 +3,10 @@
   border-radius: 8px;
   height: 40px;
   padding: 0 12px;
+  background-color: var(--background);
 
-  border: 1px solid var(--icons);
+  color: var(--primary);
+  border: 1px solid var(--select-outline);
   font-family: inherit;
   font-size: 14px;
   font-style: normal;
@@ -15,11 +17,10 @@
   }
 
   &:hover {
-    border-color: var(--secondary);
   }
 
   &:focus {
-    border-color: var(--primary);
+    border-color: var(--select-active);
     outline: none;
   }
 }

@@ -1,5 +1,6 @@
 .about {
   &__header {
+    color: var(--primary);
     font-size: 22px;
     font-style: normal;
     font-weight: 800;
@@ -13,6 +14,8 @@
   }
   &__description-title {
     margin: 32px 0 0 0;
+
+    color: var(--primary);
     font-size: 20px;
     font-style: normal;
     font-weight: 700;

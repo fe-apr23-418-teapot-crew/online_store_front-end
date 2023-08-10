@@ -17,6 +17,7 @@
     font-weight: 800;
     line-height: 41px;
     letter-spacing: -0.32px;
+    color: var(--primary);
   }
   &__priceRegular {
     color: var(--gray-secondary, var(--secondary));
@@ -34,7 +35,7 @@
   &__buttonToCart {
     flex-grow: 1;
     margin-right: 8px;
-    color: var(--background);
+    color: white;
     border: 1px solid var(--accent);
     border-radius: 8px;
     background: var(--accent);
@@ -112,6 +113,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    color: var(--primary);
   }
 }
 @media (min-width: 640px) {

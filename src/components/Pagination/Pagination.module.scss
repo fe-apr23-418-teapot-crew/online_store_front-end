@@ -35,8 +35,9 @@
       }
     }
     &--active {
-      background-color: var(--highlight);
-      color: white;
+      background-color: var(--button-active);
+      color: var(--primary);
+      border-color: var(--pag-border);
     }
     &--arrow {
       border-color: var(--icons);

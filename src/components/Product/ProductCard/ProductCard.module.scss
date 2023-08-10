@@ -54,6 +54,7 @@ $card-padding: 32px;
     gap: 8px;
     padding-bottom: 8px;
     position: relative;
+    color: var(--primary);
 
     &::after {
       content: '';
@@ -104,6 +105,7 @@ $card-padding: 32px;
     font-weight: 700;
     line-height: normal;
     text-align: right;
+    color: var(--primary);
   }
 
   &__buttons {
@@ -132,7 +134,7 @@ $card-padding: 32px;
     transition: 0.3s;
 
     &:disabled {
-      background: transparent;
+      background: var(--button-active);
       border: 1px solid var(--elements);
       color: var(--accent);
 
@@ -147,7 +149,7 @@ $card-padding: 32px;
 
     &:active {
       color: var(--accent);
-      background-color: var(--background);
+      background-color: var(--button-active);
       border: 1px solid var(--elements);
     }
   }
@@ -156,8 +158,8 @@ $card-padding: 32px;
     width: 40px;
     height: 40px;
     border-radius: 100px;
-    border: 1px solid var(--icons);
-    background-color: var(--background);
+    border: 1px solid var(--card-border);
+    background-color: var(--button-bg);
     background-image: url('../../../icons/FavouriteBtn.svg');
     background-repeat: no-repeat;
     background-position: center;
