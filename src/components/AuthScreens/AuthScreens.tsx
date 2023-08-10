@@ -54,6 +54,7 @@ export const AuthScreens: React.FC<Props> = ({
       return responseData;
 
     } catch (error) {
+      console.log('error -', error);
       setErrorMessage('Server error!');
     }
   };
@@ -80,22 +81,14 @@ export const AuthScreens: React.FC<Props> = ({
       setErrorMessage('Wrong e-mail or password');
       setIsLoading(false);
     }, 2000);
-    // setIsDataLoaded(true);
-    // if (loggedUser) {
-    //   setIsLogging(false);
-    //   return;
-    // }
-    // setErrorMessage('Wrong e-mail or password');
   };
   const handleReg = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!userEmail || !password) {
-      setErrorMessage('Please enter data required');
-      return;
-    }
+    setIsLoading(true);
     if (password.length < 8) {
-      setIsDataLoaded(true);
       setErrorMessage('Password must consist of at least 8 chars');
+      setIsDataLoaded(true);
+      setIsLoading(false);
       return;
     }
     const newUser = {
@@ -115,28 +108,25 @@ export const AuthScreens: React.FC<Props> = ({
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
+      setIsUserRegistered(true);
       console.log('New user created:', newUser);
     } catch (error) {
       console.log('New EEEEERRRR:');
-      setIsDataLoaded(true);
       setErrorMessage('User with this email already exists');
-      return;
     }
-    setIsUserRegistered(true);
+    setTimeout(() => {
+      setIsDataLoaded(true);
+      setIsLoading(false);
+    }, 2000);
   };
   useEffect(() => {
-    // if (!isRegistration) {
-    //   fetchUser();
-    // }
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = 'hidden';
   
     return () => {
       document.body.style.overflow = originalStyle;
     };
-  }, [
-    // password
-  ]);
+  }, []);
 
   return (
     <div>
@@ -170,7 +160,7 @@ export const AuthScreens: React.FC<Props> = ({
               </div>
             </div>
             {isUserRegistered
-              ? <p>Please check your email</p>
+              ? <p>Please check your email in order to finish the registration of your account</p>
               : <form
                 className={styles.auth__form}
                 onSubmit={handleReg}
@@ -205,18 +195,29 @@ export const AuthScreens: React.FC<Props> = ({
                     onChange={handlePasswordChange}
                   />
                 </div>
-                {isDataLoaded &&
-            <div
-              className={styles.auth__error}
-            >
-              {errorMessage}
-            </div>}
+                {isDataLoaded
+                  ? <div
+                    className={styles.auth__error}
+                  >
+                    {errorMessage}
+                  </div>
+                  : <div
+                    className={styles.auth__error}
+                  >
+                  </div>
+                }
                 <button 
                   type="submit"
                   className={styles.auth__formButton}
                   disabled={!userEmail || !password}
                 >
-            Sign in
+                  {isLoading
+                    ? <CircularProgress
+                      style={{color: 'white'}}
+                      size={30}
+                    />
+                    :'Sign in'
+                  }
                 </button>
               </form>
             }
@@ -265,23 +266,32 @@ export const AuthScreens: React.FC<Props> = ({
                   onChange={handlePasswordChange}
                 />
               </div>
-              {isDataLoaded &&
-          <div
-            className={styles.auth__error}
-          >
-            {errorMessage}
-          </div>}
+              {isDataLoaded
+                ? <div
+                  className={styles.auth__error}
+                >
+                  {errorMessage}
+                </div>
+                : <div
+                  className={styles.auth__error}
+                >
+                  {/* {errorMessage} */}
+                </div>
+              }
               <button 
                 type="submit"
                 className={styles.auth__formButton}
                 disabled={!userEmail || !password}
               >
                 {isLoading
-                  ? <CircularProgress style={{color: 'white'}} />
+                  ? <CircularProgress
+                    style={{color: 'white'}}
+                    size={30}
+                  />
                   :'Log in'
                 }
               </button>
-              <p className={styles.auth__formLabel}>
+              <p className={styles.auth__formCall}>
                 {'Don\'t have an account? Sign Up'}
               </p>
               <button 
