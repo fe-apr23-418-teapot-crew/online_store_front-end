@@ -4,6 +4,9 @@
   line-height: 48px;
 
   &__icon {
+    position: sticky;
+    z-index: 222;
+
     line-height: 28px;
     color: var(--theme-switcher);
   }

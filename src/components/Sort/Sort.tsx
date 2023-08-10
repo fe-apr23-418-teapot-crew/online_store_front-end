@@ -1,6 +1,9 @@
 import React from 'react';
 import './Sort.scss';
+import Select, {SelectChangeEvent} from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import { Search } from '../Search/Search';
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 
 type Props = {
   sortBy: string;
@@ -19,11 +22,11 @@ export const Sort: React.FC<Props> = ({
   changeLimit,
   changeQuery,
 }) => {
-  function handleSortByChange(event: React.ChangeEvent<HTMLSelectElement>) {
+  function handleSortByChange(event: SelectChangeEvent) {
     changeSortBy(event.target.value);
   }
 
-  function handleLimitChange(event: React.ChangeEvent<HTMLSelectElement>) {
+  function handleLimitChange(event: SelectChangeEvent) {
     changeLimit(event.target.value);
   }
 
@@ -32,54 +35,56 @@ export const Sort: React.FC<Props> = ({
       <div className="sort__filter">
         <div className="sort__field">
           <div className="sort__title">Sort by</div>
-          <select
+          <Select
             name="sort-by"
             value={sortBy}
             className="sort__select"
             onChange={handleSortByChange}
+            IconComponent={KeyboardArrowDownRoundedIcon}
           >
-            <option className="option" value="id">
+            <MenuItem className="option" value="id">
               Default
-            </option>
-            <option className="option" value="new">
+            </MenuItem>
+            <MenuItem className="option" value="new">
               By date
-            </option>
-            <option className="option" value="discount">
+            </MenuItem>
+            <MenuItem className="option" value="discount">
               By discount
-            </option>
-            <option className="option" value="price">
+            </MenuItem>
+            <MenuItem className="option" value="price">
               By price
-            </option>
-          </select>
+            </MenuItem>
+          </Select>
         </div>
 
         <div className="sort__field ">
           <div className="sort__title">Items on page</div>
-          <select
+          <Select
             name="perPage"
             value={limit}
             className="sort__select sort__select--perPage"
             onChange={handleLimitChange}
+            IconComponent={KeyboardArrowDownRoundedIcon}
           >
-            <option className="option" value="8">
-              8
-            </option>
-            <option className="option" value="16">
+            <MenuItem className="option" value="16">
               16
-            </option>
-            <option className="option" value="32">
+            </MenuItem>
+            <MenuItem className="option" value="24">
+              24
+            </MenuItem>
+            <MenuItem className="option" value="32">
               32
-            </option>
-            <option className="option" value="64">
+            </MenuItem>
+            <MenuItem className="option" value="64">
               64
-            </option>
-          </select>
+            </MenuItem>
+          </Select>
         </div>
       </div>
       <div className="search__filter">
         <div className="sort__title">Search products</div>
         <Search query={query} changeQuery={changeQuery} />
       </div>
-    </div>
+    </div >
   );
 };
