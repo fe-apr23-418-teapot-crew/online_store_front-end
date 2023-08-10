@@ -43,7 +43,7 @@ export const Header = () => {
           <ThemeSwitcher />
         </div>
         <div className={styles.header__button}>
-          <MenuLink isBurgerItem={true} to="/favourites" path="Favourites">
+          <MenuLink isBurgerItem={true} to="/favourites" path="Favourites" isPages={true}>
             <FavIcon />
           </MenuLink>
 
@@ -55,7 +55,7 @@ export const Header = () => {
         </div>
 
         <div className={styles.header__button}>
-          <MenuLink isBurgerItem={true} to="/cart" path="Cart">
+          <MenuLink isBurgerItem={true} to="/cart" path="Cart" isPages={true}>
             <CartIcon />
           </MenuLink>
 
