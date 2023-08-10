@@ -12,6 +12,9 @@ import { CartPage } from './pages/CartPage/CartPage';
 import { ErrorPage } from './pages/ErrorPage';
 import { ActivationPage } from './pages/ActivationPage';
 import './styles/App.scss';
+import { OrderPage } from './pages/OrderPage';
+import { RightsPage } from './pages/RightsPage/RightsPage';
+import { ContactsPage } from './pages/ContactsPage';
 
 export const App = () => (
   <Routes>
@@ -32,7 +35,13 @@ export const App = () => (
 
       <Route path="cart" element={<CartPage />} />
 
+      <Route path="orders" element={<OrderPage />} />
+
       <Route path="error" element={<ErrorPage />} />
+
+      <Route path="rights" element={<RightsPage />} />
+
+      <Route path="contacts" element={<ContactsPage />} />
 
       <Route path="activation/:activationToken" element={<ActivationPage />} />
 

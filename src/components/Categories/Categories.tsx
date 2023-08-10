@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import styles from './Categories.module.scss';
 import phones from '../../images/categories_1.svg';
 import tablets from '../../images/categories_2.svg';
@@ -14,11 +14,13 @@ export const Categories = () => {
 
   const { handleError } = useErrorHandling();
 
+  const phonesCount = data?.[0];
+  const tabletsCount = data?.[1];
+  const accessoriesCount = data?.[2];
+
   if (error) {
     handleError(error);
   }
-
-  const count = data?.count || 0;
 
   const handleNavigate = (endpoint: string) => {
     navigate(endpoint);
@@ -39,7 +41,9 @@ export const Categories = () => {
 
             <h4 className={styles.categories_type}>Mobile Phones</h4>
 
-            <p className={styles.categories_models}>{count} models</p>
+            <p className={styles.categories_models}>
+              {phonesCount} models
+            </p>
           </div>
 
           <div className={styles.categories_product}>
@@ -52,7 +56,9 @@ export const Categories = () => {
 
             <h4 className={styles.categories_type}>Tablets</h4>
 
-            <p className={styles.categories_models}>{count} models</p>
+            <p className={styles.categories_models}>
+              {tabletsCount} models
+            </p>
           </div>
 
           <div className={styles.categories_product}>
@@ -65,7 +71,9 @@ export const Categories = () => {
 
             <h4 className={styles.categories_type}>Accessories</h4>
 
-            <p className={styles.categories_models}>{count} models</p>
+            <p className={styles.categories_models}>
+              {accessoriesCount} models
+            </p>
           </div>
         </div>
       </div>

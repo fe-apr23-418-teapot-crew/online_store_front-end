@@ -14,6 +14,8 @@ import { CartIcon } from '../../icons2/CartIcon';
 import { FavIcon } from '../../icons2/FavIcon';
 import { User } from '../../types/User';
 import { AuthScreens } from '../AuthScreens/AuthScreens';
+import { resetStoredItems } from '../../helpers/localStorage/resetStoredItems';
+import { getStoredItem } from '../../helpers/localStorage/getStoredItem';
 
 export const Header = () => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -28,10 +30,15 @@ export const Header = () => {
   const isCartEmpty = cartProductsCount < 1;
   const [isLogging, setIsLogging] = useState(false);
   const [isRegistration, setIsRegistration] = useState(false);
-  const [loggedUser, setLoggedUser] = useState<User | null>(
-    null
-  );
-  // const { pathname } = useLocation();
+  const storedUser = getStoredItem('user');
+  const [loggedUser, setLoggedUser] = useState<User | null>(storedUser);
+  
+  const handleLogOut = () => {
+    setLoggedUser(null);
+    resetStoredItems('user');
+  };
+
+  console.log(loggedUser);
 
   return (
     <header className={styles.header}>
@@ -50,42 +57,50 @@ export const Header = () => {
 
       <div className={styles.header__buttons}>
         <div className={styles.header__button}>
-          {loggedUser
-            ? <div className={styles.header__authUserData}>
-              <p className={styles.header__authUserName}>{loggedUser.email.split('@')[0]}</p>
+          {loggedUser ? (
+            <div className={styles.header__authUserData}>
+              <p className={styles.header__authUserName}>
+                {loggedUser?.email.split('@')[0]}
+              </p>
               <Link
                 to={'/'}
                 className={styles.header__authButton}
-                onClick={() => setLoggedUser(null)}
+                onClick={handleLogOut}
               >
                 <img src={logOut} alt="LOG OUT" />
               </Link>
             </div>
-            : <Link
+          ) : (
+            <Link
               to={pathname}
               className={styles.header__authButton}
               onClick={() => setIsLogging(true)}
             >
               <img src={user} alt="USER AUTH" />
             </Link>
-
-          }
-          {isLogging && <AuthScreens
-            loggedUser={loggedUser}
-            isRegistration={isRegistration}
-            setIsLogging={setIsLogging}
-            setLoggedUser={setLoggedUser}
-            setIsRegistration={setIsRegistration}
-          />}
-
+          )}
+          {isLogging && (
+            <AuthScreens
+              loggedUser={loggedUser}
+              isRegistration={isRegistration}
+              setIsLogging={setIsLogging}
+              setLoggedUser={setLoggedUser}
+              setIsRegistration={setIsRegistration}
+            />
+          )}
         </div>
-        
+
         <div className={styles.header__button}>
           <ThemeSwitcher />
         </div>
-        
+
         <div className={styles.header__button}>
-          <MenuLink isBurgerItem={true} to="/favourites" path="Favourites" isPages={true}>
+          <MenuLink
+            isBurgerItem={true}
+            to="/favourites"
+            path="Favourites"
+            isPages={true}
+          >
             <FavIcon />
           </MenuLink>
 

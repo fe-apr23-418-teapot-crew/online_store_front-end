@@ -49,10 +49,19 @@ export const getDetailedProductByItemId = async (
   return response.data;
 };
 
-export const getCountOfCategory = async () => {
-  const response = await axios.get<ProductsData>(`${API_URL}products`);
 
-  return response.data;
+export const getCountOfCategory = async () => {
+  const requests = [
+    axios.get<ProductsData>(`${API_URL}phones`),
+    axios.get<ProductsData>(`${API_URL}tablets`),
+    axios.get<ProductsData>(`${API_URL}accessories`),
+  ];
+
+  const responses = await Promise.all(requests);
+
+  const counts = responses.map((response) => response.data.count);
+
+  return counts;
 };
 
 export const getActivation = async (activationToken: string) => {
