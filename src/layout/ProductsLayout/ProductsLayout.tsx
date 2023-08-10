@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { ProductList } from '../../components/Product/ProductList/ProductList';
 import { Sort } from '../../components/Sort/Sort';
 import { useSearchParams } from 'react-router-dom';
@@ -20,6 +20,7 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
   title,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [activePage, setActivePage] = useState<number>(1);
   const sortBy = searchParams.get('sortBy') || 'discount';
   const limit = searchParams.get('limit') || '16';
   const offset = searchParams.get('offset') || '0';
@@ -38,6 +39,10 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
   const products = data?.rows || [];
   const productsCount = data?.count || 0;
   const isProductsEmpty = productsCount === 0;
+
+  const changePage = (newPage: number) => {
+    setActivePage(newPage);
+  };
 
   const updateSearchParams = (params: Record<string, string>) => {
     const newSearchParams = new URLSearchParams(searchParams);
@@ -93,9 +98,12 @@ export const ProductsLayout: React.FC<ProductsLayoutProps> = ({
           <ProductList products={products} />
 
           <Pagination
+            activePage={activePage}
+            offset={offset}
             productsOnPage={+limit}
             productsNumber={productsCount}
             changeOffset={changeOffset}
+            changePage={changePage}
           />
         </>
       )}
