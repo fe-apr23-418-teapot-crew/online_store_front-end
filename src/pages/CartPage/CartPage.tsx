@@ -19,7 +19,6 @@ export const CartPage: React.FC = () => {
 
   const cartItemsCount = cartProducts.length;
   const isCartEmpty = cartItemsCount < 1;
-  console.log(totalAmount);
 
   useEffect(() => {
     if (totalAmount > 1000000) {

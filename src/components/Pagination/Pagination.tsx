@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 
 interface Props {
   activePage: number;
-  offset: string;
+  offset?: string;
   productsOnPage: number;
   productsNumber: number;
   changePage: (page: number) => void;
@@ -18,7 +18,7 @@ export const Pagination: React.FC<Props> = ({
   productsNumber,
   changeOffset,
   changePage,
-  offset,
+  //offset,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const lastPage = Math.ceil(productsNumber / productsOnPage);
@@ -37,9 +37,6 @@ export const Pagination: React.FC<Props> = ({
   useEffect(() => {
     searchParams.set('offset', '0');
     changePage(activePage);
-    console.log('activePage -', activePage);
-    console.log('productsOnPage -', productsOnPage);
-    console.log('offset -', offset);
   }, [productsOnPage]);
 
   const handleMoveLeft = () => {
