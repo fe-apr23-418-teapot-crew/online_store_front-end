@@ -1,3 +1,51 @@
+.container {
+  padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  
+    @media (min-width: 640px) {
+      padding: 0 24px;
+    }
+  
+    @media (min-width: 1200px) {
+      padding: 0 32px;
+      width: 1200px;
+      text-align: left;
+    }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+  justify-content: center;
+  padding: 16px;
+  border-radius: 16px;
+  gap: 16px;
+  border: 1px solid var(--elements);
+  margin: 10px;
+  font-size: 18px;
+
+  &__name {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+}
+
 .title {
-  font-size: 36px;
+  max-width: 1200px;
+    padding: 24px 14px;
+    margin-bottom: 8px;
+
+    text-transform: capitalize;
+    font-size: 32px;
+    text-align: left;
+
+    @media (min-width: 640px) {
+      margin: 8px 0px 32px 0px;
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
 }
