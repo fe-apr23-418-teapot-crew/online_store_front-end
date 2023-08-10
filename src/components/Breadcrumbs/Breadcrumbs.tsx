@@ -17,8 +17,6 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productDetails }) => {
   const pathParts = productUrl.split('/');
   const parentRoute = `/${pathParts[0]}`;
 
-  console.log(productUrl);
-
   return (
     <div className={styles.locationHistory}>
       <Link className={styles.locationHistory__icon} to="/">

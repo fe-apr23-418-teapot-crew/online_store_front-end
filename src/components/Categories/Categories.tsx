@@ -26,11 +26,8 @@ export const Categories = () => {
 
   return (
     <section className={styles.categories}>
-      <h2 className={styles.categories_title}>
-        Shop by category
-      </h2>
+      <h2 className={styles.categories_title}>Shop by category</h2>
       <div className={styles.container}>
-
         <div className={styles.categories_container}>
           <div className={styles.categories_product}>
             <img
@@ -68,7 +65,7 @@ export const Categories = () => {
 
             <h4 className={styles.categories_type}>Accessories</h4>
 
-            <p className={styles.categories_models}>{count}models</p>
+            <p className={styles.categories_models}>{count} models</p>
           </div>
         </div>
       </div>

@@ -3,11 +3,13 @@ import styles from './FavsPage.module.scss';
 import { StorageContext } from '../../contexts/StorageContext';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { ProductList } from '../../components/Product/ProductList';
+import { EmptyScreen } from '../../components/EmptyScreen';
 
 export const FavsPage: React.FC = () => {
   const { favsProducts } = useContext(StorageContext);
 
   const itemsCount = favsProducts.length;
+  const isCartEmpty = itemsCount === 0;
 
   return (
     <section className={styles.favs}>
@@ -15,9 +17,9 @@ export const FavsPage: React.FC = () => {
 
       <h1 className={styles.favs__title}>Favourites</h1>
       <h6 className={styles.favs__count}>
-        {itemsCount} {'items'}
+        {!isCartEmpty ? `${itemsCount} items` : ''}
       </h6>
-      {favsProducts && <ProductList products={favsProducts} />}
+      {isCartEmpty ? <EmptyScreen /> : <ProductList products={favsProducts} />}
     </section>
   );
 };

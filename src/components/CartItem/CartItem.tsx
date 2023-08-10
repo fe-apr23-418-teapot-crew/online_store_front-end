@@ -10,11 +10,13 @@ import { updateStoredCount } from '../../helpers/localStorage/updateStoredCount'
 import { StorageContext } from '../../contexts/StorageContext';
 
 interface CartItemProps {
+  isLimit: boolean;
   product: Product;
   onChangeTotalAmount: (newPrice: number) => void;
 }
 
 export const CartItem: React.FC<CartItemProps> = ({
+  isLimit,
   product,
   onChangeTotalAmount,
 }) => {
@@ -22,6 +24,8 @@ export const CartItem: React.FC<CartItemProps> = ({
   const storedCartItemCount = getStoredItemCount('cart', id);
   const [count, setCount] = useState<number>(storedCartItemCount);
   const { removeFromStorage } = useContext(StorageContext);
+
+  const isLimitOfCount = isLimit || count > 100;
 
   const imageURL = API_URL + image;
   const isReduceCountDisabled = count === 1;
@@ -87,6 +91,7 @@ export const CartItem: React.FC<CartItemProps> = ({
           <button
             className={styles.cartItem__counterButton}
             onClick={() => handleCountChange('+')}
+            disabled={isLimitOfCount}
           >
             <img
               src={plusButton}
