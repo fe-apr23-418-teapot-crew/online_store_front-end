@@ -4,15 +4,22 @@ import styles from './Pagination.module.scss';
 import { useSearchParams } from 'react-router-dom';
 
 interface Props {
-  activePage: number,
-  offset: string,
+  activePage: number;
+  offset: string;
   productsOnPage: number;
   productsNumber: number;
   changePage: (page: number) => void;
   changeOffset: (serverData: string) => void;
 }
 
-export const Pagination: React.FC<Props> = ({ activePage, productsOnPage, productsNumber, changeOffset, changePage, offset }) => {
+export const Pagination: React.FC<Props> = ({
+  activePage,
+  productsOnPage,
+  productsNumber,
+  changeOffset,
+  changePage,
+  offset,
+}) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const lastPage = Math.ceil(productsNumber / productsOnPage);
 
@@ -26,7 +33,7 @@ export const Pagination: React.FC<Props> = ({ activePage, productsOnPage, produc
     setSearchParams(searchParams);
     // window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activePage]);
-  
+
   useEffect(() => {
     searchParams.set('offset', '0');
     changePage(activePage);
@@ -34,7 +41,6 @@ export const Pagination: React.FC<Props> = ({ activePage, productsOnPage, produc
     console.log('productsOnPage -', productsOnPage);
     console.log('offset -', offset);
   }, [productsOnPage]);
-
 
   const handleMoveLeft = () => {
     if (activePage === 1) {
@@ -80,9 +86,7 @@ export const Pagination: React.FC<Props> = ({ activePage, productsOnPage, produc
         {'<'}
       </button>
       <div className={styles.pagination__pagesListContainer}>
-        <div
-          className={styles.pagination__pagesList}
-        >
+        <div className={styles.pagination__pagesList}>
           {pageNumbers.map((num) => (
             <button
               className={cn(styles.pagination__button, {

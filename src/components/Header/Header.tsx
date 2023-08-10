@@ -38,11 +38,10 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className={styles.header__themeSwitcherWrapper}>
-        <ThemeSwitcher />
-      </div>
-
       <div className={styles.header__buttons}>
+        <div className={styles.header__button}>
+          <ThemeSwitcher />
+        </div>
         <div className={styles.header__button}>
           <MenuLink isBurgerItem={true} to="/favourites" path="Favourites">
             <FavIcon />
