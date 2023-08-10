@@ -17,6 +17,8 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productDetails }) => {
   const pathParts = productUrl.split('/');
   const parentRoute = `/${pathParts[0]}`;
 
+  console.log(productUrl);
+
   return (
     <div className={styles.locationHistory}>
       <Link className={styles.locationHistory__icon} to="/">
@@ -32,14 +34,16 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productDetails }) => {
           <li className={styles.locationHistory__item}>
             <Link className={styles.locationHistory__link} to={parentRoute}>
               <div className={styles.locationHistory__path}>
-                <img className={styles.locationHistory__arrow} src={rightArrow} alt="" />
+                <img
+                  className={styles.locationHistory__arrow}
+                  src={rightArrow}
+                  alt=""
+                />
                 {`${pathParts[0]}`}
               </div>
             </Link>
           </li>
-          <li
-            className={styles.locationHistory__item}
-          >
+          <li className={styles.locationHistory__item}>
             <div className={styles.locationHistory__path}>
               <img src={rightArrow} alt="" />
               {`${productDetails.name}`}
@@ -53,8 +57,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productDetails }) => {
             {`${productUrl}`}
           </div>
         </div>
-      )
-      }
+      )}
     </div>
   );
 };

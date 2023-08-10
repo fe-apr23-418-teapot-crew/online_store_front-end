@@ -14,13 +14,15 @@ import { getDetailedProductByItemId } from '../../api/products';
 import { useQuery } from 'react-query';
 import { Loader } from '../../components/Loader';
 import { useErrorHandling } from '../../hooks/useErrorHandling';
+import cn from 'classnames';
 
 export const ProductPage = () => {
   const { pathname } = useLocation();
   const [category, itemId] = pathname.slice(1).split('/');
 
-  const { data, error } = useQuery(['detailedProduct', pathname], () =>
-    getDetailedProductByItemId(category, itemId),
+  const { data, error, isLoading } = useQuery(
+    ['detailedProduct', pathname],
+    () => getDetailedProductByItemId(category, itemId),
   );
 
   const { handleError } = useErrorHandling();
@@ -39,7 +41,16 @@ export const ProductPage = () => {
 
   return (
     <>
-      <Breadcrumbs path={normalizedPathName} productDetails={productDetails} />
+      <div
+        className={cn(styles.product__breadCrumbsWrapper, {
+          [styles['product__breadCrumbsWrapper--hidden']]: isLoading,
+        })}
+      >
+        <Breadcrumbs
+          path={normalizedPathName}
+          productDetails={productDetails}
+        />
+      </div>
 
       <section className={styles.product}>
         <div className={styles.product__navigation}>
