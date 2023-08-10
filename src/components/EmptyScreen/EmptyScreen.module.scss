@@ -1,0 +1,18 @@
+.emptyScreen {
+  margin-top: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    margin-bottom: 20px;
+    color: var(--accent);
+  }
+
+  &__img {
+    width: 50%;
+    margin-bottom: 20px;
+  }
+}
