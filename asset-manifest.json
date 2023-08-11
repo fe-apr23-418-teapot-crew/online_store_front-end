@@ -1,14 +1,13 @@
 {
   "files": {
-    "main.css": "/online_store_front-end/static/css/main.507b73fd.css",
-    "main.js": "/online_store_front-end/static/js/main.47fe5291.js",
+    "main.css": "/online_store_front-end/static/css/main.0514e057.css",
+    "main.js": "/online_store_front-end/static/js/main.965c0ea0.js",
     "static/media/categories_2.svg": "/online_store_front-end/static/media/categories_2.f9b2d98853f53a9375918128b98ed760.svg",
     "static/media/categoties_3.svg": "/online_store_front-end/static/media/categoties_3.4348097537b078161095fc44dd763489.svg",
     "static/media/desktop-image-3.png": "/online_store_front-end/static/media/desktop-image-3.f92f589de98eec4b675d.png",
     "static/media/categories_1.svg": "/online_store_front-end/static/media/categories_1.2b8c7bd04c9e98d28a7f0ae780701ccc.svg",
     "static/media/mobile-image-3.png": "/online_store_front-end/static/media/mobile-image-3.e06f50018726335d75da.png",
     "static/media/mobile-image-1.png": "/online_store_front-end/static/media/mobile-image-1.8786038cf05e529ce7ca.png",
-    "static/media/LogoForBurger.svg": "/online_store_front-end/static/media/LogoForBurger.d83cc28d1ea342dc722523af069166ad.svg",
     "static/media/Logo.svg": "/online_store_front-end/static/media/Logo.06beb17f36782e0efc982c4986d8b033.svg",
     "static/media/desktop-image-2.png": "/online_store_front-end/static/media/desktop-image-2.7e4296e5c2935780c511.png",
     "static/media/mobile-image-2.png": "/online_store_front-end/static/media/mobile-image-2.7092563d0e3380f9f12f.png",
@@ -27,11 +26,11 @@
     "static/media/ArrowRightSecondary.svg": "/online_store_front-end/static/media/ArrowRightSecondary.ae9555c0a6d15db5b3fdd59d2e2c3b78.svg",
     "static/media/Chevron (Arrow Right).svg": "/online_store_front-end/static/media/Chevron (Arrow Right).07c58b607a4cfaa0ed72cef8e66d7b1c.svg",
     "static/media/LineCheckout.svg": "/online_store_front-end/static/media/LineCheckout.a562aeedad0fde75bc1cf88d500c2b8d.svg",
-    "main.507b73fd.css.map": "/online_store_front-end/static/css/main.507b73fd.css.map",
-    "main.47fe5291.js.map": "/online_store_front-end/static/js/main.47fe5291.js.map"
+    "main.0514e057.css.map": "/online_store_front-end/static/css/main.0514e057.css.map",
+    "main.965c0ea0.js.map": "/online_store_front-end/static/js/main.965c0ea0.js.map"
   },
   "entrypoints": [
-    "static/css/main.507b73fd.css",
-    "static/js/main.47fe5291.js"
+    "static/css/main.0514e057.css",
+    "static/js/main.965c0ea0.js"
   ]
 }
