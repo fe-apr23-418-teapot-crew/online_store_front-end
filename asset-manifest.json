@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/online_store_front-end/static/css/main.026e8986.css",
-    "main.js": "/online_store_front-end/static/js/main.0b7b565c.js",
+    "main.css": "/online_store_front-end/static/css/main.507b73fd.css",
+    "main.js": "/online_store_front-end/static/js/main.47fe5291.js",
     "static/media/categories_2.svg": "/online_store_front-end/static/media/categories_2.f9b2d98853f53a9375918128b98ed760.svg",
     "static/media/categoties_3.svg": "/online_store_front-end/static/media/categoties_3.4348097537b078161095fc44dd763489.svg",
     "static/media/desktop-image-3.png": "/online_store_front-end/static/media/desktop-image-3.f92f589de98eec4b675d.png",
@@ -27,11 +27,11 @@
     "static/media/ArrowRightSecondary.svg": "/online_store_front-end/static/media/ArrowRightSecondary.ae9555c0a6d15db5b3fdd59d2e2c3b78.svg",
     "static/media/Chevron (Arrow Right).svg": "/online_store_front-end/static/media/Chevron (Arrow Right).07c58b607a4cfaa0ed72cef8e66d7b1c.svg",
     "static/media/LineCheckout.svg": "/online_store_front-end/static/media/LineCheckout.a562aeedad0fde75bc1cf88d500c2b8d.svg",
-    "main.026e8986.css.map": "/online_store_front-end/static/css/main.026e8986.css.map",
-    "main.0b7b565c.js.map": "/online_store_front-end/static/js/main.0b7b565c.js.map"
+    "main.507b73fd.css.map": "/online_store_front-end/static/css/main.507b73fd.css.map",
+    "main.47fe5291.js.map": "/online_store_front-end/static/js/main.47fe5291.js.map"
   },
   "entrypoints": [
-    "static/css/main.026e8986.css",
-    "static/js/main.0b7b565c.js"
+    "static/css/main.507b73fd.css",
+    "static/js/main.47fe5291.js"
   ]
 }
