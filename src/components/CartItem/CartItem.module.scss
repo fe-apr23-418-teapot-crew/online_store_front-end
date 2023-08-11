@@ -42,10 +42,8 @@ svg path {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    // background-color: green;
 
     &__buttons {
-      // background-color: blue;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -58,7 +56,6 @@ svg path {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    // background-color: yellow;
   }
 
   &__img {
@@ -108,7 +105,6 @@ svg path {
   }
 
   &__removeButton {
-    // background-color: green;
     background: none;
     color: var(--primary);
     border: none;

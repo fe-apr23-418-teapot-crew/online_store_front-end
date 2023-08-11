@@ -1,32 +1,81 @@
 import React from 'react';
 import styles from './ContactsPage.module.scss';
 
-interface ContactsPageProps {}
+const developers = [
+  {
+    devName: 'Bogdan Mihailenko',
+    links: {
+      gmail: 'b.a.mykhailenko@gmail.com',
+      github: 'https://github.com/bohdan-mykhailenko',
+      linkedin: 'https://www.linkedin.com/in/bohdan-mykhailenko-a1849926b/',
+    },
+  },
+  {
+    devName: 'Maksym Nemera',
+    links: {
+      gmail: 'maksym.nemera@outlook.com',
+      github: 'https://github.com/maksym-nemera',
+      linkedin: 'https://www.linkedin.com/in/maksym-nemera/',
+    },
+  },
+  {
+    devName: 'Maksym Bobryk',
+    links: {
+      gmail: 'booobryyyk@gmail.com',
+      github: 'https://github.com/maksym-bobryk',
+      linkedin: 'http://www.linkedin.com/in/maksym-bobryk',
+    },
+  },
+  {
+    devName: 'Kucheriavenko Yuliia',
+    links: {
+      gmail: 'kucheriavenko.dev@gmail.com',
+      github: 'https://github.com/Yuliia-kucheriavenko',
+      linkedin: 'https://www.linkedin.com/in/yuliia-kucheriavenko-800ab6233/',
+    },
+  },
+  {
+    devName: 'Ivan Iarovyi',
+    links: {
+      gmail: 'yarovyi@gmail.com',
+      github: 'https://github.com/niaYaro',
+      linkedin: 'https://www.linkedin.com/in/ivan-yarovyi-067381266/',
+    },
+  },
+  {
+    devName: 'Kyryl Shorin',
+    links: {
+      gmail: 'kirillshorin8838@gmail.com',
+      github: 'https://github.com/kirilshorin',
+    },
+  },
+];
 
-export const ContactsPage: React.FC<ContactsPageProps> = () => {
+export const ContactsPage = () => {
   return (
-    <div className={styles.contactsPage}>
-      <div className={styles.contactsContainer}>
-        <h2 className={styles.contactsTitle}>Contact Us</h2>
-        <p className={styles.contactsDescription}>
-          If you have any questions or inquiries, feel free to get in touch with
-          us. We would d love to hear from you!
-        </p>
-        <div className={styles.contactsInfo}>
-          <div className={styles.contactsInfoItem}>
-            <h3 className={styles.infoTitle}>Email</h3>
-            <p className={styles.infoText}>info@example.com</p>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Our team</h1>
+      {developers.map(developer =>
+        <> 
+          <div className={styles.card}>
+            <div 
+              key={developer.devName}
+              className={styles.card__name}
+            >
+              {developer.devName}
+            </div>
+            <div className={styles.card__item}>
+              {developer.links.github}
+            </div>
+            <div className={styles.card__item}>
+              {developer.links.gmail}
+            </div>
+            <div className={styles.card__item}>
+              {developer.links.linkedin}
+            </div>
           </div>
-          <div className={styles.contactsInfoItem}>
-            <h3 className={styles.infoTitle}>Phone</h3>
-            <p className={styles.infoText}>+1 (123) 456-7890</p>
-          </div>
-          <div className={styles.contactsInfoItem}>
-            <h3 className={styles.infoTitle}>Address</h3>
-            <p className={styles.infoText}>123 Main Street, City, Country</p>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };
