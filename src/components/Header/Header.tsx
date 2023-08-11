@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import styles from './Header.module.scss';
 import logo from '../../icons/Logo.svg';
-import logoBurger from '../../icons/LogoForBurger.svg';
 // import user from '../../icons/User.svg';
 // import logOut from '../../icons/Logout.svg';
 // import closeMenu from '../../icons/Close.svg';
@@ -41,8 +40,6 @@ export const Header = () => {
     setLoggedUser(null);
     resetStoredItems('user');
   };
-
-  console.log(loggedUser);
 
   return (
     <header className={styles.header}>
@@ -142,7 +139,7 @@ export const Header = () => {
             <div className={styles.container}>
               <div className={styles.header__logo}>
                 <img
-                  src={logoBurger}
+                  src={logo}
                   alt="LOGO"
                   className={styles.header__logoImage}
                 />
