@@ -116,8 +116,12 @@
   }
  }
 
-.MuiInputBase-colorPrimary  {
+.MuiInputBase-colorPrimary {
   color: var(--primary) !important;
+
+  &:hover{
+    border-color: red !important;
+  }
 }
 
 .MuiOutlinedInput-notchedOutline {
@@ -134,6 +138,10 @@
   border-radius: 8px !important;
 }
 
+.MuiSelect-select :hover {
+  border-color: red !important;
+}
+
 .MuiPaper-root {
   border-radius: 8px !important;
   margin-top: 4px !important;
@@ -142,4 +150,8 @@
 
 .MuiButtonBase-root {
   font-family: inherit !important;
+}
+
+.MuiSvgIcon-root {
+  fill: var(--primary) !important;
 }

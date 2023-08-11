@@ -9,6 +9,7 @@ import { useQuery } from 'react-query';
 import { getSelectedProducts } from '../../api/products';
 import { useErrorHandling } from '../../hooks/useErrorHandling';
 
+
 const responsiveSettings = {
   desktop: {
     breakpoint: { max: 3000, min: 1200 },

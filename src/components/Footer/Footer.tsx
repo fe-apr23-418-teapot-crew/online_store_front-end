@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './Footer.module.scss';
 import logo from '../../icons/Logo.svg';
-import slider from '../../icons/Vector (Stroke).svg';
+// import slider from '../../icons/Vector (Stroke).svg';
+import { ArrowDown } from '../../icons2/ArrowDown';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const GITHUB_URL = 'https://github.com/fe-apr23-418-teapot-crew';
-    
+
   return (
     <footer className={styles.footer}>
       <div className={styles.footer__content}>
@@ -51,11 +52,7 @@ const Footer = () => {
               });
             }}
           >
-            <img
-              src={slider}
-              alt="BACK TO TOP"
-              className={styles.backToTop__pic}
-            />
+            <ArrowDown />
           </button>
         </div>
       </div>

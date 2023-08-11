@@ -3,11 +3,13 @@ import React, {
   useState,
 } from 'react';
 import styles from './AuthScreens.module.scss';
-import closeIcon from '../../icons/Close.svg';
-import arrowLeft from '../../icons/ArrowLeft.svg';
+// import closeIcon from '../../icons/Close.svg';
+// import arrowLeft from '../../icons/ArrowLeft.svg';
+import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
 import { User } from '../../types/User';
 import { addNewItem } from '../../helpers/localStorage/addNewItem';
 import { Loader } from '../Loader';
+import { CloseIcon } from '../../icons2/CloseIcon';
 
 interface Props {
     loggedUser: User | null;
@@ -149,29 +151,33 @@ export const AuthScreens: React.FC<Props> = ({
                   <h4>Registration</h4>
                   <div className={styles.auth__navButtons}>
                     {!isUserRegistered && (
-                      <img
+                      <div
                         className={styles.auth__icon}
-                        src={arrowLeft}
+                        // src={arrowLeft}
                         onClick={() => {
                           setIsRegistration(false);
                           setIsDataLoaded(false);
                         }}
-                        alt="BACK"
-                      />
+                        // alt="BACK"
+                      >
+                        <KeyboardArrowLeftRoundedIcon sx={{width: '20px'}}/>
+                      </div>
                     )}
-                    <img
+                    <div
                       className={styles.auth__icon}
-                      src={closeIcon}
+                      // src={closeIcon}
                       onClick={() => {
                         setIsRegistration(false);
                         setIsLogging(false);
                       }}
-                      alt="CLOSE ICON"
-                    />
+                      // alt="CLOSE ICON"
+                    >
+                      <CloseIcon />
+                    </div>
                   </div>
                 </div>
                 {isUserRegistered ? (
-                  <p>
+                  <p className={styles.auth__success}>
                     Please check your email to finish the registration of your
                     account
                   </p>
@@ -229,12 +235,14 @@ export const AuthScreens: React.FC<Props> = ({
               <div className={styles.auth__container}>
                 <div className={styles.auth__header}>
                   <h4>Log in</h4>
-                  <img
+                  <div
                     className={styles.auth__icon}
-                    src={closeIcon}
+                    // src={closeIcon}
                     onClick={() => setIsLogging(false)}
-                    alt="CLOSE ICON"
-                  />
+                    // alt="CLOSE ICON"
+                  >
+                    <CloseIcon />
+                  </div>
                 </div>
                 <form className={styles.auth__form} onSubmit={handleLogin}>
                   <div className={styles.auth__formSection}>
@@ -275,7 +283,7 @@ export const AuthScreens: React.FC<Props> = ({
                     Log in
                   </button>
                   <p className={styles.auth__formLabel}>
-                    {'Don\'t have an account? Sign Up'}
+                    {'Don\'t have an account?'}
                   </p>
                   <button
                     type="button"

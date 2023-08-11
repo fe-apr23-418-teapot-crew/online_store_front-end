@@ -57,10 +57,14 @@
     font-style: normal;
     font-weight: 600;
     letter-spacing: 0.48px;
+    border-left: 1px solid var(--elements);
+    padding: 0 12px;
   }
 
   &__authButton {
     text-align: center;
+    display: flex;
+    justify-content: center;
     line-height: 48px;
     width: 48px;
   }
@@ -78,11 +82,16 @@
     margin-right: 8px;
   }
   &__authUserName {
-    // line-height: 48px;
+    line-height: 48px;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     letter-spacing: 0.48px;
+    color: var(--primary)
+  }
+  
+  &__burgerContainer{
+    display: flex;
   }
 
   &__button,

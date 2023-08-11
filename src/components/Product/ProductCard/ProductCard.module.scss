@@ -157,14 +157,15 @@ $card-padding: 32px;
   &__favoriteButton {
     width: 40px;
     height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 100px;
     border: 1px solid var(--card-border);
     background-color: var(--button-bg);
-    background-image: url('../../../icons/FavouriteBtn.svg');
     background-repeat: no-repeat;
     background-position: center;
     transition: 0.3s;
-
     &--active {
       background-image: url('../../../icons/FavouritesFilledBtn.svg');
     }
@@ -172,10 +173,10 @@ $card-padding: 32px;
     &:hover {
       border-color: var(--accent);
     }
-    &:active {
-      border-color: var(--accent);
-      background-image: url('../../../icons/FavouritesFilledBtn.svg');
-    }
+    // &:active {
+    //   border-color: var(--accent);
+    //   background-image: url('../../../icons/FavouritesFilledBtn.svg');
+    // }
   }
 }
 

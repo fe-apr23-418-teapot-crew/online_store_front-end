@@ -74,6 +74,9 @@
   &__buttonToFavourites {
     width: 48px;
     height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 100px;
     border: 1px solid var(--icons);
     background-color: var(--background);
@@ -87,10 +90,6 @@
     }
     &:hover {
       border-color: var(--accent);
-    }
-    &:active {
-      border-color: var(--accent);
-      background-image: url('../../../icons/FavouritesFilledBtn.svg');
     }
   }
   &__infoContainer {

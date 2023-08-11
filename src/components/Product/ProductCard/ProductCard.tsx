@@ -6,6 +6,7 @@ import styles from './ProductCard.module.scss';
 import cn from 'classnames';
 import { isProductInStorage } from '../../../helpers/localStorage/isProductInStorage';
 import { StorageContext } from '../../../contexts/StorageContext';
+import { FavoriteIcon } from '../../../icons2/FavoriteIcon';
 
 type ProductCardProps = {
   product: Product;
@@ -117,7 +118,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           className={cn(styles.productCard__favoriteButton, {
             [styles['productCard__favoriteButton--active']]: isFavIconActive,
           })}
-        />
+        >
+          {!isFavIconActive && 
+            <FavoriteIcon />
+          }
+        </button>
       </div>
     </article>
   );

@@ -104,6 +104,7 @@
 
     border-radius: 48px;
     border: 1px solid var(--icons);
+    transition: transform 0.5s;
 
     @media (min-width: 640px) {
       margin-right: 32px;
@@ -111,13 +112,12 @@
   }
 
   &__pic {
-    width: 10px;
-    height: 10px;
-    margin: 10px;
-    transition: transform 0.5s;
+    display: flex;
+    justify-content: center;
+    // margin: 10px;
   }
 
-  &__pic:hover {
-    transform: rotate(-360deg);
+  &__button:hover {
+    transform: rotate(-180deg);
   }
 }
