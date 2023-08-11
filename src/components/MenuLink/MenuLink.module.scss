@@ -3,7 +3,7 @@
     fill: var(--primary);
   }
   &--burger {
-    line-height: 48px;
+    line-height: 75px;
     width: 48px;
     text-align: center;
     //border-left: 1px solid var(--elements);
@@ -35,7 +35,7 @@
   @media (min-width: 640px) {
     margin-right: 32px;
 
-    font-size: 12px;
+    font-size: 11px;
     font-style: normal;
     font-weight: 600;
     line-height: 48px;

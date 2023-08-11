@@ -14,6 +14,8 @@ import { CartIcon } from '../../icons2/CartIcon';
 import { FavIcon } from '../../icons2/FavIcon';
 import { User } from '../../types/User';
 import { AuthScreens } from '../AuthScreens/AuthScreens';
+import { resetStoredItems } from '../../helpers/localStorage/resetStoredItems';
+import { getStoredItem } from '../../helpers/localStorage/getStoredItem';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import { MenuIcon } from '../../icons2/MenuIcon';
@@ -32,10 +34,15 @@ export const Header = () => {
   const isCartEmpty = cartProductsCount < 1;
   const [isLogging, setIsLogging] = useState(false);
   const [isRegistration, setIsRegistration] = useState(false);
-  const [loggedUser, setLoggedUser] = useState<User | null>(
-    null
-  );
-  // const { pathname } = useLocation();
+  const storedUser = getStoredItem('user');
+  const [loggedUser, setLoggedUser] = useState<User | null>(storedUser);
+
+  const handleLogOut = () => {
+    setLoggedUser(null);
+    resetStoredItems('user');
+  };
+
+  console.log(loggedUser);
 
   return (
     <header className={styles.header}>
@@ -58,7 +65,12 @@ export const Header = () => {
         </div>
 
         <div className={styles.header__button}>
-          <MenuLink isBurgerItem={true} to="/favourites" path="Favourites" isPages={true}>
+          <MenuLink
+            isBurgerItem={true}
+            to="/favourites"
+            path="Favourites"
+            isPages={true}
+          >
             <FavIcon />
           </MenuLink>
 
@@ -88,7 +100,7 @@ export const Header = () => {
               <Link
                 to={'/'}
                 className={styles.header__authButton}
-                onClick={() => setLoggedUser(null)}
+                onClick={handleLogOut}
               >
                 <ExitToAppOutlinedIcon sx={{ width: '20px' }} />
               </Link>
@@ -136,16 +148,52 @@ export const Header = () => {
                 />
               </div>
 
-              <div
-                className={styles.header__buttonBurgerMenu}
-                onClick={() => setIsBurgerMenuOpen((prevState) => !prevState)}
-              >
-                <Link
-                  to={`${pathname}${search}`}
-                  className={styles.header__buttonMenu}
+              <div className={styles.header__burgerContainer}>
+                <div className={styles.header__button}>
+                  <ThemeSwitcher />
+                </div>
+                {loggedUser ?
+                  <div className={styles.header__authUserData}>
+                    <p className={styles.header__authUserName}>{loggedUser.email.split('@')[0]}</p>
+                    <div className={styles.header__button}>
+                      <Link
+                        to={'/'}
+                        className={styles.header__authButton}
+                        onClick={handleLogOut}
+                      >
+                        <ExitToAppOutlinedIcon sx={{ width: '20px' }} />
+                      </Link>
+                    </div>
+                  </div>
+                  : <div className={styles.header__button}>
+                    <Link
+                      to={pathname}
+                      className={styles.header__authButton}
+                      onClick={() => setIsLogging(true)}
+                    >
+                      <PersonOutlinedIcon sx={{ width: '24px' }} />
+                    </Link>
+                  </div>
+                }
+                {isLogging && <AuthScreens
+                  loggedUser={loggedUser}
+                  isRegistration={isRegistration}
+                  setIsLogging={setIsLogging}
+                  setLoggedUser={setLoggedUser}
+                  setIsRegistration={setIsRegistration}
+                />}
+
+                <div
+                  className={styles.header__buttonBurgerMenu}
+                  onClick={() => setIsBurgerMenuOpen((prevState) => !prevState)}
                 >
-                  <CloseIcon />
-                </Link>
+                  <Link
+                    to={`${pathname}${search}`}
+                    className={styles.header__buttonMenu}
+                  >
+                    <CloseIcon />
+                  </Link>
+                </div>
               </div>
             </div>
 

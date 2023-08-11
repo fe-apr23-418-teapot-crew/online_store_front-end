@@ -82,12 +82,16 @@
     margin-right: 8px;
   }
   &__authUserName {
-    // line-height: 48px;
+    line-height: 48px;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     letter-spacing: 0.48px;
     color: var(--primary)
+  }
+  
+  &__burgerContainer{
+    display: flex;
   }
 
   &__button,

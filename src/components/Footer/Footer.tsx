@@ -1,48 +1,50 @@
 import React from 'react';
-import s from './Footer.module.scss';
+import styles from './Footer.module.scss';
 import logo from '../../icons/Logo.svg';
 // import slider from '../../icons/Vector (Stroke).svg';
 import { ArrowDown } from '../../icons2/ArrowDown';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
+  const GITHUB_URL = 'https://github.com/fe-apr23-418-teapot-crew';
+
   return (
-    <footer className={s.footer}>
-      <div className={s.footer__content}>
-        <a href="/" className={s.footer__logo}>
+    <footer className={styles.footer}>
+      <div className={styles.footer__content}>
+        <a href="/" className={styles.footer__logo}>
           <img
             src={logo}
             alt="Nice Gadgets logo"
-            className={s.footer__logoImage}
+            className={styles.footer__logoImage}
           />
         </a>
       </div>
 
-      <nav className={s.footer__menuLinks}>
-        <ul className={s.list}>
-          <li className={s.list__item}>
-            <a href="#" className={s.list__link}>
+      <nav className={styles.footer__menuLinks}>
+        <ul className={styles.list}>
+          <li className={styles.list__item}>
+            <a href={GITHUB_URL} className={styles.list__link}>
               Github
             </a>
           </li>
-          <li className={s.list__item}>
-            <a href="#" className={s.list__link}>
+          <li className={styles.list__item}>
+            <Link to={'/contacts'} className={styles.list__link}>
               Contacts
-            </a>
+            </Link>
           </li>
-          <li className={s.list__item}>
-            <a href="#" className={s.list__link}>
+          <li className={styles.list__item}>
+            <Link to={'/rights'} className={styles.list__link}>
               Rights
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
 
-      <div className={s.footer__moveTop}>
-        <div className={s.backToTop}>
+      <div className={styles.footer__moveTop}>
+        <div className={styles.backToTop}>
           Back to top
-
           <button
-            className={s.backToTop__button}
+            className={styles.backToTop__button}
             onClick={() => {
               window.scrollTo({
                 top: 0,
@@ -50,11 +52,7 @@ const Footer = () => {
               });
             }}
           >
-            <div
-              className={s.backToTop__pic}
-            > 
-              <ArrowDown />
-            </div>
+            <ArrowDown />
           </button>
         </div>
       </div>

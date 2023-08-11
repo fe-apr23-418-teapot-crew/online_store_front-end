@@ -4,7 +4,7 @@
     justify-content: center;
     top: 0;
     left: 0;
-    z-index: 1111;
+    z-index: 3;
 
     width: 100vw;
     height: 110vh;
@@ -35,14 +35,23 @@
     }
     &__icon {
         cursor: pointer;
+        margin-left: 8px;
+        display: flex;
+        align-items: center;
     }
     &__form {
         display: flex;
         justify-content: center;
         flex-direction: column;
     }
+
+    &__success {
+      color: var(--primary);
+    }
+    
     &__formSection {
-        margin-bottom: 20px;
+      margin-top: 16px;  
+      margin-bottom: 20px;
     }
     &__formLabel {
         display: block;
@@ -52,6 +61,22 @@
         line-height: normal;
         margin-bottom: 8px;
         color: var(--primary)
+    }
+    &__formCall {
+        display: block;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-top: 16px;
+    }
+    &__formCall {
+        display: block;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-top: 16px;
     }
     &__formInput {
         width: 100%;
@@ -76,7 +101,7 @@
         line-height: normal;
     }
     &__formButton {
-        margin-bottom: 16px;
+        margin-top: 16px;
         color: white;
         background: var(--accent);
         border: 0 solid;
@@ -122,5 +147,12 @@
         background-color: #fff;
         border: 1px solid #e2e6e9;
         }
+    }
+    .auth__error {
+        height: 15px;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 550;
+        line-height: normal;
     }
 }

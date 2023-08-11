@@ -6,7 +6,7 @@ import { TechSpecs } from '../../components/TechSpecs';
 import { ProductActions } from '../../components/Product/ProductActions';
 import { ProductVarieties } from '../../components/Product/ProductVarieties';
 import { MenuLink } from '../../components/MenuLink';
-import chevron from '../../icons/Chevron (Arrow Right).svg';
+// import chevron from '../../icons/Chevron (Arrow Right).svg';
 import styles from './ProductPage.module.scss';
 import { CardCarousel } from '../../components/CardCarousel/CardCarousel';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
@@ -14,6 +14,7 @@ import { getDetailedProductByItemId } from '../../api/products';
 import { useQuery } from 'react-query';
 import { Loader } from '../../components/Loader';
 import { useErrorHandling } from '../../hooks/useErrorHandling';
+import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
 import cn from 'classnames';
 
 export const ProductPage = () => {
@@ -55,11 +56,13 @@ export const ProductPage = () => {
       <section className={styles.product}>
         <div className={styles.product__navigation}>
           <MenuLink to="/" path="Back">
-            <img
-              src={chevron}
-              alt="Chevron"
+            <div
+              // src={chevron}
+              // alt="Chevron"
               className={styles['product__navigation--chevronButton']}
-            />
+            >
+              <KeyboardArrowLeftRoundedIcon />
+            </div>
             <div
               onClick={goBack}
               className={styles['product__navigation--backButton']}
