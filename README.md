@@ -3,6 +3,7 @@
 ## Overview
 * [**Demo Link**](https://fe-apr23-418-teapot-crew.github.io/online_store_front-end/#)
 * [**Figma Design**](https://www.figma.com/file/FRxncC4lfyhs6og1L6FGEU/Phone-catalog-%28V2%29-Rounded-Style-2?type=design&node-id=0-1&mode=design) 
+* [**Backend Repo**](https://github.com/fe-apr23-418-teapot-crew/online_store_back-end)
 
 
 This project is an online store where you can find and explore a variety of Apple electronic devices and gadgets. Easy to use with all possible functions for comfortable browsing and shopping!
