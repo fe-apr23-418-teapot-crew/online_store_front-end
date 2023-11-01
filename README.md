@@ -54,26 +54,6 @@ This project is an online store where you can find and explore a variety of Appl
 - **Search and Filter**: Ability to find a specific product or group of products.
 - **Adaptability**: Full adaptability for different screen resolutions.
     
-## Structure
-* **Frontend Side**:
-	* API
-	* Components
-	* Contexts
-	* Helpers
-	* Hooks
-	* Layouts
-	* Pages
-	* Provider
-	* Styles
-* **Backend Side**:
-	* Controllers
-	* Exceptions
-	* Models
-	* Middlewares
-	* Routes
-	* Services
-	* Static
-
 ## How to start
 
 **Follow these steps to start app in your local machine:**
